@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
+
+.ContentDiv {
+  height: 100vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: #111;
+  padding: 7px 0;
+  background: transparent;
+}
+.form__field::placeholder {
+  color: transparent;
+}
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+}
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+  font-weight: 500;
+}
+
+/* reset input */
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+
+/* demo */
+body {
+  font-family: "Monaco", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.5rem;
+  background-color: #f5f5f5;
+}
+
+button {
+  margin-top: 0px;
+  height: 100%;
+  width: 100%;
+  border-radius: 200px;
+  right: 0;
+  left: 0;
+  margin-left: "auto";
+  margin-right: "auto";
+  border: 0;
+  background-color: #9b9b9b;
+}
+
+.ButtonFont {
+  font-family: "Monaco", sans-serif;
+  color: #eee;
+  font-size: 1.2rem;
+}
+
+.Cranium {
+  height: 200px;
+  margin-left: "auto";
+  margin-right: "auto";
+}
+
+.standingCrane {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: "auto";
+  margin-bottom: "auto";
+  margin-top: 2vh;
+}
+
+.SignInTable{
+  position: absolute;
+  top: 70%;
+  width: 6vh;
+  min-width: 650px;
+  border-spacing: 3vh;
+  height: 6vh;
+  font-size: 1.1rem;
+  
+  font-family: gloock;
+  text-align: left;
+  
+
+}
+
+.TableRow{
+  border-bottom: 1px solid black;
+  width: 10wh;
+}
+
+.TableElement{
+  font-weight:100;
+  color: #aaa;
+}

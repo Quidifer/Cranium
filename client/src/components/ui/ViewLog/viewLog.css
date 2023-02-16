@@ -1,0 +1,78 @@
+.button {
+  height: 50px;
+  width: 130px;
+  border-radius: 200px;
+  border: 0;
+  background-color: #9b9b9b;
+  color: white;
+  font-family: "Monaco", sans-serif;
+  margin: 0 5px;
+  padding: 0;
+}
+.modal {
+  font-size: 12px;
+  background-color: white;
+  border: solid;
+  width: calc(100vw - 350px);
+  height: calc(100vh - 150px);
+  padding: 30px;
+  justify-content: center;
+}
+.modal > .modalHeader {
+  font-size: 25px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.modal > .modalContent {
+  overflow: auto;
+  border: dashed;
+  width: calc(100vw - 500px);
+  height: calc(100vh - 310px);
+  display: block;
+  margin: 0px auto;
+  padding: 25px;
+  font-size: 20px;
+  white-space: pre-line;
+}
+
+.modalContent > .modalTable {
+  border: 2px solid black;
+  width: calc(100vw - 700px);
+  margin: 0px auto;
+  text-align: center;
+  font-size: 15px;
+  color: black;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.modalTable th {
+  border-bottom: 2px solid;
+  padding: 5px;
+}
+.modalTable td {
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  padding: 5px;
+  overflow: auto;
+}
+
+/* .modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+} */

@@ -1,0 +1,172 @@
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+/* .box-exit-active {
+  transform: translateX(0px) translateY(-175px);
+  transition: transform 300ms;
+} */
+
+.page {
+  height: 100vh;
+  width: 100vw;
+}
+
+p {
+  margin: 0;
+}
+
+.leftcontent {
+  width: calc(100% - 300px);
+  height: 100%;
+  float: left;
+  background-color: aqua;
+}
+
+.column {
+  width: 300px;
+  height: 100vh;
+  float: right;
+  background-color: #DFF6FF;
+}
+
+.boxContent {
+  height: calc(93% - 130px);
+  overflow-y: scroll;
+}
+
+.timeEstimates {
+  height: 130px;
+  border-color: black;
+  border-bottom: 1px solid;
+}
+
+.header {
+  height: 10%;
+  width: 100%;
+  background-color: blueviolet;
+}
+
+.crane {
+  height: 75%;
+  width: 100%;
+  background-color: gray;
+  position: relative;
+}
+
+.footer {
+  height: 15%;
+  width: 100%;
+  background-color: rgb(59, 58, 58);
+  bottom: 0;
+  border-top: solid black;
+}
+
+.columnFooter {
+  height: 10%;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  z-index: 3;
+}
+
+.nextButton {
+  background-color: green;
+  height: 70%;
+  width: 250px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.gradient {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(
+    to top,
+    rgba(228, 244, 243, 1) 0%,
+    rgba(228, 244, 243, 0) 100%
+  );
+  position: fixed;
+  top: auto;
+  bottom: 4%;
+}
+.gradient1 {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(
+    to top,
+    rgba(228, 244, 243, 1) 0%,
+    rgba(228, 244, 243, 0) 100%
+  );
+  position: fixed;
+  top: auto;
+  bottom: 4%;
+}
+.gradient2 {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(
+    to top,
+    rgba(228, 244, 243, 1) 0%,
+    rgba(228, 244, 243, 0) 100%
+  );
+  position: fixed;
+  top: auto;
+  bottom: 4%;
+}
+
+.greenOutline {
+  top: 310px;
+  height: 170px;
+  width: 285px;
+  margin-left: 4px;
+  border: rgb(5, 245, 5) solid;
+  border-radius: 10px;
+  position: fixed;
+  z-index: 0;
+}
+
+.CommentTitle {
+  color: white;
+}
+
+.CommentBar {
+  position: relative;
+  color: white;
+
+  position: block;
+  height: 76.5%;
+  width: 85%;
+  margin: auto;
+}
+.CommentInput {
+  position: block;
+  margin: auto;
+  border-radius: 5px;
+  height: 9.5vh;
+  width: 85%;
+  float: left;
+  background-color: lightgray;
+  border: 1px solid black;
+  font-family: arial;
+  resize: none;
+}
+
+.SubmitComment {
+  position: relative;
+  height: 70%;
+  width: 10%;
+  margin-left: 1%;
+  border-radius: 0;
+  background-color: rgb(59, 58, 58);
+}
+
+/* .greenOutline {
+  height: 190px;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border: 2px solid;
+  border-color: rgb(5, 245, 5);
+  border-radius: 10px;
+} */
