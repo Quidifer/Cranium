@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import CraniumButton from ".././components/ui/CraniumButton";
+import CraniumButton from "../components/ui/CraniumButton/CraniumButton";
 
 function App() {
   const variable = "hello world";
@@ -19,7 +19,7 @@ function App() {
         >
           Learn React
         </a>
-        <CraniumButton>Finish</CraniumButton>
+        <CraniumButton>Sign In</CraniumButton>
       </header>
     </div>
   );

@@ -1,11 +1,11 @@
 import React from "react";
-import ColorPallet from "../../utils/ColorPallet";
-import { ButtonProps } from "../../utils/Props";
+import ColorPallet from "../../../utils/ColorPallet";
+import { ButtonProps } from "../../../utils/Props";
 import './CraniumButton.css'
 
 const DEFAULTS: ButtonProps = {
     border: '1px',
-    color: ColorPallet.LightGreen,
+    color: ColorPallet.Red,
     onClick: () => console.log('Click Detected!'),
     radius: '50px',
     height: '100px',

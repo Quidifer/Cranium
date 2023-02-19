@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ColorPallet = {
     White: '#FFFFFF',
     Black: '#000000',
