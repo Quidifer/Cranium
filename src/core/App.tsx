@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import CraniumButton from "../components/ui/CraniumButton/CraniumButton";
+import CraniumToolbar from "../components/ui/Toolbar/CraniumToolbar";
 
 function App() {
   const variable = "hello world";
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>{variable}.</p>
         <a
@@ -19,8 +20,8 @@ function App() {
         >
           Learn React
         </a>
-        <CraniumButton>Sign In</CraniumButton>
-      </header>
+      </header> */}
+      <CraniumToolbar></CraniumToolbar>
     </div>
   );
 }

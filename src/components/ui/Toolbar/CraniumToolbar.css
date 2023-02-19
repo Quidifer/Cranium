@@ -1,0 +1,11 @@
+.CraniumToolbar {
+    display: flex;
+    justify-content: right;
+    background-color: white;
+    border: 2px;
+    border-color: black;
+    border-style: ridge;
+    padding: 20px;
+    width: 100%;
+    height: 50px;
+}
