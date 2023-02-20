@@ -1,0 +1,16 @@
+/* .SignInButton {
+  align-self: center;
+} */
+
+.ContentDiv {
+  height: 100vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* .SignInInputBox {
+  align-self: center;
+} */

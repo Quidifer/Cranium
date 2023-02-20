@@ -1,25 +1,25 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
+import SignIn from "./signIn";
 import "./App.css";
 
-function App() {
-  const variable = "hello world";
+// const props = [
+//   "password",
+//   "signIn",
+//   "jobType",
+//   "uploadManifest",
+//   "modeSelection",
+//   "load",
+//   "balance",
+//   "animationScreen",
+// ];
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{variable}.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+function App() {
+  const [screenState, setScreenState] = useState("signIn");
+
+  return screenState === "signIn" ? (
+    <SignIn setScreenState={setScreenState} />
+  ) : (
+    <p>test</p>
   );
 }
 
