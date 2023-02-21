@@ -18,7 +18,7 @@
     "clean:typescript": "rimraf dist node_modules/.cache",
     "clean:client": "rimraf ./client/build ./client/node_modules/.cache",
     "db:start": "docker-compose up -d",
-    "db:fix": "groupadd docker || usermod -aG docker $USER || newgrp docker",
+    "db:fix": "sudo usermod -aG docker $USER && newgrp docker && sudo service docker restart",
     "db:stop": "docker-compose stop",
     "db:clean": "docker-compose down --volumes --remove-orphans"
   },
