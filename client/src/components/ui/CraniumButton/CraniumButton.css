@@ -1,0 +1,14 @@
+.CraniumButton {
+    text-align: center;
+    text-decoration: none;
+    font-size: 125%;
+    margin-right: 5px;
+}
+
+.CraniumButton:hover {
+    color: white;
+}
+
+.CraniumButton:active {
+    color: cyan;
+}

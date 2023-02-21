@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  postgresql:
+    image: postgres:9.6.23-alpine
+    restart: always
+    volumes: 
+      - postgresql:/var/lib/postgresql/data
+    networks:
+      - internal
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: totallySecurePassword
+      POSTGRES_DB: application
+    ports:
+      - 5432:5432
+
+volumes:
+  postgresql:
+
+networks:
+  internal:
