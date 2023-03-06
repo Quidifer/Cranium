@@ -3,7 +3,7 @@ import { useDropzone, FileWithPath } from "react-dropzone";
 
 interface Props {
   setScreenState: React.Dispatch<React.SetStateAction<string>>;
-  setManifest: React.Dispatch<React.SetStateAction<string>>;
+  setManifest: any;
 }
 
 const baseStyle = {
@@ -23,11 +23,11 @@ const focusedStyle = {
 };
 
 const acceptStyle = {
-  borderColor: '#00e676'
+  border: "#00e676 dashed 1.5px"
 };
 
 const rejectStyle = {
-  borderColor: '#ff1744'
+  border: "#ff1744 dashed 1.5px"
 };
 
 export default function UploadManifest(props: Props) {
@@ -43,9 +43,9 @@ export default function UploadManifest(props: Props) {
       reader.onload = (e: any) => {
         // Do whatever you want with the file contents
         // const content = reader.result
-        setManifest(e.target.result)
+        setManifest(e.target.result.split('\n'))
         // console.log(e.target.result)
-        setScreenState("jobtype");
+        setScreenState("load");
       }
       reader.readAsText(file)
       // file.text().then(res => {
@@ -60,8 +60,7 @@ export default function UploadManifest(props: Props) {
     getInputProps, 
     isFocused, 
     isDragAccept, 
-    isDragReject, 
-    acceptedFiles
+    isDragReject
   } = useDropzone({
     onDrop, 
     accept: {'text/*': []}

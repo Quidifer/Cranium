@@ -1,0 +1,57 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+.tile {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    background: #ffffff;
+}
+.black {
+    background: #000;
+    color: #ffffff;
+}
+.gray {
+  background: #ebebeb;
+  color: #000000;
+}
+.white {
+  background: #ffffff;
+  color: #000000;
+}
+.row {
+    display: flex;
+}
+
+.split {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  width: 65%;
+  left: 0;
+  background-color: #d1d1d1;
+}
+
+/* Control the right side */
+.right {
+  width: 35%;
+  right: 0;
+  background-color: rgb(255, 255, 255);
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
