@@ -35,7 +35,7 @@ export default function Password(props: Props) {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === websitePassword) {
-      setScreenState("jobtype");
+      setScreenState("uploadManifest");
       setIsIncorrectPassword(false);
       setIsCorrectPassword(true);
 
