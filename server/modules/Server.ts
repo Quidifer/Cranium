@@ -5,10 +5,11 @@ import path from 'path';
 import Engine from './Engine';
 import ManifestParser from './ManifestParser';
 import http from 'http';
+import ServerConfiguration from './ServerConfiguration';
 
 
 @Service()
-export default class e {
+export default class Server {
 
     private app: express.Application;
 
@@ -25,14 +26,9 @@ export default class e {
     }
 
     public async start() {
-        const engine = Container.get(Engine);
-        const manifestParser = Container.get(ManifestParser);
+        // Connect React client files to NodeJS server
         this.app.use(express.static(this.REACT_FRONT_END));
-        this.app.get("/transfer", (req, res) => res.json(engine.calculateMoveSet_Transfer(req.body)));
-        this.app.get("/balance", (req, res) => res.json(engine.calculateMoveSet_Balance(req.body)));
-        this.app.get("/manifest", async (req, res) => {
-            res.json(await manifestParser.parseManifest('./server/modules/test.txt'));
-        });
+        Container.get(ServerConfiguration).setupEndpoints(this.app);
         this.listener = this.app.listen(this.PORT, () => console.log(`Server listening on ${this.PORT}`));
     }
 

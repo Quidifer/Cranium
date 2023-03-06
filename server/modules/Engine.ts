@@ -18,9 +18,9 @@ export default class Engine {
 
 
     public calculateMoveSet_Transfer(ship: Ship) { // : MoveSet
-        const exploredState: Array<EngineNode> = [];
-        const queuedStates: Array<EngineNode> = [];
-        const goalStates: Array<EngineNode> = [];
+        let exploredStates: Array<EngineNode> = [];
+        let queuedStates: Array<EngineNode> = [];
+        let goalStates: Array<EngineNode> = [];
 
         // Queue initial ship state
         const initialState = new EngineNode(ship, 0);
@@ -31,9 +31,15 @@ export default class Engine {
 
             // Grab next Node and remove from queued set
             const leaf = queuedStates[0];
-            queuedStates.filter((value) => value.id != leaf.id);
+            queuedStates = queuedStates.filter((value) => value.id != leaf.id);
 
-            
+            if(isGoalState(leaf)) {
+                goalStates.push(leaf);
+
+            }
+            exploredStates.push(leaf);
+
+
 
 
 
@@ -45,6 +51,10 @@ export default class Engine {
 
 
          
+    }
+
+    private heuristic(initialState: Ship, currentState: Ship) {
+        
     }
 
     public calculateMoveSet_Balance(ship: Ship) { // : MoveSet
