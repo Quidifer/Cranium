@@ -119,7 +119,7 @@ export default function SignIn(props: Props) {
           >
             <button
               onClick={() => {
-                setScreenState("load");
+                setScreenState("password");
                 console.log(name);
               }}
             >
