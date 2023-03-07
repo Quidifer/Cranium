@@ -41,10 +41,19 @@ export default function UploadManifest(props: Props) {
       reader.onabort = () => console.log('file reading was aborted')
       reader.onerror = () => console.log('file reading has failed')
       reader.onload = (e: any) => {
-        // Do whatever you want with the file contents
-        // const content = reader.result
-        setManifest(e.target.result.split('\n'))
-        // console.log(e.target.result)
+        let rows = e.target.result.split('\n')
+        let cells: any[] = []
+        rows.forEach((element: any) => {
+            let row = element.split(',')
+            let cell = {
+              row: Number(row[0].replace('[', '')), 
+              col: Number(row[1].replace(']', '')), 
+              weight: Number(row[2].replace('{', '').replace('}', '')),
+              name: row[3]
+            }
+            cells.push(cell)
+          });
+        setManifest(cells)
         setScreenState("load");
       }
       reader.readAsText(file)

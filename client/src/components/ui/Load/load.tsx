@@ -12,22 +12,22 @@ export default function Load(props: Props) {
   const { setScreenState, setManifest, manifest } = props;
   const [ selectedCells, setselectedCells ] = useState([{ row: 0, col: 0 }]);
   const [ isGridSelectable, setIsGridSelectable ] = useState(false);
-  const [ manifestCells, setManifestCells ] = useState([{ row: 0, col: 0, weight: 0, name: "" }]);
+  // const [ manifestCells, setManifestCells ] = useState([{ row: 0, col: 0, weight: 0, name: "" }]);
 
-  useEffect(() => {
-    let cells: any[] = []
-    manifest.forEach((element: any) => {
-      let row = element.split(',')
-      let cell = {
-        row: Number(row[0].replace('[', '')), 
-        col: Number(row[1].replace(']', '')), 
-        weight: Number(row[2].replace('{', '').replace('}', '')),
-        name: row[3]
-      }
-      cells.push(cell)
-    });
-    setManifestCells([...manifestCells, ...cells])
-  }, [])
+  // useEffect(() => {
+  //   let cells: any[] = []
+  //   manifest.forEach((element: any) => {
+  //     let row = element.split(',')
+  //     let cell = {
+  //       row: Number(row[0].replace('[', '')), 
+  //       col: Number(row[1].replace(']', '')), 
+  //       weight: Number(row[2].replace('{', '').replace('}', '')),
+  //       name: row[3]
+  //     }
+  //     cells.push(cell)
+  //   });
+  //   setManifestCells([...manifestCells, ...cells])
+  // }, [])
 
   const Tile = (props: any) => {
     const { color, id, row, col, name } = props;
@@ -36,7 +36,7 @@ export default function Load(props: Props) {
         id={id}
         className={isGridSelectable ? `${color} tile` : `gray tile`}
         onMouseDown={() => {
-          if (isGridSelectable && manifestCells.some(item => item.row === row && item.col === col)) {
+          if (isGridSelectable && manifest.some((item: any) => item.row === row && item.col === col)) {
             selectedCells.some(item => item.row === row && item.col === col) ?
             setselectedCells(selectedCells.filter(item => item.row !== row || item.col !== col)) :
             setselectedCells([...selectedCells, { row, col }]);
@@ -44,7 +44,7 @@ export default function Load(props: Props) {
         }}
         style={{fontSize: "12px"}}
       >
-        {id}
+        {name}
       </div>
     );
   };
@@ -55,7 +55,7 @@ export default function Load(props: Props) {
       const boardRow = [];
       for (let col = 1; col <= m; col++) {
         let color = ""
-        if (manifestCells.some(item => item.row === row && item.col === col)) {
+        if (manifest.some((item: any) => item.row === row && item.col === col)) {
           color = "white" 
           if (selectedCells.some(item => item.row === row && item.col === col)) color = "black"
         }
@@ -63,7 +63,7 @@ export default function Load(props: Props) {
           color = "gray"
         }
 
-        const cell = manifestCells.find(item => item.row === row && item.col === col) 
+        const cell = manifest.find((item: any) => item.row === row && item.col === col) 
         const name = cell ? cell.name : ""
 
         boardRow.push(
@@ -87,28 +87,15 @@ export default function Load(props: Props) {
   };
 
   return (
-    <div>
-      <div className="split left">
-        <div className="centered"> 
-            {createBoard(8, 12)}
-            <button
-              onClick={() => {
-                setIsGridSelectable(!isGridSelectable);
-              }}
-              style={{ width: "130px", height: "30px", marginTop: "15px" }}
-            >{isGridSelectable ? "is selectable" : "is NOT selectable" }</button>
-            {/* <p>{manifest}</p> */}
-        </div>
-      </div>
-
-      <div className="split right">
-        <div className="centered">
-          <UploadManifest 
-            setScreenState={setScreenState}
-            setManifest={setManifest}
-          />
-        </div>
-      </div>
+    <div className="centered"> 
+        {createBoard(8, 12)}
+        <button
+          onClick={() => {
+            setIsGridSelectable(!isGridSelectable);
+          }}
+          style={{ width: "130px", height: "30px", marginTop: "15px" }}
+        >{isGridSelectable ? "is selectable" : "is NOT selectable" }</button>
+        {/* <p>{manifest}</p> */}
     </div>
   );
 }
