@@ -44,22 +44,28 @@ export default function Load(props: Props) {
         }}
         style={{fontSize: "12px"}}
       >
-        {name}
+        {id}
       </div>
     );
   };
 
   const createBoard = (n: any, m: any) => {
     const board = []
-    debugger;
     for (let row = 1; row <= n; row++) {
       const boardRow = [];
       for (let col = 1; col <= m; col++) {
-        const color = manifestCells.some(item => item.row === row && item.col === col) ? "white" : 
-                      // selectedCells.some(item => item.row === row && item.col === col) ? "black" : 
-                      "gray";
+        let color = ""
+        if (manifestCells.some(item => item.row === row && item.col === col)) {
+          color = "white" 
+          if (selectedCells.some(item => item.row === row && item.col === col)) color = "black"
+        }
+        else { 
+          color = "gray"
+        }
+
         const cell = manifestCells.find(item => item.row === row && item.col === col) 
         const name = cell ? cell.name : ""
+
         boardRow.push(
           <Tile
             key={`${col}${row}`}
