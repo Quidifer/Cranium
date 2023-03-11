@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './password.css';
 // import '../SignIn/signIn.css'
-import { InputLabel, IconButton, InputAdornment, Input } from "@mui/material";
+import { IconButton, InputAdornment, Input } from "@mui/material";
 import { Visibility, VisibilityOff,  } from "@mui/icons-material";
 
 interface Props {

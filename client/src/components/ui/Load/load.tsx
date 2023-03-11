@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./load.css";
-import UploadManifest from '../UploadManifest/uploadManifest';
+// import UploadManifest from '../UploadManifest/uploadManifest';
 
 interface Props {
   setScreenState: React.Dispatch<React.SetStateAction<string>>;
@@ -9,9 +9,9 @@ interface Props {
 }
 
 export default function Load(props: Props) {
-  const { setScreenState, setManifest, manifest } = props;
+  const { manifest } = props;
   const [ selectedCells, setselectedCells ] = useState([{ row: 0, col: 0 }]);
-  const [ isGridSelectable, setIsGridSelectable ] = useState(false);
+  const [ isGridSelectable, setIsGridSelectable ] = useState(true);
   // const [ manifestCells, setManifestCells ] = useState([{ row: 0, col: 0, weight: 0, name: "" }]);
 
   // useEffect(() => {
@@ -29,6 +29,10 @@ export default function Load(props: Props) {
   //   setManifestCells([...manifestCells, ...cells])
   // }, [])
 
+  const isInList = (list:any, row: any, col: any) => {
+    return list.some((item: any) => item.row === row && item.col === col)
+  }
+
   const Tile = (props: any) => {
     const { color, id, row, col, name } = props;
     return (
@@ -36,7 +40,7 @@ export default function Load(props: Props) {
         id={id}
         className={isGridSelectable ? `${color} tile` : `gray tile`}
         onMouseDown={() => {
-          if (isGridSelectable && manifest.some((item: any) => item.row === row && item.col === col)) {
+          if (isGridSelectable && isInList(manifest, row, col) && name !== "NAN" && name !== "UNUSED") {
             selectedCells.some(item => item.row === row && item.col === col) ?
             setselectedCells(selectedCells.filter(item => item.row !== row || item.col !== col)) :
             setselectedCells([...selectedCells, { row, col }]);
@@ -51,20 +55,22 @@ export default function Load(props: Props) {
 
   const createBoard = (n: any, m: any) => {
     const board = []
-    for (let row = 1; row <= n; row++) {
+    for (let row = n; row >= 1; row--) {
       const boardRow = [];
       for (let col = 1; col <= m; col++) {
         let color = ""
-        if (manifest.some((item: any) => item.row === row && item.col === col)) {
-          color = "white" 
-          if (selectedCells.some(item => item.row === row && item.col === col)) color = "black"
-        }
-        else { 
-          color = "gray"
-        }
-
         const cell = manifest.find((item: any) => item.row === row && item.col === col) 
         const name = cell ? cell.name : ""
+        if (isInList(manifest, row, col)) {
+          if (isInList(selectedCells, row, col)) 
+            color = "black"
+          else if (name === "NAN") 
+            color = "gray"
+          else 
+            color = "white"
+        } else {
+          color = "gray"
+        }
 
         boardRow.push(
           <Tile

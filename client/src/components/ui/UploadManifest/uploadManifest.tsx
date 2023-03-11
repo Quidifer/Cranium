@@ -49,7 +49,7 @@ export default function UploadManifest(props: Props) {
               row: Number(row[0].replace('[', '')), 
               col: Number(row[1].replace(']', '')), 
               weight: Number(row[2].replace('{', '').replace('}', '')),
-              name: row[3]
+              name: row[3].trim()
             }
             cells.push(cell)
           });
