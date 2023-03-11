@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useDropzone, FileWithPath } from "react-dropzone";
 
 interface Props {

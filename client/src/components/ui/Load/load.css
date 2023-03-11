@@ -2,28 +2,43 @@
     font-family: sans-serif;
     text-align: center;
 }
+
+/* board */
+.row {
+  display: flex;
+}
 .tile {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #ccc;
-    background: #ffffff;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background: #ffffff;
 }
-.black {
-    background: #000;
-    color: #ffffff;
-}
-.gray {
+.nan {
   background: #ebebeb;
   color: #000000;
 }
-.white {
+.selected {
+  background: #addd8b;
+  color: #000000;
+}
+.unselected {
   background: #ffffff;
   color: #000000;
 }
-.row {
-    display: flex;
+.duplicate {
+  background: #f6ce56;
+  color: #000000;
 }
 
+/* counts */
+.table {
+  position: absolute;
+  width: 200px;
+  text-align: center;
+  left: 30%;
+}
+
+/* split screen */
 .split {
   height: 100%;
   position: fixed;
@@ -32,22 +47,16 @@
   overflow-x: hidden;
   padding-top: 20px;
 }
-
-/* Control the left side */
 .left {
   width: 65%;
   left: 0;
   background-color: #d1d1d1;
 }
-
-/* Control the right side */
 .right {
   width: 35%;
   right: 0;
   background-color: rgb(255, 255, 255);
 }
-
-/* If you want the content centered horizontally and vertically */
 .centered {
   position: absolute;
   top: 50%;
