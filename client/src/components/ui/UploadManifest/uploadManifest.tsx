@@ -85,6 +85,7 @@ export default function UploadManifest(props: Props) {
         <img
           src="https://cdn-icons-png.flaticon.com/512/126/126477.png"
           style={{ width: "110px", height: "100px", paddingTop: "25px" }}
+          alt="Upload Manifest"
         />
         <p style={{ fontSize: "15px" }}>
           Drag or click here to upload Manifest

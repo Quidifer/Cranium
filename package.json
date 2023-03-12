@@ -37,15 +37,8 @@
     "@types/uuid": "^9.0.0",
     "create-react-app": "^1.2.1",
     "express": "^4.18.2",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "react-draggable": "^4.4.5",
     "react-dropzone": "^14.2.3",
-=======
->>>>>>> ae8aa1c (looking good i thinkkks)
-=======
-    "react-draggable": "^4.4.5",
->>>>>>> 53573b1 (draggle and zoomable)
     "react-transition-group": "^4.4.5",
     "reflect-metadata": "^0.1.13",
     "styled-components": "^5.3.8",
@@ -61,10 +54,7 @@
     "@types/express": "^4.17.17",
     "@types/glob": "^8.0.1",
     "@types/react-transition-group": "^4.4.5",
-<<<<<<< HEAD
     "@types/styled-components-react-native": "^5.2.1",
-=======
->>>>>>> ae8aa1c (looking good i thinkkks)
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "eslint": "^8.34.0",

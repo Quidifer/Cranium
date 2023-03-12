@@ -17,7 +17,7 @@ function App() {
       .then(() => console.log("Response Received"));
   }, []);
 
-  const [screenState, setScreenState] = useState("password");
+  const [screenState, setScreenState] = useState("uploadManifest");
   const [manifest, setManifest] = useState([]);
 
   return screenState === "signIn" ? (
