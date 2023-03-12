@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./load.css";
 // import UploadManifest from '../UploadManifest/uploadManifest';
+// import { ContextMenu, MenuContextContainer } from '../ContextMenu/contextMenu';
 
 interface Props {
   setScreenState: React.Dispatch<React.SetStateAction<string>>;
@@ -14,22 +15,16 @@ export default function Load(props: Props) {
   const [ selectedNames, setSelectedNames ] = useState<string[]>([]);
   const [ counts, setCounts ] = useState<Record<string, number>[]>([]);
   const [ isGridSelectable, setIsGridSelectable ] = useState(true);
-  // const [ manifestCells, setManifestCells ] = useState([{ row: 0, col: 0, weight: 0, name: "" }]);
+  // const [ clicked, setClicked ] = useState(false);
+  // const [ points, setPoints ] = useState({ x: 0, y: 0 });
 
   // useEffect(() => {
-  //   let cells: any[] = []
-  //   manifest.forEach((element: any) => {
-  //     let row = element.split(',')
-  //     let cell = {
-  //       row: Number(row[0].replace('[', '')), 
-  //       col: Number(row[1].replace(']', '')), 
-  //       weight: Number(row[2].replace('{', '').replace('}', '')),
-  //       name: row[3]
-  //     }
-  //     cells.push(cell)
-  //   });
-  //   setManifestCells([...manifestCells, ...cells])
-  // }, [])
+  //   const handleClick = () => setClicked(false);
+  //   window.addEventListener("click", handleClick);
+  //   return () => {
+  //     window.removeEventListener("click", handleClick);
+  //   };
+  // }, []);
 
   const isInList = (list:any, row: any, col: any) => {
     return list.some((item: any) => item.row === row && item.col === col)
@@ -42,42 +37,37 @@ export default function Load(props: Props) {
         id={id}
         className={isGridSelectable ? `${color} tile` : `nan tile`}
         onMouseDown={() => {
-          if (isGridSelectable && isInList(manifest, row, col) && name !== "NAN" && name !== "UNUSED") {
-            if (isInList(selectedCells, row, col)) { // deselect cell
-              setSelectedCells(selectedCells.filter(item => item.row !== row || item.col !== col))
-              
-              let index = counts.findIndex((item => item.name === name));
-              let oldCount = counts[index].count;
-              // let item = {
-              //   ...counts[index], count: oldCount + 1
-              // }
-              if (oldCount == 1) { // last cell is deselected -> unhighlight all duplicate cells
-                setSelectedNames(selectedNames.filter(item => item !== name))
-                setCounts(counts.filter(item => item.name !== name))
-              } else {
-                setCounts([...counts.slice(0, index)].concat(
-                          {...counts[index], count: oldCount - 1}, 
-                          [...counts.slice(index+1)]))
-              }
-            } else { // select cell
-              setSelectedCells([...selectedCells, { row, col }])
-
-              if (!selectedNames.some((item: any) => item === name)) 
-                setSelectedNames([...selectedNames, name])
-              
-              if (!counts.some((item: any) => item.name === name)) {
-                setCounts([...counts, {name: name, count: 1}])
-              } else {
+            if (isGridSelectable && isInList(manifest, row, col) && name !== "NAN" && name !== "UNUSED") {
+              if (isInList(selectedCells, row, col)) { // deselect cell
+                setSelectedCells(selectedCells.filter(item => item.row !== row || item.col !== col))
+                
                 let index = counts.findIndex((item => item.name === name));
                 let oldCount = counts[index].count;
-                // setCounts([...selectedNames, name])
-                // let item = {
-                //   ...counts[index], count: oldCount + 1
-                // }
-                setCounts([...counts.slice(0, index)].concat({...counts[index], count: oldCount + 1}, [...counts.slice(index+1)]));
+                if (oldCount == 1) { // last cell is deselected -> unhighlight all duplicate cells
+                  setSelectedNames(selectedNames.filter(item => item !== name))
+                  setCounts(counts.filter(item => item.name !== name))
+                } else {
+                  setCounts([...counts.slice(0, index)].concat(
+                            {...counts[index], count: oldCount - 1}, 
+                            [...counts.slice(index+1)]))
+                }
+              } else { // select cell
+                setSelectedCells([...selectedCells, { row, col }])
+  
+                if (!selectedNames.some((item: any) => item === name)) 
+                  setSelectedNames([...selectedNames, name])
+                
+                if (!counts.some((item: any) => item.name === name)) {
+                  setCounts([...counts, {name: name, count: 1}])
+                } else {
+                  let index = counts.findIndex((item => item.name === name))
+                  let oldCount = counts[index].count
+                  setCounts([...counts.slice(0, index)].concat(
+                            {...counts[index], count: oldCount + 1}, 
+                            [...counts.slice(index+1)]))
+                }
               }
-            }
-          } 
+          }
         }}
         style={{fontSize: "12px"}}
       >
@@ -108,14 +98,33 @@ export default function Load(props: Props) {
         }
 
         boardRow.push(
-          <Tile
-            key={`${col}${row}`}
-            color={color}
-            id={`${col},${row}`}
-            row={row}
-            col={col}
-            name={name}
-          />
+          // <div
+          //   onContextMenu={(e) => {
+          //     e.preventDefault();
+          //     setClicked(true);
+          //     setPoints({
+          //       x: e.pageX,
+          //       y: e.pageY,
+          //     });
+          //   }}
+          // >
+            <Tile
+              key={`${col}${row}`}
+              color={color}
+              id={`${col},${row}`}
+              row={row}
+              col={col}
+              name={name}
+              // onContextMenu={(e: any) => {
+              //   e.preventDefault();
+              //   setClicked(true);
+              //   setPoints({
+              //     x: e.pageX,
+              //     y: e.pageY,
+              //   });
+              // }}
+            />
+          // </div>
         );
       }
       board.push(
@@ -132,13 +141,23 @@ export default function Load(props: Props) {
       <div className="split left">
         <div className="centered">
           {createBoard(8, 12)}
-            <button
-              onClick={() => {
-                setIsGridSelectable(!isGridSelectable);
-              }}
-              style={{ width: "130px", height: "30px", marginTop: "15px" }}>
-              {isGridSelectable ? "is selectable" : "is NOT selectable" }
-            </button>
+          {/* {clicked && (
+            <ContextMenu top={points.y} left={points.x}>
+              <ul>
+                <li>Edit</li>
+                <li>Copy</li>
+                <li>Delete</li>
+              </ul>
+            </ContextMenu>
+          )} */}
+          
+          <button
+            onClick={() => {
+              setIsGridSelectable(!isGridSelectable);
+            }}
+            style={{ width: "130px", height: "30px", marginTop: "15px" }}>
+            {isGridSelectable ? "is selectable" : "is NOT selectable" }
+          </button>
         </div>
       </div>
 
