@@ -1,0 +1,66 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+/* board */
+.row {
+  display: flex;
+}
+.tile {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background: #ffffff;
+}
+.nan {
+  background: #ebebeb;
+  color: #000000;
+}
+.selected {
+  background: #addd8b;
+  color: #000000;
+}
+.unselected {
+  background: #ffffff;
+  color: #000000;
+}
+.duplicate {
+  background: #f6ce56;
+  color: #000000;
+}
+
+/* counts */
+.table {
+  position: absolute;
+  width: 200px;
+  text-align: center;
+  left: 30%;
+}
+
+/* split screen */
+.split {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.left {
+  width: 65%;
+  left: 0;
+  background-color: #d1d1d1;
+}
+.right {
+  width: 35%;
+  right: 0;
+  background-color: rgb(255, 255, 255);
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
