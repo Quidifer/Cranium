@@ -1,0 +1,10 @@
+.ZoomDiv {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 20px;
+  margin-top: 10px;
+  z-index: 10;
+}
