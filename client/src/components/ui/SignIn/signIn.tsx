@@ -4,11 +4,11 @@ import cranium from "../../../resources/cranium.svg";
 import standingCrane from "../../../resources/standingCrane.svg";
 
 interface Props {
-  setScreenState: React.Dispatch<React.SetStateAction<string>>;
+  updateScreenState: () => void;
 }
 
 export default function SignIn(props: Props) {
-  const { setScreenState } = props;
+  const { updateScreenState } = props;
   const [name, setName] = useState("");
   return (
     <div
@@ -119,7 +119,7 @@ export default function SignIn(props: Props) {
           >
             <button
               onClick={() => {
-                setScreenState("password");
+                updateScreenState();
                 console.log(name);
               }}
             >

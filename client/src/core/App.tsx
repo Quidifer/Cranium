@@ -5,6 +5,7 @@ import SignIn from "../components/ui/SignIn/signIn";
 import Password from "../components/ui/Password/password";
 import UploadManifest from "../components/ui/UploadManifest/uploadManifest";
 import Load from "../components/ui/Load/load";
+import CrateMovement from "../components/ui/CrateMovement/crateMovement";
 
 function App() {
   const [data, setData] = useState(0);
@@ -19,14 +20,27 @@ function App() {
   const [screenState, setScreenState] = useState("uploadManifest");
   const [manifest, setManifest] = useState([]);
 
-  return (
-    screenState === "signIn" ? <SignIn setScreenState={setScreenState} /> : 
-    screenState === "password" ? <Password setScreenState={setScreenState} /> : 
-    screenState === "uploadManifest" ? <UploadManifest setScreenState={setScreenState} setManifest={setManifest}/> : 
-    screenState === "load" ? <Load setScreenState={setScreenState} setManifest={setManifest} manifest={manifest}/> : 
-    (<p>test</p>)
-    // <Load setScreenState={setScreenState} setManifest={setManifest} manifest={manifest}/>
+  return screenState === "signIn" ? (
+    <SignIn updateScreenState={() => setScreenState("password")} />
+  ) : screenState === "password" ? (
+    <Password updateScreenState={() => setScreenState("uploadManifest")} />
+  ) : screenState === "uploadManifest" ? (
+    <UploadManifest
+      updateScreenState={() => setScreenState("load")}
+      setManifest={setManifest}
+    />
+  ) : screenState === "load" ? (
+    <Load
+      updateScreenState={() => setScreenState("crateMovement")}
+      setManifest={setManifest}
+      manifest={manifest}
+    />
+  ) : screenState === "crateMovement" ? (
+    <CrateMovement />
+  ) : (
+    <p>test</p>
   );
+  // <Load setScreenState={setScreenState} setManifest={setManifest} manifest={manifest}/>
 }
 
 export default App;
