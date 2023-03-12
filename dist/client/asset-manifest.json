@@ -2,6 +2,7 @@
   "files": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "main.css": "/static/css/main.6fb0fe29.css",
     "main.js": "/static/js/main.fa9d53bd.js",
 =======
@@ -12,10 +13,15 @@
     "main.css": "/static/css/main.d9d9536a.css",
     "main.js": "/static/js/main.cc671917.js",
 >>>>>>> 53573b1 (draggle and zoomable)
+=======
+    "main.css": "/static/css/main.a0ae7417.css",
+    "main.js": "/static/js/main.f7e192c3.js",
+>>>>>>> 195b20a (dependency for react-draggable)
     "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
     "static/media/standingCrane.svg": "/static/media/standingCrane.5ad687bf89d981640488b4ecc7f7d5df.svg",
     "static/media/cranium.svg": "/static/media/cranium.26ba8e149829c3cfcd72a221cd870e7b.svg",
     "index.html": "/index.html",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "main.6fb0fe29.css.map": "/static/css/main.6fb0fe29.css.map",
@@ -43,5 +49,14 @@
     "static/css/main.d9d9536a.css",
     "static/js/main.cc671917.js"
 >>>>>>> 53573b1 (draggle and zoomable)
+=======
+    "main.a0ae7417.css.map": "/static/css/main.a0ae7417.css.map",
+    "main.f7e192c3.js.map": "/static/js/main.f7e192c3.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a0ae7417.css",
+    "static/js/main.f7e192c3.js"
+>>>>>>> 195b20a (dependency for react-draggable)
   ]
 }
