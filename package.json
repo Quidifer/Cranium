@@ -38,10 +38,14 @@
     "create-react-app": "^1.2.1",
     "express": "^4.18.2",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-draggable": "^4.4.5",
     "react-dropzone": "^14.2.3",
 =======
 >>>>>>> ae8aa1c (looking good i thinkkks)
+=======
+    "react-draggable": "^4.4.5",
+>>>>>>> 53573b1 (draggle and zoomable)
     "react-transition-group": "^4.4.5",
     "reflect-metadata": "^0.1.13",
     "styled-components": "^5.3.8",

@@ -17,7 +17,7 @@ function App() {
       .then(() => console.log("Response Received"));
   }, []);
 
-  const [screenState, setScreenState] = useState("crateMovement");
+  const [screenState, setScreenState] = useState("password");
   const [manifest, setManifest] = useState([]);
 
   return screenState === "signIn" ? (
