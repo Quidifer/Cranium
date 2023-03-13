@@ -3,6 +3,7 @@ import "./load.css";
 // import UploadManifest from '../UploadManifest/uploadManifest';
 // import { ContextMenu, MenuContextContainer } from '../ContextMenu/contextMenu';
 import Grid from "../Grid/grid";
+import Draggable from "react-draggable";
 
 interface Props {
   updateScreenState: () => void;
@@ -14,10 +15,16 @@ export default function Load(props: Props) {
   const { manifest, duplicates } = props;
   const [counts, setCounts] = useState<Record<string, number>[]>([]);
   const [isGridSelectable, setIsGridSelectable] = useState(true);
-  const [selectedCell, setSelectedCell] = useState({ row: 0, col: 0, name: "", weight: "", count: 0 });
+  const [selectedCell, setSelectedCell] = useState({
+    row: 0,
+    col: 0,
+    name: "",
+    weight: "",
+    count: 0,
+  });
   const [rightClicked, setRightClicked] = useState(false);
   // const [ points, setPoints ] = useState({ x: 0, y: 0 });
-  debugger
+  debugger;
   return (
     <div>
       <div className="split left">
@@ -44,6 +51,35 @@ export default function Load(props: Props) {
             {isGridSelectable ? "is selectable" : "is NOT selectable"}
           </button>
         </div>
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {rightClicked && (
+            <Draggable>
+              <div
+                style={{
+                  height: "115px",
+                  width: "230px",
+                  backgroundColor: "white",
+                  fontSize: "16px",
+                  padding: "15px",
+                  borderStyle: "solid"
+                }}
+              >
+                <div style={{textAlign: "center", fontSize: "12px", fontWeight: "bold"}}>Selected Container Information <br /><br /></div> 
+                Name: {selectedCell.name} <br />
+                Weight: {selectedCell.weight} <br />
+                Location: ({selectedCell.row}, {selectedCell.col}) <br />
+                Number of Duplicates: {selectedCell.count} <br />
+              </div>
+            </Draggable>
+          )}
+        </div>
       </div>
 
       <div className="split right">
@@ -64,18 +100,6 @@ export default function Load(props: Props) {
               ))}
           </tbody>
         </table>
-        <div style={{position: "absolute", top:"250px", padding:"80px"}}>
-          {/* {duplicates} */}
-          selected cell: ({selectedCell.row}, {selectedCell.col})
-          {rightClicked && (
-            <div>
-              Name: {selectedCell.name} <br/>
-              Weight: {selectedCell.weight} <br/>
-              Location: ({selectedCell.row}, {selectedCell.col}) <br/>
-              Number of Duplicates: {selectedCell.count} <br/>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );
