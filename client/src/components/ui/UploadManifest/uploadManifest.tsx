@@ -4,6 +4,8 @@ import { useDropzone, FileWithPath } from "react-dropzone";
 interface Props {
   updateScreenState: () => void;
   setManifest: any;
+  setDuplicates: any;
+  duplicates: any;
 }
 
 const baseStyle = {
@@ -31,7 +33,7 @@ const rejectStyle = {
 };
 
 export default function UploadManifest(props: Props) {
-  const { updateScreenState, setManifest } = props;
+  const { updateScreenState, setManifest, setDuplicates, duplicates } = props;
 
   const onDrop = useCallback((acceptedFiles: any) => {
     acceptedFiles.forEach((file: FileWithPath) => {
@@ -42,17 +44,39 @@ export default function UploadManifest(props: Props) {
       reader.onload = (e: any) => {
         let rows = e.target.result.split("\n");
         let cells: any[] = [];
+        let dups: any[] = [];
         rows.forEach((element: any) => {
           let row = element.split(",");
-          let cell = {
-            row: Number(row[0].replace("[", "")),
-            col: Number(row[1].replace("]", "")),
+
+          let name = row[3].trim();
+          let r = Number(row[0].replace("[", ""));
+          let c = Number(row[1].replace("]", ""));
+
+          cells.push({
+            row: r,
+            col: c,
             weight: Number(row[2].replace("{", "").replace("}", "")),
-            name: row[3].trim(),
-          };
-          cells.push(cell);
+            name: name,
+          });
+
+          if (!dups.some((item: any) => item.name === name)) {
+            dups.push({
+              name: name,
+              count: 1,
+              dup: [{r, c}],
+            });
+          } else {
+            let index = dups.findIndex((item: any) => item.name === name);
+            let oldCount = dups[index].count;
+            let oldDup = dups[index].dup;
+            dups = [...dups.slice(0, index)].concat(
+              {...dups[index], count: oldCount + 1, dup: [...oldDup, {r, c}]},
+              [...dups.slice(index + 1)]
+            );
+          }
         });
         setManifest(cells);
+        setDuplicates(dups);
         updateScreenState();
       };
       reader.readAsText(file);

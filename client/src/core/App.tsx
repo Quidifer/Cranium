@@ -19,6 +19,7 @@ function App() {
 
   const [screenState, setScreenState] = useState("uploadManifest");
   const [manifest, setManifest] = useState([]);
+  const [duplicates, setDuplicates] = useState([]);
 
   return screenState === "signIn" ? (
     <SignIn updateScreenState={() => setScreenState("password")} />
@@ -28,12 +29,14 @@ function App() {
     <UploadManifest
       updateScreenState={() => setScreenState("load")}
       setManifest={setManifest}
+      setDuplicates={setDuplicates}
+      duplicates={duplicates}
     />
   ) : screenState === "load" ? (
     <Load
       updateScreenState={() => setScreenState("crateMovement")}
-      setManifest={setManifest}
       manifest={manifest}
+      duplicates={duplicates}
     />
   ) : screenState === "crateMovement" ? (
     <CrateMovement />
