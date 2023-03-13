@@ -68,10 +68,36 @@ export default function Load(props: Props) {
                   backgroundColor: "white",
                   fontSize: "16px",
                   padding: "15px",
-                  borderStyle: "solid"
+                  borderStyle: "solid",
+                  position: "relative"
                 }}
               >
-                <div style={{textAlign: "center", fontSize: "12px", fontWeight: "bold"}}>Selected Container Information <br /><br /></div> 
+                <button
+                  style={{
+                    backgroundColor: "rgba(0, 0, 0, 0)",
+                    position: "absolute",
+                    padding: "0px",
+                    height: "25px",
+                    width: "25px",
+                    fontWeight: "bold",
+                    fontSize: "15px",
+                    top: "0",
+                    left: "calc(100% - 25px)"
+                  }}
+                  onClick={() => {setRightClicked(!rightClicked)}}
+                >
+                  x
+                </button>
+                <div
+                  style={{
+                    textAlign: "center",
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                    padding: "5px 0 10px 0"
+                  }}
+                >
+                  Selected Container Information
+                </div>
                 Name: {selectedCell.name} <br />
                 Weight: {selectedCell.weight} <br />
                 Location: ({selectedCell.row}, {selectedCell.col}) <br />
