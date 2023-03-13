@@ -1,0 +1,26 @@
+/* board */
+.row {
+  display: flex;
+}
+.tile {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background: #ffffff;
+}
+.nan {
+  background: #ebebeb;
+  color: #000000;
+}
+.selected {
+  background: #addd8b;
+  color: #000000;
+}
+.unselected {
+  background: #ffffff;
+  color: #000000;
+}
+.duplicate {
+  background: #f6ce56;
+  color: #000000;
+}
