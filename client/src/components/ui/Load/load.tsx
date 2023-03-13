@@ -41,7 +41,7 @@ export default function Load(props: Props) {
             isGridSelectable &&
             isInList(manifest, row, col) &&
             name !== "NAN" &&
-            name !== "UNUSED"
+            name !== "" // for unused cells
           ) {
             if (isInList(selectedCells, row, col)) {
               // deselect cell
@@ -103,11 +103,11 @@ export default function Load(props: Props) {
         const cell = manifest.find(
           (item: any) => item.row === row && item.col === col
         );
-        const name = cell ? cell.name : "";
+        let name = cell ? cell.name : "";
+        if (name === "UNUSED") name = ""
         if (isInList(manifest, row, col)) {
           if (isInList(selectedCells, row, col)) color = "selected";
-          else if (selectedNames.some((item: any) => item === name))
-            color = "duplicate";
+          else if (selectedNames.some((item: any) => item === name)) color = "duplicate";
           else if (name === "NAN") color = "nan";
           else color = "unselected";
         } else {
