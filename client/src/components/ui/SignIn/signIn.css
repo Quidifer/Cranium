@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
+
 .ContentDiv {
   height: 100vh;
   display: flex;
@@ -107,4 +109,29 @@ button {
   margin-top: "auto";
   margin-bottom: "auto";
   margin-top: 2vh;
+}
+
+.SignInTable{
+  position: absolute;
+  top: 70%;
+  width: 6vh;
+  min-width: 650px;
+  border-spacing: 3vh;
+  height: 6vh;
+  font-size: 1.1rem;
+  
+  font-family: gloock;
+  text-align: left;
+  
+
+}
+
+.TableRow{
+  border-bottom: 1px solid black;
+  width: 10wh;
+}
+
+.TableElement{
+  font-weight:100;
+  color: #aaa;
 }

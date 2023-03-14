@@ -81,31 +81,29 @@ function App() {
   const [duplicates, setDuplicates] = useState([]);
   const [manifestName, setManifestName] = useState("");
 
-  return screenState === "signIn" ? (
-    <SignIn updateScreenState={() => setScreenState("password")} />
-  ) : screenState === "password" ? (
-    <Password updateScreenState={() => setScreenState("uploadManifest")} />
+  return screenState === "password" ? (
+    <Password updateScreenState={() => setScreenState("signIn")} />
+  ) : screenState === "signIn" ? (
+    <SignIn updateScreenState={() => setScreenState("uploadManifest")} />
   ) : screenState === "uploadManifest" ? (
     <UploadManifest
-      updateScreenState={() => setScreenState("load")}
+      updateScreenState={() => setScreenState("jobSelect")}
       setManifest={setManifest}
-      setDuplicates={setDuplicates}
-      duplicates={duplicates}
-      setManifestName={setManifestName}
+    />
+  ) : screenState === "jobSelect" ? (
+    <JobSelect
+      updateScreenState={(type: string) =>
+        type === "Load" ? setScreenState("load") : setScreenState("load")
+      }
     />
   ) : screenState === "load" ? (
     <Load
       updateScreenState={() => setScreenState("crateMovement")}
-      manifest={manifest}
-      manifestName={manifestName}
-      duplicates={duplicates}
-    />
-  ) : screenState === "crateMovement" ? (
-    <CrateMovement
       setManifest={setManifest}
       manifest={manifest}
-      moveSet={moveSet}
     />
+  ) : screenState === "crateMovement" ? (
+    <CrateMovement />
   ) : (
     <p>test</p>
   );

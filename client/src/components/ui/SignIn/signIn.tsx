@@ -39,21 +39,29 @@ export default function SignIn(props: Props) {
             }}
             alt="standingCrane"
           />
-          <p
-            style={{
-              position: "inherit",
-              fontSize: "1rem",
-              marginLeft: "5vw",
-              marginRight: "5vw",
-              fontFamily: "Monaco",
-              color: "#aaa",
-            }}
-          >
-            dobee doooo beee blah blah i like eatch asdfjklf apples are the best
-            lokl why are you dubbing over this!!! You ADD Nothing! Please just
-            make content of your own. "Casually Explained just destroyed..."
-            gosh shut up.
-          </p>
+          <table className="SignInTable">
+            <tr className="TableRow">
+              <th className="TableElement">Elegance</th>
+              <th className="TableElement">Graceful</th>
+              <th className="TableElement">Magnificent</th>
+              <th className="TableElement">Serendipitous</th>
+              <th className="TableElement">Chic</th>
+            </tr>
+            <tr className="TableRow">
+              <th className="TableElement">Excellence</th>
+              <th className="TableElement">Gallant</th>
+              <th className="TableElement">Master-Class</th>
+              <th className="TableElement">Spectacular</th>
+              <th className="TableElement">Cool</th>
+            </tr>
+            <tr className="TableRow">
+              <th className="TableElement">Exquisite</th>
+              <th className="TableElement">Grandiose</th>
+              <th className="TableElement">Marvelous</th>
+              <th className="TableElement">Sophisticated</th>
+              <th className="TableElement">Clean</th>
+            </tr>
+          </table>
         </div>
       </div>
       <div
