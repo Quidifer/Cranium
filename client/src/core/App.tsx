@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 // import CraniumToolbar from "../components/ui/Toolbar/CraniumToolbar";
 import SignIn from "../components/ui/SignIn/signIn";
+import JobType from "../components/ui/JobType/jobType";
+import JobSelect from "../components/ui/JobType/jobSelect";
 
 function App() {
   const [data, setData] = useState(0);
@@ -16,7 +18,7 @@ function App() {
   const [screenState, setScreenState] = useState("signIn");
 
   return screenState === "signIn" ? (
-    <SignIn setScreenState={setScreenState} />
+    <JobSelect setScreenState={setScreenState}/>
   ) : (
     <p>test</p>
   );
