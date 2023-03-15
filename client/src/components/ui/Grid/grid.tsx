@@ -46,83 +46,75 @@ export default function Grid(props: Props) {
     return list.some((item: any) => item.row === row && item.col === col);
   };
 
-  const TileLeftClick = (props: any) => {
-    const { row, col, name, weight, count } = props;
-    if (
-      isGridSelectable &&
-      isInList(manifest, row, col) &&
-      name !== "NAN" &&
-      name !== "UNUSED"
-    ) {
-      selectedCell.row === row && selectedCell.col === col
-        ? setSelectedCell({ row: 0, col: 0, name: "", weight: "", count: 0 })
-        : setSelectedCell({
-            row: row,
-            col: col,
-            name: name,
-            weight: weight,
-            count: count,
-          });
-      if (isInList(selectedCells, row, col)) {
-        // deselect cell
-        setSelectedCells(
-          selectedCells.filter((item) => item.row !== row || item.col !== col)
-        );
-
-        let index = counts.findIndex((item: any) => item.name === name);
-        let oldCount = counts[index].count;
-        if (oldCount == 1) {
-          // last cell is deselected -> unhighlight all duplicate cells
-          setSelectedNames(selectedNames.filter((item) => item !== name));
-          setCounts(counts.filter((item: any) => item.name !== name));
-        } else {
-          setCounts(
-            [...counts.slice(0, index)].concat(
-              { ...counts[index], count: oldCount - 1 },
-              [...counts.slice(index + 1)]
-            )
-          );
-        }
-      } else {
-        // select cell
-        setSelectedCells([...selectedCells, { row, col }]);
-
-        if (!selectedNames.some((item: any) => item === name))
-          setSelectedNames([...selectedNames, name]);
-
-        if (!counts.some((item: any) => item.name === name)) {
-          setCounts([...counts, { name: name, count: 1 }]);
-        } else {
-          let index = counts.findIndex((item: any) => item.name === name);
-          let oldCount = counts[index].count;
-          setCounts(
-            [...counts.slice(0, index)].concat(
-              { ...counts[index], count: oldCount + 1 },
-              [...counts.slice(index + 1)]
-            )
-          );
-        }
-      }
-    }
-  };
-
   const Tile = (props: any) => {
-    const { color, id, row, col, name } = props;
+    const { color, id, row, col, name, weight, count } = props;
     return (
       <div
         id={id}
         className={isGridSelectable ? `${color} tile` : `nan tile`}
-        onContextMenu={(e) => {
-          // right click
+        onContextMenu={(e) => { // right click
           e.preventDefault();
           setRightClicked(!rightClicked);
-          //console.log("Right Click", e.pageX, e.pageY);
         }}
         onMouseDown={(e) => {
-          if (e.button === 0) {
-            // left click
+          if (e.button === 0) { // left click
             console.log("left click");
-            TileLeftClick(props);
+            if (
+              isGridSelectable &&
+              isInList(manifest, row, col) &&
+              name !== "NAN" &&
+              name !== "UNUSED"
+            ) {
+              selectedCell.row === row && selectedCell.col === col
+                ? setSelectedCell({ row: 0, col: 0, name: "", weight: "", count: 0 })
+                : setSelectedCell({
+                    row: row,
+                    col: col,
+                    name: name,
+                    weight: weight,
+                    count: count,
+                  });
+              if (isInList(selectedCells, row, col)) {
+                // deselect cell
+                setSelectedCells(
+                  selectedCells.filter((item) => item.row !== row || item.col !== col)
+                );
+        
+                let index = counts.findIndex((item: any) => item.name === name);
+                let oldCount = counts[index].count;
+                if (oldCount == 1) {
+                  // last cell is deselected -> unhighlight all duplicate cells
+                  setSelectedNames(selectedNames.filter((item) => item !== name));
+                  setCounts(counts.filter((item: any) => item.name !== name));
+                } else {
+                  setCounts(
+                    [...counts.slice(0, index)].concat(
+                      { ...counts[index], count: oldCount - 1 },
+                      [...counts.slice(index + 1)]
+                    )
+                  );
+                }
+              } else {
+                // select cell
+                setSelectedCells([...selectedCells, { row, col }]);
+        
+                if (!selectedNames.some((item: any) => item === name))
+                  setSelectedNames([...selectedNames, name]);
+        
+                if (!counts.some((item: any) => item.name === name)) {
+                  setCounts([...counts, { name: name, count: 1 }]);
+                } else {
+                  let index = counts.findIndex((item: any) => item.name === name);
+                  let oldCount = counts[index].count;
+                  setCounts(
+                    [...counts.slice(0, index)].concat(
+                      { ...counts[index], count: oldCount + 1 },
+                      [...counts.slice(index + 1)]
+                    )
+                  );
+                }
+              }
+            }
           }
         }}
         style={{ fontSize: "12px" }}

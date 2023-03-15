@@ -4,6 +4,7 @@ import "./load.css";
 // import { ContextMenu, MenuContextContainer } from '../ContextMenu/contextMenu';
 import Grid from "../Grid/grid";
 import Draggable from "react-draggable";
+import OnloadInput from "../OnloadInput/onloadInput";
 
 interface Props {
   updateScreenState: () => void;
@@ -23,33 +24,46 @@ export default function Load(props: Props) {
     count: 0,
   });
   const [rightClicked, setRightClicked] = useState(false);
-  // const [ points, setPoints ] = useState({ x: 0, y: 0 });
+  const [onloadContainers, setOnloadContainers] = useState<Record<string, number>[]>([]);
   debugger;
   return (
     <div>
       <div className="split left">
-        <div className="centered">
-          <Grid
-            manifest={manifest}
-            duplicates={duplicates}
-            n={8}
-            m={12}
-            counts={counts}
-            isGridSelectable={isGridSelectable}
-            selectedCell={selectedCell}
-            setSelectedCell={setSelectedCell}
-            rightClicked={rightClicked}
-            setRightClicked={setRightClicked}
-            setCounts={setCounts}
-          />
-          <button
-            onClick={() => {
-              setIsGridSelectable(!isGridSelectable);
-            }}
-            style={{ width: "130px", height: "30px", marginTop: "15px" }}
+        <div className="centered flex-container">
+          {/* input onload container info */}
+          <div
+            className="flex-child"
+            style={{ border: "solid", backgroundColor: "white" }}
           >
-            {isGridSelectable ? "is selectable" : "is NOT selectable"}
-          </button>
+            <OnloadInput
+              onloadContainers={onloadContainers}
+              setOnloadContainers={setOnloadContainers}
+            />
+          </div>
+
+          <div className="flex-child">
+            <Grid
+              manifest={manifest}
+              duplicates={duplicates}
+              n={8}
+              m={12}
+              counts={counts}
+              isGridSelectable={isGridSelectable}
+              selectedCell={selectedCell}
+              setSelectedCell={setSelectedCell}
+              rightClicked={rightClicked}
+              setRightClicked={setRightClicked}
+              setCounts={setCounts}
+            />
+            <button
+              onClick={() => {
+                setIsGridSelectable(!isGridSelectable);
+              }}
+              style={{ width: "130px", height: "30px", marginTop: "15px" }}
+            >
+              {isGridSelectable ? "is selectable" : "is NOT selectable"}
+            </button>
+          </div>
         </div>
         <div
           style={{
@@ -69,7 +83,7 @@ export default function Load(props: Props) {
                   fontSize: "16px",
                   padding: "15px",
                   borderStyle: "solid",
-                  position: "relative"
+                  position: "relative",
                 }}
               >
                 <button
@@ -82,9 +96,11 @@ export default function Load(props: Props) {
                     fontWeight: "bold",
                     fontSize: "15px",
                     top: "0",
-                    left: "calc(100% - 25px)"
+                    left: "calc(100% - 25px)",
                   }}
-                  onClick={() => {setRightClicked(!rightClicked)}}
+                  onClick={() => {
+                    setRightClicked(!rightClicked);
+                  }}
                 >
                   x
                 </button>
@@ -93,7 +109,7 @@ export default function Load(props: Props) {
                     textAlign: "center",
                     fontSize: "12px",
                     fontWeight: "bold",
-                    padding: "5px 0 10px 0"
+                    padding: "5px 0 10px 0",
                   }}
                 >
                   Selected Container Information
