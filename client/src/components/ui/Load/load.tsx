@@ -15,6 +15,9 @@ interface Props {
 export default function Load(props: Props) {
   const { manifest, duplicates } = props;
   const [counts, setCounts] = useState<Record<string, number>[]>([]);
+  const [onloadContainers, setOnloadContainers] = useState<
+    Record<string, number>[]
+  >([]);
   const [isGridSelectable, setIsGridSelectable] = useState(true);
   const [selectedCell, setSelectedCell] = useState({
     row: 0,
@@ -24,7 +27,7 @@ export default function Load(props: Props) {
     count: 0,
   });
   const [rightClicked, setRightClicked] = useState(false);
-  const [onloadContainers, setOnloadContainers] = useState<Record<string, number>[]>([]);
+
   debugger;
   return (
     <div>
@@ -125,23 +128,44 @@ export default function Load(props: Props) {
       </div>
 
       <div className="split right">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            {counts &&
-              counts.map((item) => (
-                <tr key={item.name}>
-                  <td>{item.name}</td>
-                  <td>{item.count}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        <div>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              {counts &&
+                counts.map((item) => (
+                  <tr key={item.name}>
+                    <td>{item.name}</td>
+                    <td>{item.count}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <table className="table" style={{top: "350px"}}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              {onloadContainers &&
+                onloadContainers.map((item) => (
+                  <tr key={item.name}>
+                    <td>{item.name}</td>
+                    <td>{item.weight}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
