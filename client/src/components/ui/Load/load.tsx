@@ -6,6 +6,7 @@ import Grid from "../Grid/grid";
 import Draggable from "react-draggable";
 import OnloadInput from "../OnloadInput/onloadInput";
 import ViewManifest from "../ViewManifest/viewManifest";
+import ViewLog from "../ViewLog/viewLog";
 
 interface Props {
   updateScreenState: () => void;
@@ -33,7 +34,14 @@ export default function Load(props: Props) {
   return (
     <div>
       <div className="split left">
-        <ViewManifest manifest={manifest} manifestName={manifestName}/>
+        <div className="parent">
+          <div className="child">
+            <ViewManifest manifest={manifest} manifestName={manifestName} />
+          </div>
+          <div className="child">
+            <ViewLog manifest={manifest} manifestName={manifestName} />
+          </div>
+        </div>
         <div className="centered flex-container">
           {/* input onload container info */}
           <div
@@ -82,13 +90,14 @@ export default function Load(props: Props) {
             <Draggable>
               <div
                 style={{
-                  height: "115px",
+                  height: "117px",
                   width: "230px",
                   backgroundColor: "white",
                   fontSize: "16px",
                   padding: "15px",
                   borderStyle: "solid",
                   position: "relative",
+                  overflow: "auto"
                 }}
               >
                 <button
@@ -150,7 +159,7 @@ export default function Load(props: Props) {
           </table>
         </div>
         <div>
-          <table className="table" style={{top: "350px"}}>
+          <table className="table" style={{ top: "350px" }}>
             <thead>
               <tr>
                 <th>Name</th>

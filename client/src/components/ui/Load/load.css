@@ -24,6 +24,7 @@
   width: 70%;
   left: 0;
   background-color: #d1d1d1;
+  overflow: hidden;
 }
 .right {
   width: 30%;
@@ -53,7 +54,6 @@ div.form-example {
 label,
 .form-exampel.input {
   display: table-cell;
-  /* margin-bottom: 5px; */
   width: 80%;
 }
 
@@ -87,4 +87,15 @@ label {
 
 .flex-child:first-child {
   margin-right: 50px;
+} 
+
+/* manifest and log buttons */
+.parent {
+  padding: 10px 30px;
+  text-align: left;
+}
+.child {
+  display: inline-block;
+  padding: 0 10px;
+  vertical-align: middle;
 }

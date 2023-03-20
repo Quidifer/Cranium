@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
-import "./viewManifest.css";
+import "./viewLog.css";
 interface Props {
   manifest: any;
   manifestName: string;
 }
 
-export default function ViewManifest(props: Props) {
+export default function ViewLog(props: Props) {
   const { manifest, manifestName } = props;
-  const manifestButton = (
-    <button
-      className={"button"}
-      // style={{ top: "50px", left: "50px", position: "fixed" }}
-    >
-      Manifest
-    </button>
-  );
+  const logButton = <button className={"button"}>Log</button>;
+  const currentYear = new Date().getFullYear();
 
   function pad(num: number, size: number) {
     var s = "00000" + num;
     return s.substring(s.length - size);
   }
 
-  const downloadManifest = () => {
+  const downloadLog = () => {
     let fileData = "";
     manifest.forEach((item: any) => {
       let row =
@@ -41,22 +35,22 @@ export default function ViewManifest(props: Props) {
     const blob = new Blob([fileData], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.download = manifestName.split(".txt")[0] + "_OUTBOUND" + ".txt";
+    link.download = "KeoghLongBeach" + currentYear + ".txt";
     link.href = url;
     link.click();
   };
 
   return (
-    <Popup trigger={manifestButton} modal>
+    <Popup trigger={logButton} modal>
       <div className="modal">
-        <div className="modalHeader"> Manifest </div>
+        <div className="modalHeader"> {currentYear} Log </div>
         <div className="modalContent">
           <table className="modalTable">
             <thead>
               <tr>
                 <th>Position</th>
                 <th>Weight</th>
-                <th> Name</th>
+                <th>Name</th>
               </tr>
             </thead>
             <tbody>
@@ -81,9 +75,9 @@ export default function ViewManifest(props: Props) {
             display: "block",
             width: "190px",
           }}
-          onClick={downloadManifest}
+          onClick={downloadLog}
         >
-          Download Manifest
+          Download Log
         </button>
       </div>
     </Popup>
