@@ -1,5 +1,28 @@
-.Tile {
-  /* border: 1px solid #ccc; */
-  /* border-inline: 3px solid #ccc; */
-  background: #ffffff;
+.lighterBlue {
+  background-color: #54bcdb;
+}
+
+.lightBlue {
+  background-color: #5890a8;
+}
+
+.lightYellow {
+  background-color: #f8e05a;
+}
+
+.lightRed {
+  background-color: #fd574e;
+}
+
+.green {
+  background-color: #3b7a34;
+}
+
+.nan {
+  background-color: #2e2d2d;
+  /* background-color: #151d70; */
+}
+.unselected {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(46, 46, 46, 0.2);
 }

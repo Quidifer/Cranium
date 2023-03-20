@@ -6,6 +6,7 @@ interface Props {
   scale: number;
   tileHeight: number;
   widthScale: number;
+  manifest: any;
 }
 
 interface box {
@@ -22,17 +23,17 @@ interface coord {
 }
 
 export default function AnimeCrate(props: Props) {
-  const { scale, tileHeight, widthScale } = props;
+  const { manifest, scale, tileHeight, widthScale } = props;
 
   const boxRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const ropeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const excessRopeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const start: coord = useMemo(() => {
-    return { row: 0, col: 7, type: "buffer" };
+    return { row: 0, col: 3, type: "ship" };
   }, []);
   const end: coord = useMemo(() => {
-    return { row: 0, col: 0, type: "truck" };
+    return { row: 0, col: 6, type: "ship" };
   }, []);
   const moveType: "left" | "right" = useMemo(() => {
     if (start.type !== end.type) {
@@ -50,6 +51,30 @@ export default function AnimeCrate(props: Props) {
   const rightCoord = useMemo(() => {
     return moveType === "left" ? start : end;
   }, [moveType, end, start]);
+
+  const highestRow = useMemo(() => {
+    if (leftCoord.type !== rightCoord.type) return -1;
+    let best = Math.max(leftCoord.row, rightCoord.row);
+    for (let i = leftCoord.col + 1; i < rightCoord.col; ++i) {
+      for (let j = 7; j > best; --j) {
+        const name: string = manifest[j * 12 + i].name;
+        if (name !== "UNUSED" && name !== "NAN") {
+          best = j;
+          break;
+        }
+      }
+    }
+    console.log("best ", best);
+    return best;
+  }, [
+    leftCoord.col,
+    leftCoord.row,
+    leftCoord.type,
+    manifest,
+    rightCoord.col,
+    rightCoord.row,
+    rightCoord.type,
+  ]);
 
   const [index, setIndex] = useState(0);
 
@@ -108,11 +133,11 @@ export default function AnimeCrate(props: Props) {
         ];
 
   const bufferLeft = 118;
-  const shipLeft = 738;
+  const shipLeft = 736;
   const truckLeft = 613; //not done
   const craneTop = 169.5;
-  const shipTop = 454.5;
-  const bufferTop = 403.7;
+  const shipTop = 422;
+  const bufferTop = 408.5;
   const truckTop = 398; // not done
 
   const tileWidth = tileHeight * widthScale;
@@ -126,7 +151,7 @@ export default function AnimeCrate(props: Props) {
           : start.type === "buffer"
           ? bufferTop
           : truckTop) -
-        Math.max(start.row, end.row) * tileHeight;
+        (highestRow + 1) * tileHeight;
   const left =
     (leftCoord.type === "buffer"
       ? bufferLeft
@@ -224,7 +249,7 @@ export default function AnimeCrate(props: Props) {
             className={moveType + classBoxStages[index]}
             ref={boxRef}
             style={{
-              height: `${scale * tileHeight + 10}px`,
+              height: `${scale * (tileHeight + 5)}px`,
               width: `${scale * (tileHeight * widthScale)}px`,
               ...boxStages[index],
             }}
@@ -259,10 +284,6 @@ export default function AnimeCrate(props: Props) {
         classNames={moveType + classRopeStages[index]}
         timeout={2150}
         nodeRef={ropeRef}
-        // onEntering={() => {
-        //   if ((index === 0 || index === 2) && currBoundingBox.height === 0)
-        //     setIndex(index + 1);
-        // }}
       >
         <div
           style={{
@@ -270,7 +291,7 @@ export default function AnimeCrate(props: Props) {
             height: `${currBoundingBox.height}px`,
             width: `${currBoundingBox.width}px`,
             top: `${currBoundingBox.top}px`,
-            left: `${currBoundingBox.left + scale * 8}px`,
+            left: `${currBoundingBox.left + scale * 7.75}px`,
           }}
         >
           <div
@@ -295,7 +316,7 @@ export default function AnimeCrate(props: Props) {
             height: `${currBoundingBox.top - (craneTop - 2) * scale}px`,
             width: `${currBoundingBox.width}px`,
             top: `${craneTop * scale}px`,
-            left: `${currBoundingBox.left + scale * 8}px`,
+            left: `${currBoundingBox.left + scale * 7.75}px`,
           }}
         >
           <div

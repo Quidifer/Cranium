@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useMemo,
-  useEffect,
-  RefObject,
-  useCallback,
-} from "react";
+import React, { useState, useCallback } from "react";
 import Craninmations from "../../Cranimations/Cranimations";
 
 import InteractableBox from "../InteractableBox/interactableBox";
@@ -14,6 +7,14 @@ import "./crateMovement.css";
 interface Props {
   setManifest: any;
   manifest: any;
+  moveSet: {
+    row_start: number;
+    col_start: number;
+    row_end: number;
+    col_end: number;
+    move_type: string;
+    step: number;
+  }[];
 }
 
 export default function CrateMovement(props: Props) {
