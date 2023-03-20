@@ -34,7 +34,13 @@ const rejectStyle = {
 };
 
 export default function UploadManifest(props: Props) {
-  const { updateScreenState, setManifest, setDuplicates, duplicates, setManifestName } = props;
+  const {
+    updateScreenState,
+    setManifest,
+    setDuplicates,
+    duplicates,
+    setManifestName,
+  } = props;
 
   const onDrop = useCallback((acceptedFiles: any) => {
     acceptedFiles.forEach((file: FileWithPath) => {
@@ -64,14 +70,18 @@ export default function UploadManifest(props: Props) {
             dups.push({
               name: name,
               count: 1,
-              dup: [{r, c}],
+              dup: [{ r, c }],
             });
           } else {
             let index = dups.findIndex((item: any) => item.name === name);
             let oldCount = dups[index].count;
             let oldDup = dups[index].dup;
             dups = [...dups.slice(0, index)].concat(
-              {...dups[index], count: oldCount + 1, dup: [...oldDup, {r, c}]},
+              {
+                ...dups[index],
+                count: oldCount + 1,
+                dup: [...oldDup, { r, c }],
+              },
               [...dups.slice(index + 1)]
             );
           }

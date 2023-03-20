@@ -4,3 +4,17 @@
   height: 100%;
   width: 100%;
 }
+
+.ground {
+  background-color: #2e2d2d;
+}
+
+@keyframes slideRight {
+  100% {
+    left: 100%;
+  }
+}
+
+.fog-enter-active {
+  animation: slideRight 60s forwards linear;
+}
