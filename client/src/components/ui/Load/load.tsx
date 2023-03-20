@@ -7,6 +7,7 @@ import Draggable from "react-draggable";
 import OnloadInput from "../OnloadInput/onloadInput";
 import ViewManifest from "../ViewManifest/viewManifest";
 import ViewLog from "../ViewLog/viewLog";
+import CraniumToolbar from "../Toolbar/CraniumToolbar";
 
 interface Props {
   updateScreenState: () => void;
@@ -16,7 +17,7 @@ interface Props {
 }
 
 export default function Load(props: Props) {
-  const { manifest, manifestName, duplicates } = props;
+  const { manifest, manifestName, duplicates, updateScreenState } = props;
   const [counts, setCounts] = useState<Record<string, number>[]>([]);
   const [onloadContainers, setOnloadContainers] = useState<
     Record<string, number>[]
@@ -34,14 +35,15 @@ export default function Load(props: Props) {
   return (
     <div>
       <div className="split left">
-        <div className="parent">
+        <CraniumToolbar manifest={manifest} manifestName={manifestName} updateScreenState={updateScreenState}/>
+        {/* <div className="parent">
           <div className="child">
             <ViewManifest manifest={manifest} manifestName={manifestName} />
           </div>
           <div className="child">
             <ViewLog manifest={manifest} manifestName={manifestName} />
           </div>
-        </div>
+        </div> */}
         <div className="centered flex-container">
           {/* input onload container info */}
           <div
@@ -97,7 +99,7 @@ export default function Load(props: Props) {
                   padding: "15px",
                   borderStyle: "solid",
                   position: "relative",
-                  overflow: "auto"
+                  overflow: "auto",
                 }}
               >
                 <button

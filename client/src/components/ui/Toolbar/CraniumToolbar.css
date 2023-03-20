@@ -1,11 +1,24 @@
-.CraniumToolbar {
+.toolbar {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     background-color: white;
     border: 2px;
     border-color: black;
     border-style: ridge;
     padding: 20px;
-    width: 100%;
+    margin: 0;
+    /* width: 99%; */
     height: 50px;
 }
+
+.button {
+    height: 50px;
+    width: 130px;
+    border-radius: 200px;
+    border: 0;
+    background-color: #9b9b9b;
+    color: white;
+    font-family: "Monaco", sans-serif;
+    margin: 0 5px;
+    padding: 0;
+  }

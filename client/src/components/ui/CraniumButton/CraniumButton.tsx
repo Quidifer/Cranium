@@ -22,7 +22,8 @@ export default function CraniumButton (props?: ButtonProps) {
                 border,
                 borderRadius: radius,
                 height,
-                width
+                width,
+                fontSize: "20px"
             }}
         >
         {children}
