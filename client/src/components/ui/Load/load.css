@@ -71,6 +71,7 @@ label {
   background: #191919;
   text-align: center;
 }
+<<<<<<< HEAD
 
 .flex-container {
   display: flex;
@@ -98,3 +99,5 @@ label {
   padding: 0 10px;
   vertical-align: middle;
 }
+=======
+>>>>>>> 6afafba (animations work with truck)

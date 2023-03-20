@@ -17,7 +17,7 @@ function App() {
       .then(() => console.log("Response Received"));
   }, []);
 
-  const [screenState, setScreenState] = useState("uploadManifest");
+  const [screenState, setScreenState] = useState("crateMovement");
   const [manifest, setManifest] = useState([]);
   const [duplicates, setDuplicates] = useState([]);
   const [manifestName, setManifestName] = useState("");
@@ -42,7 +42,7 @@ function App() {
       duplicates={duplicates}
     />
   ) : screenState === "crateMovement" ? (
-    <CrateMovement />
+    <CrateMovement setManifest={setManifest} manifest={manifest} />
   ) : (
     <p>test</p>
   );

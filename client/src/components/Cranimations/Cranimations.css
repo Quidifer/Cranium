@@ -4,3 +4,27 @@
   height: 100%;
   width: 100%;
 }
+
+.nan {
+  background: #ebebeb;
+  color: #000000;
+}
+.selected {
+  background: #addd8b;
+  color: #000000;
+}
+.unselected {
+  background: #ffffff;
+  color: #000000;
+}
+
+.tile {
+  width: 40px;
+  height: 40px;
+  /* border: 1px solid #ccc; */
+  background: #ffffff;
+}
+
+.ground {
+  background-color: #2e2d2d;
+}

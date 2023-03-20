@@ -38,7 +38,7 @@ export default function InteractableBox(props: Props) {
           <CSSTransition
             in={animationStart}
             classNames={animationType}
-            timeout={600}
+            timeout={2000}
             nodeRef={nodeRef}
             key={index}
             onEntered={() => {
@@ -56,7 +56,7 @@ export default function InteractableBox(props: Props) {
         <CSSTransition
           in={animationStart}
           classNames={animationType}
-          timeout={600}
+          timeout={2000}
           nodeRef={nodeRef}
           key={index}
           // onEnter={() => setRenderBoxes(false)}

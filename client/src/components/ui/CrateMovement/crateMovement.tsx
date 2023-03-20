@@ -11,7 +11,12 @@ import Craninmations from "../../Cranimations/Cranimations";
 import InteractableBox from "../InteractableBox/interactableBox";
 import "./crateMovement.css";
 
-export default function CrateMovement() {
+interface Props {
+  setManifest: any;
+  manifest: any;
+}
+
+export default function CrateMovement(props: Props) {
   const [items, setItems] = useState([
     "This is a test of a lot of information that is long",
     "test2",
@@ -34,7 +39,7 @@ export default function CrateMovement() {
       <div className="leftcontent">
         <div className="header"></div>
         <div className="crane">
-          <Craninmations />
+          <Craninmations {...props} />
         </div>
         <div className="footer"></div>
       </div>

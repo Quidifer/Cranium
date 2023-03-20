@@ -34,15 +34,15 @@
 
 .moveFar-enter-active {
   transform: translateX(0px) translateY(-192px);
-  transition: transform 600ms;
+  transition: transform 2000ms;
 }
 .move-enter-active {
   transform: translateX(0px) translateY(-172px);
-  transition: transform 600ms;
+  transition: transform 2000ms;
 }
 .destroy-enter-active {
   transform: scale(0);
-  transition: transform 300ms;
+  transition: transform 2000ms;
 }
 
 /* .box-exit-active {
@@ -59,7 +59,6 @@
   border: 2px solid;
   border-color: rgb(5, 245, 5);
   border-radius: 10px;
-  z-index: 3;
 }
 
 .info {
