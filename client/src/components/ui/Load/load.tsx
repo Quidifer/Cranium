@@ -11,13 +11,15 @@ import CraniumToolbar from "../Toolbar/CraniumToolbar";
 
 interface Props {
   updateScreenState: () => void;
+  prevScreenState: (type: string) => void;
+  setManifest: any;
   manifest: any;
   manifestName: string;
   duplicates: any;
 }
 
 export default function Load(props: Props) {
-  const { manifest, manifestName, duplicates, updateScreenState } = props;
+  const { manifest, manifestName, duplicates, updateScreenState, prevScreenState } = props;
   const [counts, setCounts] = useState<Record<string, number>[]>([]);
   const [onloadContainers, setOnloadContainers] = useState<
     Record<string, number>[]

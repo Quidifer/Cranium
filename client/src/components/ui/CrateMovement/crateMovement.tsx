@@ -2,9 +2,13 @@ import React, { useState, useCallback } from "react";
 import Craninmations from "../../Cranimations/Cranimations";
 
 import InteractableBox from "../InteractableBox/interactableBox";
+import submitButton from "../../../resources/SubmitButton.svg";
 import "./crateMovement.css";
+import { Login } from "@mui/icons-material";
+import { TextField } from "@mui/material";
 
 interface Props {
+  prevScreenState: (type: string) => void;
   setManifest: any;
   manifest: any;
   moveSet: {
@@ -18,6 +22,7 @@ interface Props {
 }
 
 export default function CrateMovement(props: Props) {
+  
   const [items, setItems] = useState([
     "This is a test of a lot of information that is long",
     "test2",
@@ -28,12 +33,17 @@ export default function CrateMovement(props: Props) {
     "test7",
   ]);
 
+
+
   const [animateBoxes, setAnimateBoxes] = useState(false);
+  
 
   const updateItems = useCallback(() => {
     setItems(items.slice(1, items.length));
     setAnimateBoxes(false);
   }, [items, setAnimateBoxes]);
+
+  const [comment, setComment] = useState("");
 
   return (
     <div className="page">
@@ -42,7 +52,37 @@ export default function CrateMovement(props: Props) {
         <div className="crane">
           <Craninmations {...props} />
         </div>
-        <div className="footer"></div>
+        <div className="footer">
+          <div className="CommentTitle">
+            Add Comment
+          </div>
+          <div className="CommentBar">
+            <textarea
+              className="CommentInput"
+              
+              placeholder="Type here..."
+              name="comment"
+              id="comment"
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+            ></textarea>
+            <button className="SubmitComment">
+              <img
+                src={submitButton}
+                style={{
+                  height: "150%",
+                  width: "150%",
+                  marginLeft: "-25%",
+                  marginTop: "-25%",
+                }}
+                alt="submit"
+                className="ButtonSvg"
+              />
+              {/* Submit */}
+            </button>
+          </div>
+        </div>
       </div>
       <div className="column">
         <div className="timeEstimates">
