@@ -160,6 +160,40 @@ export default function Craninmations(props: Props) {
                 src={Ship}
                 alt="shipoutline"
               />
+              <CSSTransition
+                in={animate}
+                classNames="fog"
+                timeout={60000}
+                nodeRef={fogRef}
+                onEntered={() => {
+                  setAnimate(false);
+                  setTimeout(() => {
+                    setAnimate(true);
+                  }, 1000);
+                }}
+              >
+                <div
+                  ref={fogRef}
+                  className="fog"
+                  style={{
+                    position: "absolute",
+                    height: "100%",
+                    width: "100%",
+                    left: "-100%",
+                  }}
+                >
+                  <img
+                    style={{
+                      position: "absolute",
+                      height: `${600 * scale}px`,
+                      bottom: `${100 * scale}px`,
+                      left: `${0 * scale}px`,
+                    }}
+                    src={Fog}
+                    alt="Fog"
+                  />
+                </div>
+              </CSSTransition>
               <div
                 style={{
                   position: "absolute",
@@ -224,40 +258,6 @@ export default function Craninmations(props: Props) {
                 src={Truck}
                 alt="truck"
               />
-              <CSSTransition
-                in={animate}
-                classNames="fog"
-                timeout={60000}
-                nodeRef={fogRef}
-                onEntered={() => {
-                  setAnimate(false);
-                  setTimeout(() => {
-                    setAnimate(true);
-                  }, 1000);
-                }}
-              >
-                <div
-                  ref={fogRef}
-                  className="fog"
-                  style={{
-                    position: "absolute",
-                    height: "100%",
-                    width: "100%",
-                    left: "-100%",
-                  }}
-                >
-                  <img
-                    style={{
-                      position: "absolute",
-                      height: `${600 * scale}px`,
-                      bottom: `${100 * scale}px`,
-                      left: `${0 * scale}px`,
-                    }}
-                    src={Fog}
-                    alt="Fog"
-                  />
-                </div>
-              </CSSTransition>
             </div>
           </Draggable>
         </div>
