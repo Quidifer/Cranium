@@ -8,6 +8,7 @@ import { Login } from "@mui/icons-material";
 import { TextField } from "@mui/material";
 
 interface Props {
+  prevScreenState: (type: string) => void;
   setManifest: any;
   manifest: any;
   moveSet: {
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export default function CrateMovement(props: Props) {
+  
   const [items, setItems] = useState([
     "This is a test of a lot of information that is long",
     "test2",
@@ -34,6 +36,7 @@ export default function CrateMovement(props: Props) {
 
 
   const [animateBoxes, setAnimateBoxes] = useState(false);
+  
 
   const updateItems = useCallback(() => {
     setItems(items.slice(1, items.length));

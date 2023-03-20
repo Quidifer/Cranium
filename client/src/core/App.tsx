@@ -6,6 +6,7 @@ import Password from "../components/ui/Password/password";
 import UploadManifest from "../components/ui/UploadManifest/uploadManifest";
 import Load from "../components/ui/Load/load";
 import CrateMovement from "../components/ui/CrateMovement/crateMovement";
+import JobSelect from "../components/ui/JobSelect/jobSelect";
 
 const moveSet = [
   {
@@ -80,6 +81,7 @@ function App() {
   const [manifest, setManifest] = useState([]);
   const [duplicates, setDuplicates] = useState([]);
   const [manifestName, setManifestName] = useState("");
+  const [prevScreenState, setPrevScreenState] = useState("");
 
   return screenState === "password" ? (
     <Password updateScreenState={() => setScreenState("signIn")} />
@@ -88,22 +90,35 @@ function App() {
   ) : screenState === "uploadManifest" ? (
     <UploadManifest
       updateScreenState={() => setScreenState("jobSelect")}
+      prevScreenState={() => setPrevScreenState("UploadManifest")} 
       setManifest={setManifest}
+      setDuplicates={setDuplicates}
+      duplicates={duplicates}
+      setManifestName={setManifestName}    
     />
   ) : screenState === "jobSelect" ? (
     <JobSelect
       updateScreenState={(type: string) =>
         type === "Load" ? setScreenState("load") : setScreenState("load")
       }
+      prevScreenState={() => setPrevScreenState("JobSelect")} 
     />
   ) : screenState === "load" ? (
     <Load
       updateScreenState={() => setScreenState("crateMovement")}
       setManifest={setManifest}
       manifest={manifest}
+      manifestName={manifestName}
+      duplicates={duplicates}
+      prevScreenState={() => setPrevScreenState("Load")} 
     />
   ) : screenState === "crateMovement" ? (
-    <CrateMovement />
+    <CrateMovement
+      setManifest={setManifest}
+      manifest={manifest}
+      moveSet={moveSet}
+      prevScreenState={() => setPrevScreenState("crateMovement")} 
+    />
   ) : (
     <p>test</p>
   );
