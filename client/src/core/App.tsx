@@ -87,7 +87,7 @@ function App() {
     <Password updateScreenState={() => setScreenState("uploadManifest")} />
   ) : screenState === "uploadManifest" ? (
     <UploadManifest
-      updateScreenState={() => setScreenState("crateMovement")}
+      updateScreenState={() => setScreenState("load")}
       setManifest={setManifest}
       setDuplicates={setDuplicates}
       duplicates={duplicates}

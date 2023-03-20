@@ -71,7 +71,6 @@ label {
   background: #191919;
   text-align: center;
 }
-<<<<<<< HEAD
 
 .flex-container {
   display: flex;
@@ -87,7 +86,7 @@ label {
 
 .flex-child:first-child {
   margin-right: 50px;
-} 
+}
 
 /* manifest and log buttons */
 .parent {
@@ -99,5 +98,3 @@ label {
   padding: 0 10px;
   vertical-align: middle;
 }
-=======
->>>>>>> 6afafba (animations work with truck)
