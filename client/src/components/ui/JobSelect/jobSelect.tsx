@@ -4,6 +4,7 @@ import JobSelectScreen from "../../../resources/JobSelectBackground.png";
 
 interface Props {
   updateScreenState: (type: string) => void;
+  prevScreenState: (type: string) => void;
 }
 
 export default function JobSelect(props: Props) {

@@ -31,6 +31,8 @@ export default function CrateMovement(props: Props) {
     "test7",
   ]);
 
+
+
   const [animateBoxes, setAnimateBoxes] = useState(false);
 
   const updateItems = useCallback(() => {
@@ -48,7 +50,9 @@ export default function CrateMovement(props: Props) {
           <Craninmations {...props} />
         </div>
         <div className="footer">
-          <div className="CommentTitle">Add Comment</div>
+          <div className="CommentTitle">
+            Add Comment
+          </div>
           <div className="CommentBar">
             <textarea
               className="CommentInput"

@@ -11,6 +11,8 @@ import CraniumToolbar from "../Toolbar/CraniumToolbar";
 
 interface Props {
   updateScreenState: () => void;
+  prevScreenState: (type: string) => void;
+  setManifest: any;
   manifest: any;
   manifestName: string;
   duplicates: any;

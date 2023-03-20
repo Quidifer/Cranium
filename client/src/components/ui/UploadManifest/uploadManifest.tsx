@@ -7,6 +7,7 @@ interface Props {
   setDuplicates: any;
   duplicates: any;
   setManifestName: any;
+  prevScreenState: (type: string) => void;
 }
 
 const baseStyle = {
