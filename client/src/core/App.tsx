@@ -76,7 +76,11 @@ function App() {
       .then(() => console.log("Response Received"));
   }, []);
 
+<<<<<<< HEAD
   const [screenState, setScreenState] = useState("signIn");
+=======
+  const [screenState, setScreenState] = useState("crateMovement");
+>>>>>>> 9858c20 (New comment section added)
   const [manifest, setManifest] = useState([]);
   const [duplicates, setDuplicates] = useState([]);
   const [manifestName, setManifestName] = useState("");

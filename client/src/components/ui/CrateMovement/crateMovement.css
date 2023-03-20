@@ -56,8 +56,9 @@ p {
 .footer {
   height: 15%;
   width: 100%;
-  background-color: brown;
+  background-color: rgb(59, 58, 58);
   bottom: 0;
+  border-top: solid black;
 }
 
 .columnFooter {
@@ -122,6 +123,41 @@ p {
   border-radius: 10px;
   position: fixed;
   z-index: 0;
+}
+
+.CommentTitle {
+  color: white;
+}
+
+.CommentBar {
+  position: relative;
+  color: white;
+
+  position: block;
+  height: 76.5%;
+  width: 85%;
+  margin: auto;
+}
+.CommentInput {
+  position: block;
+  margin: auto;
+  border-radius: 5px;
+  height: 9.5vh;
+  width: 85%;
+  float: left;
+  background-color: lightgray;
+  border: 1px solid black;
+  font-family: arial;
+  resize: none;
+}
+
+.SubmitComment {
+  position: relative;
+  height: 70%;
+  width: 10%;
+  margin-left: 1%;
+  border-radius: 0;
+  background-color: rgb(59, 58, 58);
 }
 
 /* .greenOutline {
