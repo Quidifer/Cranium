@@ -10,11 +10,12 @@ import ViewManifest from "../ViewManifest/viewManifest";
 interface Props {
   updateScreenState: () => void;
   manifest: any;
+  manifestName: string;
   duplicates: any;
 }
 
 export default function Load(props: Props) {
-  const { manifest, duplicates } = props;
+  const { manifest, manifestName, duplicates } = props;
   const [counts, setCounts] = useState<Record<string, number>[]>([]);
   const [onloadContainers, setOnloadContainers] = useState<
     Record<string, number>[]
@@ -32,7 +33,7 @@ export default function Load(props: Props) {
   return (
     <div>
       <div className="split left">
-        <ViewManifest manifest={manifest}/>
+        <ViewManifest manifest={manifest} manifestName={manifestName}/>
         <div className="centered flex-container">
           {/* input onload container info */}
           <div

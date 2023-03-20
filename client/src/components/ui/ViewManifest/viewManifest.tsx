@@ -3,10 +3,11 @@ import Popup from "reactjs-popup";
 import "./viewManifest.css";
 interface Props {
   manifest: any;
+  manifestName: string;
 }
 
 export default function ViewManifest(props: Props) {
-  const { manifest } = props;
+  const { manifest, manifestName } = props;
   const manifestButton = (
     <button
       className={"button"}
@@ -16,6 +17,35 @@ export default function ViewManifest(props: Props) {
     </button>
   );
 
+  function pad(num: number, size: number) {
+    var s = "00000" + num;
+    return s.substring(s.length - size);
+  }
+
+  const downloadManifest = () => {
+    let fileData = "";
+    manifest.forEach((item: any) => {
+      let row =
+        "[" +
+        pad(item.row, 2) +
+        "," +
+        pad(item.col, 2) +
+        "], {" +
+        pad(item.weight, 5) +
+        "}, " +
+        item.name +
+        "\n";
+      fileData += row;
+    });
+    // const fileData = JSON.stringify(manifest);
+    const blob = new Blob([fileData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = manifestName.split(".txt")[0] + "_OUTBOUND" + ".txt";
+    link.href = url;
+    link.click();
+  };
+
   return (
     <Popup trigger={manifestButton} modal>
       <div className="modal">
@@ -24,7 +54,9 @@ export default function ViewManifest(props: Props) {
           <table className="modalTable">
             <thead>
               <tr>
-                <th style={{ borderBottom: "2px solid", padding: "5px" }}>Position</th>
+                <th style={{ borderBottom: "2px solid", padding: "5px" }}>
+                  Position
+                </th>
                 <th style={{ borderBottom: "2px solid" }}>Weight</th>
                 <th style={{ borderBottom: "2px solid" }}> Name</th>
               </tr>
@@ -51,6 +83,7 @@ export default function ViewManifest(props: Props) {
             display: "block",
             width: "190px",
           }}
+          onClick={downloadManifest}
         >
           Download Manifest
         </button>

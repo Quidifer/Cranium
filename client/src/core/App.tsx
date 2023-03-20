@@ -38,6 +38,7 @@ function App() {
     <Load
       updateScreenState={() => setScreenState("crateMovement")}
       manifest={manifest}
+      manifestName={manifestName}
       duplicates={duplicates}
     />
   ) : screenState === "crateMovement" ? (
