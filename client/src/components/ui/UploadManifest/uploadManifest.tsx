@@ -6,6 +6,7 @@ interface Props {
   setManifest: any;
   setDuplicates: any;
   duplicates: any;
+  setManifestName: any;
 }
 
 const baseStyle = {
@@ -33,7 +34,7 @@ const rejectStyle = {
 };
 
 export default function UploadManifest(props: Props) {
-  const { updateScreenState, setManifest, setDuplicates, duplicates } = props;
+  const { updateScreenState, setManifest, setDuplicates, duplicates, setManifestName } = props;
 
   const onDrop = useCallback((acceptedFiles: any) => {
     acceptedFiles.forEach((file: FileWithPath) => {
@@ -77,6 +78,7 @@ export default function UploadManifest(props: Props) {
         });
         setManifest(cells);
         setDuplicates(dups);
+        setManifestName(file.path);
         updateScreenState();
       };
       reader.readAsText(file);

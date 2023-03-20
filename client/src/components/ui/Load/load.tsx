@@ -5,6 +5,7 @@ import "./load.css";
 import Grid from "../Grid/grid";
 import Draggable from "react-draggable";
 import OnloadInput from "../OnloadInput/onloadInput";
+import ViewManifest from "../ViewManifest/viewManifest";
 
 interface Props {
   updateScreenState: () => void;
@@ -28,10 +29,10 @@ export default function Load(props: Props) {
   });
   const [rightClicked, setRightClicked] = useState(false);
 
-  debugger;
   return (
     <div>
       <div className="split left">
+        <ViewManifest manifest={manifest}/>
         <div className="centered flex-container">
           {/* input onload container info */}
           <div

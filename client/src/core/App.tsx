@@ -20,6 +20,7 @@ function App() {
   const [screenState, setScreenState] = useState("uploadManifest");
   const [manifest, setManifest] = useState([]);
   const [duplicates, setDuplicates] = useState([]);
+  const [manifestName, setManifestName] = useState("");
 
   return screenState === "signIn" ? (
     <SignIn updateScreenState={() => setScreenState("password")} />
@@ -31,6 +32,7 @@ function App() {
       setManifest={setManifest}
       setDuplicates={setDuplicates}
       duplicates={duplicates}
+      setManifestName={setManifestName}
     />
   ) : screenState === "load" ? (
     <Load
