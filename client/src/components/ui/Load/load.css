@@ -1,33 +1,6 @@
 .App {
-    font-family: sans-serif;
-    text-align: center;
-}
-
-/* board */
-.row {
-  display: flex;
-}
-.tile {
-  width: 40px;
-  height: 40px;
-  border: 1px solid #ccc;
-  background: #ffffff;
-}
-.nan {
-  background: #ebebeb;
-  color: #000000;
-}
-.selected {
-  background: #addd8b;
-  color: #000000;
-}
-.unselected {
-  background: #ffffff;
-  color: #000000;
-}
-.duplicate {
-  background: #f6ce56;
-  color: #000000;
+  font-family: sans-serif;
+  text-align: center;
 }
 
 /* counts */
@@ -45,15 +18,15 @@
   z-index: 1;
   top: 0;
   overflow-x: hidden;
-  padding-top: 20px;
 }
 .left {
-  width: 65%;
+  width: 70%;
   left: 0;
   background-color: #d1d1d1;
+  overflow: hidden;
 }
 .right {
-  width: 35%;
+  width: 30%;
   right: 0;
   background-color: rgb(255, 255, 255);
 }
@@ -62,5 +35,66 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* form */
+form.form-example {
+  display: table;
+  background-color: white;
+  font-size: 15px;
+  width: 200px;
+  padding: 5px 10px 0 10px;
+}
+
+div.form-example {
+  display: table-row;
+}
+
+label,
+.form-exampel.input {
+  display: table-cell;
+  width: 80%;
+}
+
+label {
+  padding-right: 10px;
+  font-size: 15px;
+  padding: 7px;
+}
+
+.form.button {
+  width: 400px;
+  padding: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #191919;
   text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flex-child {
+  flex: 1;
+  padding: 10px;
+}
+
+.flex-child:first-child {
+  margin-right: 50px;
+} 
+
+/* manifest and log buttons */
+.parent {
+  padding: 10px 30px;
+  text-align: left;
+}
+.child {
+  display: inline-block;
+  padding: 0 10px;
+  vertical-align: middle;
 }
