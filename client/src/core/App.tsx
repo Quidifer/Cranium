@@ -14,8 +14,9 @@ const moveSet = [
     col_start: 4,
     row_end: 1,
     col_end: 10,
-    move_type: "SHIP_MOVE",
-    step: 1,
+    move_type: "SHIP_TO_BUFFER",
+    container_name: "your mom is soooo gay lollllllll",
+    container_weight: 9999,
   },
   {
     row_start: 5,
@@ -23,7 +24,8 @@ const moveSet = [
     row_end: 2,
     col_end: 10,
     move_type: "SHIP_MOVE",
-    step: 2,
+    container_name: "your mom",
+    container_weight: 100,
   },
   {
     row_start: 4,
@@ -31,7 +33,8 @@ const moveSet = [
     row_end: 3,
     col_end: 10,
     move_type: "SHIP_MOVE",
-    step: 3,
+    container_name: "your mom",
+    container_weight: 100,
   },
   {
     row_start: 3,
@@ -39,7 +42,8 @@ const moveSet = [
     row_end: 4,
     col_end: 10,
     move_type: "SHIP_MOVE",
-    step: 4,
+    container_name: "your mom",
+    container_weight: 100,
   },
   {
     row_start: 2,
@@ -47,7 +51,8 @@ const moveSet = [
     row_end: 5,
     col_end: 10,
     move_type: "SHIP_MOVE",
-    step: 5,
+    container_name: "your mom",
+    container_weight: 100,
   },
   {
     row_start: 1,
@@ -55,15 +60,17 @@ const moveSet = [
     row_end: -1,
     col_end: -1,
     move_type: "OFFLOAD",
-    step: 6,
+    container_name: "your mom",
+    container_weight: 100,
   },
   {
     row_start: -1,
     col_start: -1,
     row_end: 2,
-    col_end: 0,
+    col_end: 1,
     move_type: "ONLOAD",
-    step: 7,
+    container_name: "your mom is soooo gay lollllllll",
+    container_weight: 100,
   },
 ];
 
@@ -79,6 +86,21 @@ function App() {
 
   const [screenState, setScreenState] = useState("signIn");
   const [manifest, setManifest] = useState([]);
+  const [buffer, setBuffer] = useState(() => {
+    let cells: { row: number; col: number; weight: number; name: string }[] =
+      [];
+    for (let r = 1; r <= 4; ++r) {
+      for (let c = 1; c <= 24; ++c) {
+        cells.push({
+          row: r,
+          col: c,
+          weight: 0,
+          name: "UNUSED",
+        });
+      }
+    }
+    return cells;
+  });
   const [duplicates, setDuplicates] = useState([]);
   const [manifestName, setManifestName] = useState("");
   const [prevScreenState, setPrevScreenState] = useState("");
@@ -90,18 +112,18 @@ function App() {
   ) : screenState === "uploadManifest" ? (
     <UploadManifest
       updateScreenState={() => setScreenState("jobSelect")}
-      prevScreenState={() => setPrevScreenState("UploadManifest")} 
+      prevScreenState={() => setPrevScreenState("UploadManifest")}
       setManifest={setManifest}
       setDuplicates={setDuplicates}
       duplicates={duplicates}
-      setManifestName={setManifestName}    
+      setManifestName={setManifestName}
     />
   ) : screenState === "jobSelect" ? (
     <JobSelect
       updateScreenState={(type: string) =>
         type === "Load" ? setScreenState("load") : setScreenState("load")
       }
-      prevScreenState={() => setPrevScreenState("JobSelect")} 
+      prevScreenState={() => setPrevScreenState("JobSelect")}
     />
   ) : screenState === "load" ? (
     <Load
@@ -110,14 +132,16 @@ function App() {
       manifest={manifest}
       manifestName={manifestName}
       duplicates={duplicates}
-      prevScreenState={() => setPrevScreenState("Load")} 
+      prevScreenState={() => setPrevScreenState("Load")}
     />
   ) : screenState === "crateMovement" ? (
     <CrateMovement
       setManifest={setManifest}
       manifest={manifest}
+      buffer={buffer}
+      setBuffer={setBuffer}
       moveSet={moveSet}
-      prevScreenState={() => setPrevScreenState("crateMovement")} 
+      prevScreenState={() => setPrevScreenState("crateMovement")}
     />
   ) : (
     <p>test</p>

@@ -58,7 +58,6 @@ p {
   width: 100%;
   background-color: rgb(59, 58, 58);
   bottom: 0;
-  border-top: solid black;
 }
 
 .columnFooter {
@@ -70,7 +69,7 @@ p {
 }
 
 .nextButton {
-  background-color: green;
+  background-color: #008037;
   height: 70%;
   width: 250px;
   margin-left: 25px;

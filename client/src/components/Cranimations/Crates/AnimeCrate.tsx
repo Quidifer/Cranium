@@ -1,12 +1,30 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef, useMemo, useCallback } from "react";
 import { CSSTransition } from "react-transition-group";
 import "./AnimeCrates.css";
+import "./Tile.css";
+import { Tile } from "./Tile";
+import { hashedCrateClass } from "../utility";
 
 interface Props {
   scale: number;
   tileHeight: number;
   widthScale: number;
   manifest: any;
+  buffer: any;
+  movementProps: {
+    moveSet: {
+      row_start: number;
+      col_start: number;
+      row_end: number;
+      col_end: number;
+      move_type: string;
+      container_name: string;
+      container_weight: number;
+    }[];
+    currentStep: number;
+    isGhost: boolean;
+    finishedMoved: () => void;
+  };
 }
 
 interface box {
@@ -23,18 +41,62 @@ interface coord {
 }
 
 export default function AnimeCrate(props: Props) {
-  const { manifest, scale, tileHeight, widthScale } = props;
+  const { manifest, buffer, scale, tileHeight, widthScale, movementProps } =
+    props;
+  const { moveSet, currentStep, isGhost, finishedMoved } = movementProps;
+
+  const ghost: string = useMemo(() => (isGhost ? "ghost" : ""), [isGhost]);
 
   const boxRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const ropeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const excessRopeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
+  const move = moveSet[currentStep];
+
   const start: coord = useMemo(() => {
-    return { row: 0, col: 3, type: "ship" };
-  }, []);
+    let type: "ship" | "buffer" | "truck";
+    switch (move.move_type) {
+      case "OFFLOAD":
+      case "SHIP_MOVE":
+      case "SHIP_TO_BUFFER":
+        type = "ship";
+        break;
+      case "ONLOAD":
+        type = "truck";
+        break;
+      case "BUFFER_MOVE":
+      case "BUFFER_TO_SHIP":
+        type = "buffer";
+        break;
+      default:
+        type = "buffer";
+        break;
+    }
+    return { row: move.row_start - 1, col: move.col_start - 1, type };
+  }, [move.col_start, move.move_type, move.row_start]);
   const end: coord = useMemo(() => {
-    return { row: 0, col: 6, type: "ship" };
-  }, []);
+    let type: "ship" | "buffer" | "truck";
+    switch (move.move_type) {
+      case "ONLOAD":
+      case "SHIP_MOVE":
+      case "BUFFER_TO_SHIP":
+        type = "ship";
+        break;
+      case "OFFLOAD":
+        type = "truck";
+        break;
+      case "BUFFER_MOVE":
+      case "SHIP_TO_BUFFER":
+        type = "buffer";
+        break;
+      default:
+        type = "buffer";
+        break;
+    }
+
+    return { row: move.row_end - 1, col: move.col_end - 1, type };
+  }, [move.col_end, move.move_type, move.row_end]);
+
   const moveType: "left" | "right" = useMemo(() => {
     if (start.type !== end.type) {
       if (start.type === "buffer") return "right";
@@ -55,18 +117,22 @@ export default function AnimeCrate(props: Props) {
   const highestRow = useMemo(() => {
     if (leftCoord.type !== rightCoord.type) return -1;
     let best = Math.max(leftCoord.row, rightCoord.row);
-    for (let i = leftCoord.col + 1; i < rightCoord.col; ++i) {
-      for (let j = 7; j > best; --j) {
-        const name: string = manifest[j * 12 + i].name;
+    for (let col = leftCoord.col + 1; col < rightCoord.col; ++col) {
+      for (let row = leftCoord.type === "ship" ? 7 : 3; row >= best; --row) {
+        const name: string =
+          leftCoord.type === "ship"
+            ? manifest[row * 12 + col].name
+            : buffer[row * 24 + col].name;
         if (name !== "UNUSED" && name !== "NAN") {
-          best = j;
+          best = row + 1;
           break;
         }
       }
     }
-    console.log("best ", best);
+    console.log("best", best, leftCoord.type, leftCoord.row, rightCoord.row);
     return best;
   }, [
+    buffer,
     leftCoord.col,
     leftCoord.row,
     leftCoord.type,
@@ -75,6 +141,10 @@ export default function AnimeCrate(props: Props) {
     rightCoord.row,
     rightCoord.type,
   ]);
+
+  // useCallback(() => {
+  //   updateManifest(manifest, start, end, moveSet[currStep]);
+  // }, [end, manifest, moveSet, start]);
 
   const [index, setIndex] = useState(0);
 
@@ -134,10 +204,10 @@ export default function AnimeCrate(props: Props) {
 
   const bufferLeft = 118;
   const shipLeft = 736;
-  const truckLeft = 613; //not done
+  const truckLeft = 650; //not done
   const craneTop = 169.5;
-  const shipTop = 422;
-  const bufferTop = 408.5;
+  const shipTop = 423.3;
+  const bufferTop = 410;
   const truckTop = 398; // not done
 
   const tileWidth = tileHeight * widthScale;
@@ -151,7 +221,7 @@ export default function AnimeCrate(props: Props) {
           : start.type === "buffer"
           ? bufferTop
           : truckTop) -
-        (highestRow + 1) * tileHeight;
+        highestRow * tileHeight; // this is bugged
   const left =
     (leftCoord.type === "buffer"
       ? bufferLeft
@@ -169,12 +239,13 @@ export default function AnimeCrate(props: Props) {
     rightCoord.col * tileWidth;
 
   const crateBoundingBoxInit: box = useMemo(() => {
-    const height =
+    let height =
       start.type === "truck"
         ? truckTop - top
         : (start.type === "ship" ? shipTop : bufferTop) -
           top -
           start.row * tileHeight;
+    if (height < 1e-5) height = 0;
 
     return {
       height: scale * height,
@@ -185,12 +256,13 @@ export default function AnimeCrate(props: Props) {
   }, [left, scale, start.row, start.type, tileHeight, top, width]);
 
   const crateBoundingBoxFinal: box = useMemo(() => {
-    const height =
+    let height =
       end.type === "truck"
         ? truckTop - top
         : (end.type === "ship" ? shipTop : bufferTop) -
           top -
           end.row * tileHeight;
+    if (height < 1e-5) height = 0;
 
     return {
       height: scale * height,
@@ -204,18 +276,23 @@ export default function AnimeCrate(props: Props) {
     return index <= 1 ? crateBoundingBoxInit : crateBoundingBoxFinal;
   }, [crateBoundingBoxFinal, crateBoundingBoxInit, index]);
 
+  console.log(currBoundingBox.height);
+
   const classBoxStages = ["crate0", "crate1", "crate2"];
   const classRopeStages = ["rope0", "rope1", "rope2"];
 
   const [_animate, setAnimate] = useState(false);
   const animate: boolean = useMemo(() => {
     if ((index === 0 || index === 2) && currBoundingBox.height === 0) {
+      if (index === 2 && !isGhost) {
+        finishedMoved();
+      }
       setIndex((index + 1) % 3);
       return false;
     } else {
       return _animate;
     }
-  }, [_animate, currBoundingBox.height, index]);
+  }, [_animate, currBoundingBox.height, finishedMoved, index, isGhost]);
 
   setTimeout(() => {
     setAnimate(true);
@@ -225,10 +302,15 @@ export default function AnimeCrate(props: Props) {
     <>
       <CSSTransition
         in={animate}
-        classNames={moveType + classBoxStages[index]}
-        timeout={2150}
+        classNames={ghost + moveType + classBoxStages[index]}
+        timeout={isGhost ? 1150 : 2150}
         nodeRef={boxRef}
         onEntered={() => {
+          // if the animation is real
+          if (!isGhost && index === 2) {
+            console.log("fukcasjkcdjaskl");
+            finishedMoved();
+          }
           setIndex((index + 1) % 3);
           setAnimate(false);
           setTimeout(() => {
@@ -246,7 +328,7 @@ export default function AnimeCrate(props: Props) {
           }}
         >
           <div
-            className={moveType + classBoxStages[index]}
+            className={ghost + moveType + classBoxStages[index]}
             ref={boxRef}
             style={{
               height: `${scale * (tileHeight + 5)}px`,
@@ -257,32 +339,44 @@ export default function AnimeCrate(props: Props) {
             <div
               style={{
                 position: "absolute",
-                backgroundColor: "black",
-                top: 0,
-                bottom: `${scale * 10}px`,
+                backgroundColor: isGhost ? "rgb(100, 100, 100)" : "black",
+                bottom: `${scale * 29}px`,
                 width: `${scale * 3}px`,
-                height: `${scale * 10}px`,
+                height: `${scale * 5}px`,
               }}
             />
             <div
-              className="crate"
+              className={
+                isGhost ? "ghost" : hashedCrateClass(move.container_name)
+              }
               style={{
                 height: `${scale * (tileHeight - 1)}px`,
-                width: `${scale * (tileHeight * widthScale - 2)}px`,
-                bottom: 1,
+                width: `${scale * (tileHeight * widthScale - 1)}px`,
                 borderRadius: `${scale * 1}px`,
-                border: `${scale * 1}px solid black`,
+                border: `${scale * 0.8}px solid rgb(46, 46, 46)`,
+                position: "absolute",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <p style={{ fontSize: `${scale * 0.35}rem` }}>{"Crate"}</p>
+              <p
+                style={{
+                  overflow: "hidden",
+                  maxWidth: `${scale * (tileHeight * widthScale)}px`,
+                  fontSize: `${scale * 0.35}rem`,
+                }}
+              >
+                {move.container_name}
+              </p>
             </div>
           </div>
         </div>
       </CSSTransition>
       <CSSTransition
         in={animate}
-        classNames={moveType + classRopeStages[index]}
-        timeout={2150}
+        classNames={ghost + moveType + classRopeStages[index]}
+        timeout={isGhost ? 1150 : 2150}
         nodeRef={ropeRef}
       >
         <div
@@ -295,7 +389,7 @@ export default function AnimeCrate(props: Props) {
           }}
         >
           <div
-            className={moveType + classRopeStages[index]}
+            className={ghost + moveType + classRopeStages[index]}
             ref={ropeRef}
             style={{
               width: `${scale * 3}px`,
@@ -306,8 +400,8 @@ export default function AnimeCrate(props: Props) {
       </CSSTransition>
       <CSSTransition
         in={animate && index === 1}
-        classNames={`${moveType}excessRope`}
-        timeout={2150}
+        classNames={ghost + moveType + "excessRope"}
+        timeout={isGhost ? 1150 : 2150}
         nodeRef={excessRopeRef}
       >
         <div
@@ -320,7 +414,7 @@ export default function AnimeCrate(props: Props) {
           }}
         >
           <div
-            className={`${moveType}excessRope`}
+            className={ghost + moveType + "excessRope"}
             ref={excessRopeRef}
             style={{
               position: "absolute",
@@ -334,7 +428,7 @@ export default function AnimeCrate(props: Props) {
                   ? "0%"
                   : "100%",
               width: `${scale * 3}px`,
-              backgroundColor: "black",
+              backgroundColor: isGhost ? "rgb(100, 100, 100)" : "black",
             }}
           />
         </div>

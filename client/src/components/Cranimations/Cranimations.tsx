@@ -15,20 +15,42 @@ import { Tile } from "./Crates/Tile";
 interface Props {
   setManifest: any;
   manifest: any;
-  moveSet: {
-    row_start: number;
-    col_start: number;
-    row_end: number;
-    col_end: number;
-    move_type: string;
-    step: number;
-  }[];
+  setBuffer: any;
+  buffer: any;
+  movementProps: {
+    moveSet: {
+      row_start: number;
+      col_start: number;
+      row_end: number;
+      col_end: number;
+      move_type: string;
+      container_name: string;
+      container_weight: number;
+    }[];
+    currentStep: number;
+    isGhost: boolean;
+    finishedMoved: () => void;
+  };
 }
 
 export default function Craninmations(props: Props) {
   const HEIGHT = 500;
   const WIDTH = 1000;
-  const { moveSet, setManifest, manifest } = props;
+  const { manifest, buffer, movementProps } = props;
+  const { moveSet, currentStep } = movementProps;
+
+  const move =
+    currentStep < moveSet.length
+      ? moveSet[currentStep]
+      : {
+          row_start: -1,
+          col_start: -1,
+          row_end: -1,
+          col_end: -1,
+          move_type: "",
+          container_name: "",
+          container_weight: -1,
+        };
 
   const [contentHeight, setContentHeight] = useState(HEIGHT);
   const [contentWidth, setContentWidth] = useState(WIDTH);
@@ -46,6 +68,35 @@ export default function Craninmations(props: Props) {
 
   const createBoard = (n: number, m: number) => {
     const isManifest = n === 8 && m === 12 ? true : false;
+    const isBuffer = n === 4 && m === 24 ? true : false;
+
+    let sameSource = false;
+    let sameDest = false;
+    switch (move.move_type) {
+      case "OFFLOAD":
+        sameSource = isManifest;
+        break;
+      case "SHIP_MOVE":
+        sameSource = isManifest;
+        sameDest = isManifest;
+        break;
+      case "SHIP_TO_BUFFER":
+        sameSource = isManifest;
+        sameDest = isBuffer;
+        break;
+      case "ONLOAD":
+        sameDest = isManifest;
+        break;
+      case "BUFFER_MOVE":
+        sameSource = isBuffer;
+        sameDest = isBuffer;
+        break;
+      case "BUFFER_TO_SHIP":
+        sameSource = isBuffer;
+        sameDest = isManifest;
+        break;
+    }
+
     const board = [];
     for (let row = n; row >= 1; row--) {
       const boardRow = [];
@@ -53,9 +104,14 @@ export default function Craninmations(props: Props) {
         let color = "unselected";
         const cell = isManifest
           ? manifest.find((item: any) => item.row === row && item.col === col)
+          : isBuffer
+          ? buffer.find((item: any) => item.row === row && item.col === col)
           : "";
         let name = cell ? cell.name : "";
-        if (isManifest && isInList(manifest, row, col)) {
+        if (
+          (isManifest && isInList(manifest, row, col)) ||
+          (isBuffer && isInList(buffer, row, col))
+        ) {
           if (name === "NAN") {
             name = "";
             color = "nan";
@@ -72,6 +128,10 @@ export default function Craninmations(props: Props) {
             scale={scale}
             tileHeight={tileHeight}
             widthScale={widthScale}
+            source={
+              sameSource && move.col_start === col && move.row_start === row
+            }
+            dest={sameDest && move.col_end === col && move.row_end === row}
           />
         );
       }
@@ -95,7 +155,7 @@ export default function Craninmations(props: Props) {
   };
 
   const board = createBoard(8, 12);
-  const buffer = createBoard(4, 24);
+  const _buffer = createBoard(4, 24);
 
   const [animate, setAnimate] = useState(false);
   setTimeout(() => {
@@ -210,15 +270,32 @@ export default function Craninmations(props: Props) {
                   bottom: `${57 * scale}px`,
                 }}
               >
-                {buffer}
+                {_buffer}
               </div>
               <Crane height={`${550 * scale}px`} width={`${1100 * scale}px`} />
-              <AnimeCrate
-                scale={scale}
-                tileHeight={tileHeight}
-                widthScale={widthScale}
-                manifest={manifest}
-              />
+              {props.movementProps.currentStep <
+                props.movementProps.moveSet.length && (
+                <>
+                  {props.movementProps.isGhost ? (
+                    <AnimeCrate
+                      key={"gay"}
+                      scale={scale}
+                      tileHeight={tileHeight}
+                      widthScale={widthScale}
+                      {...props}
+                    />
+                  ) : (
+                    <AnimeCrate
+                      key={"not gay"}
+                      scale={scale}
+                      tileHeight={tileHeight}
+                      widthScale={widthScale}
+                      {...props}
+                    />
+                  )}
+                </>
+              )}
+
               <div
                 className="ground"
                 style={{
@@ -258,6 +335,23 @@ export default function Craninmations(props: Props) {
                 src={Truck}
                 alt="truck"
               />
+              {(move.move_type === "OFFLOAD" ||
+                move.move_type === "ONLOAD") && (
+                <div
+                  style={{
+                    position: "absolute",
+                    height: `${50 * scale}px`,
+                    width: `${36.3 * scale}px`,
+                    bottom: `${54 * scale}px`,
+                    left: `${602 * scale}px`,
+                    border: `${2 * scale}px dashed ${
+                      move.move_type === "ONLOAD" ? "rgb(5, 245, 5)" : "red"
+                    }`,
+                    borderRadius: `${scale * 5}px`,
+                    zIndex: 10,
+                  }}
+                />
+              )}
             </div>
           </Draggable>
         </div>
