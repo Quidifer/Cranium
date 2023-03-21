@@ -37,7 +37,6 @@
 .crate {
   position: absolute;
   display: flex;
-  background-color: green;
   justify-content: center;
   align-items: center;
 }
@@ -70,6 +69,81 @@
 .rightrope2 {
   position: absolute;
   background-color: black;
+  display: flex;
+}
+
+/* ghost stuff */
+.ghostleftcrate0 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ghostleftcrate1 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ghostleftcrate2 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ghostrightcrate0 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ghostrightcrate1 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ghostrightcrate2 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ghostcrate {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ghostleftrope0 {
+  position: absolute;
+  background-color: rgb(100, 100, 100);
+  display: flex;
+}
+.ghostleftrope1 {
+  position: absolute;
+  background-color: rgb(100, 100, 100);
+  display: flex;
+}
+.ghostleftrope2 {
+  position: absolute;
+  background-color: rgb(100, 100, 100);
+  display: flex;
+}
+.ghostrightrope0 {
+  position: absolute;
+  background-color: rgb(100, 100, 100);
+  display: flex;
+}
+.ghostrightrope1 {
+  position: absolute;
+  background-color: rgb(100, 100, 100);
+  display: flex;
+}
+.ghostrightrope2 {
+  position: absolute;
+  background-color: rgb(100, 100, 100);
   display: flex;
 }
 
@@ -113,6 +187,25 @@
   animation: slideDown 2s forwards linear;
 }
 
+.ghostleftcrate0-enter-active {
+  animation: slideUp 1s forwards linear;
+}
+.ghostleftcrate1-enter-active {
+  animation: slideLeft 1s forwards linear;
+}
+.ghostleftcrate2-enter-active {
+  animation: slideDown 1s forwards linear;
+}
+.ghostrightcrate0-enter-active {
+  animation: slideUp 1s forwards linear;
+}
+.ghostrightcrate1-enter-active {
+  animation: slideRight 1s forwards linear;
+}
+.ghostrightcrate2-enter-active {
+  animation: slideDown 1s forwards linear;
+}
+
 @keyframes moveUp {
   100% {
     height: 0%;
@@ -152,10 +245,35 @@
 .rightrope2-enter-active {
   animation: moveDown 2s forwards linear;
 }
-
 .leftexcessRope-enter-active {
   animation: moveLeft 2s forwards linear;
 }
 .rightexcessRope-enter-active {
   animation: moveRight 2s forwards linear;
+}
+
+.ghostleftrope0-enter-active {
+  animation: moveUp 1s forwards linear;
+}
+.ghostleftrope1-enter-active {
+  animation: moveLeft 1s forwards linear;
+}
+.ghostleftrope2-enter-active {
+  animation: moveDown 1s forwards linear;
+}
+.ghostrightrope0-enter-active {
+  animation: moveUp 1s forwards linear;
+}
+.ghostrightrope1-enter-active {
+  animation: moveRight 1s forwards linear;
+}
+.ghostrightrope2-enter-active {
+  animation: moveDown 1s forwards linear;
+}
+
+.ghostleftexcessRope-enter-active {
+  animation: moveLeft 1s forwards linear;
+}
+.ghostrightexcessRope-enter-active {
+  animation: moveRight 1s forwards linear;
 }

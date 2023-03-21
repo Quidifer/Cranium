@@ -1,47 +1,64 @@
 import React, { useState, useCallback } from "react";
-import Craninmations from "../../Cranimations/Cranimations";
+import Cranimations from "../../Cranimations/Cranimations";
 
 import InteractableBox from "../InteractableBox/interactableBox";
 import submitButton from "../../../resources/SubmitButton.svg";
+import Loading from "../../../resources/loadingballs.gif";
 import "./crateMovement.css";
-import { Login } from "@mui/icons-material";
-import { TextField } from "@mui/material";
 
 interface Props {
   prevScreenState: (type: string) => void;
   setManifest: any;
   manifest: any;
+  setBuffer: any;
+  buffer: any;
   moveSet: {
     row_start: number;
     col_start: number;
     row_end: number;
     col_end: number;
     move_type: string;
-    step: number;
+    container_name: string;
+    container_weight: number;
   }[];
 }
 
 export default function CrateMovement(props: Props) {
-  
-  const [items, setItems] = useState([
-    "This is a test of a lot of information that is long",
-    "test2",
-    "test3",
-    "test4",
-    "test5",
-    "test6",
-    "test7",
-  ]);
+  const { moveSet, manifest, setManifest, buffer, setBuffer } = props;
 
-
+  const [items, setItems] = useState(() => {
+    let items = [];
+    items.push({
+      row_start: -1,
+      col_start: -1,
+      row_end: -1,
+      col_end: -1,
+      move_type: "invis",
+      container_name: "invis",
+      container_weight: -1,
+    });
+    items.push(...moveSet);
+    items.push({
+      row_start: -1,
+      col_start: -1,
+      row_end: -1,
+      col_end: -1,
+      move_type: "invis",
+      container_name: "invis",
+      container_weight: -1,
+    });
+    return items;
+  });
 
   const [animateBoxes, setAnimateBoxes] = useState(false);
-  
 
   const updateItems = useCallback(() => {
     setItems(items.slice(1, items.length));
     setAnimateBoxes(false);
   }, [items, setAnimateBoxes]);
+
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isGhost, setIsGhost] = useState(true);
 
   const [comment, setComment] = useState("");
 
@@ -50,16 +67,56 @@ export default function CrateMovement(props: Props) {
       <div className="leftcontent">
         <div className="header"></div>
         <div className="crane">
-          <Craninmations {...props} />
+          <Cranimations
+            movementProps={{
+              moveSet: props.moveSet,
+              currentStep: currentStep,
+              isGhost: isGhost,
+              finishedMoved: () => {
+                setIsGhost(true);
+                setCurrentStep(currentStep + 1);
+
+                const move = moveSet[currentStep];
+                setManifest(() => {
+                  switch (move.move_type) {
+                    case "SHIP_MOVE":
+                    case "ONLOAD":
+                    case "BUFFER_TO_SHIP":
+                      manifest[
+                        (move.row_end - 1) * 12 + (move.col_end - 1)
+                      ].name = move.container_name;
+                      manifest[
+                        (move.row_end - 1) * 12 + (move.col_end - 1)
+                      ].weight = move.container_weight;
+                      break;
+                  }
+                  return manifest;
+                });
+                setBuffer(() => {
+                  switch (move.move_type) {
+                    case "BUFFER_MOVE":
+                    case "SHIP_TO_BUFFER":
+                      buffer[(move.row_end - 1) * 4 + (move.col_end - 1)].name =
+                        move.container_name;
+                      buffer[
+                        (move.row_end - 1) * 4 + (move.col_end - 1)
+                      ].weight = move.container_weight;
+                      break;
+                  }
+                  return buffer;
+                });
+
+                console.log(manifest, buffer);
+              },
+            }}
+            {...props}
+          />
         </div>
         <div className="footer">
-          <div className="CommentTitle">
-            Add Comment
-          </div>
+          <div className="CommentTitle">Add Comment</div>
           <div className="CommentBar">
             <textarea
               className="CommentInput"
-              
               placeholder="Type here..."
               name="comment"
               id="comment"
@@ -79,7 +136,6 @@ export default function CrateMovement(props: Props) {
                 alt="submit"
                 className="ButtonSvg"
               />
-              {/* Submit */}
             </button>
           </div>
         </div>
@@ -106,13 +162,54 @@ export default function CrateMovement(props: Props) {
           <button
             className="nextButton"
             onClick={() => {
-              // setItems(items.slice(1, items.length));
-              // mutableItems.slice(1, mutableItems.length);
               setAnimateBoxes(true);
-              console.log(items);
+              setIsGhost(false);
+              const move = moveSet[currentStep];
+              setManifest(() => {
+                switch (move.move_type) {
+                  case "SHIP_MOVE":
+                  case "OFFLOAD":
+                  case "SHIP_TO_BUFFER":
+                    manifest[
+                      (move.row_start - 1) * 12 + (move.col_start - 1)
+                    ].name = "UNUSED";
+                    manifest[
+                      (move.row_start - 1) * 12 + (move.col_start - 1)
+                    ].weight = 0;
+                    break;
+                }
+
+                return manifest;
+              });
+
+              setBuffer(() => {
+                switch (move.move_type) {
+                  case "BUFFER_MOVE":
+                  case "BUFFER_TO_SHIP":
+                    buffer[
+                      (move.row_start - 1) * 4 + (move.col_start - 1)
+                    ].name = "UNUSED";
+                    buffer[
+                      (move.row_start - 1) * 4 + (move.col_start - 1)
+                    ].weight = 0;
+                    break;
+                }
+                return buffer;
+              });
             }}
+            disabled={!isGhost || currentStep >= moveSet.length}
           >
-            <label>Next</label>
+            {isGhost ? (
+              <label>Next</label>
+            ) : (
+              <img
+                style={{
+                  width: "50px",
+                }}
+                src={Loading}
+                alt="Loading"
+              />
+            )}
           </button>
         </div>
         <div className="gradient" />

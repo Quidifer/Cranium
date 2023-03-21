@@ -1,38 +1,12 @@
 import "./Tile.css";
 import React, { useCallback } from "react";
+import { hashedCrateClass } from "../utility";
 
 export function Tile(props: any) {
-  const { id, name, scale, tileHeight, widthScale } = props;
+  const { id, name, scale, tileHeight, widthScale, source, dest } = props;
   let { color } = props;
 
-  const colors = [
-    "lighterBlue",
-    "lightBlue",
-    "lightYellow",
-    "lightRed",
-    "green",
-  ];
-
-  const hash = useCallback((str: string) => {
-    let h1 = 1779033703,
-      h2 = 3144134277,
-      h3 = 1013904242,
-      h4 = 2773480762;
-    for (let i = 0, k; i < str.length; i++) {
-      k = str.charCodeAt(i);
-      h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
-      h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
-      h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
-      h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
-    }
-    h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
-    h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
-    h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
-    h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
-    return Math.abs(h1 ^ h2 ^ h3 ^ h4);
-  }, []);
-
-  color = name !== "" ? colors[Math.floor(hash(name) % colors.length)] : color;
+  color = name !== "" ? hashedCrateClass(name) : color;
 
   return (
     <div
@@ -63,7 +37,14 @@ export function Tile(props: any) {
           borderRadius: name !== "" ? `${scale * 1.6}px` : "",
         }}
       >
-        <p style={{ fontSize: `${scale * 0.5}rem` }}>{name}</p>
+        <p
+          style={{
+            maxWidth: `${scale * (tileHeight * widthScale)}px`,
+            fontSize: `${scale * 0.35}rem`,
+          }}
+        >
+          {name}
+        </p>
       </div>
       <div
         id={id}
@@ -83,15 +64,24 @@ export function Tile(props: any) {
           borderRadius: name !== "" ? `${scale * 1.6}px` : "",
         }}
       >
-        <p style={{ fontSize: `${scale * 0.5}rem` }}>{name}</p>
+        <p
+          style={{
+            maxWidth: `${scale * (tileHeight * widthScale)}px`,
+            fontSize: `${scale * 0.35}rem`,
+          }}
+        >
+          {name}
+        </p>
       </div>
-      {id === "1,1" && (
+      {(source || dest) && (
         <div
           style={{
             position: "absolute",
-            height: `${scale * tileHeight}px`,
-            width: `${scale * tileHeight * widthScale}px`,
-            border: "4px dashed lightgreen",
+            height: `${scale * (tileHeight + 1)}px`,
+            width: `${scale * (tileHeight * widthScale + 1)}px`,
+            border: `${2 * scale}px dashed ${
+              source ? "rgb(5, 245, 5)" : "red"
+            }`,
             borderRadius: `${scale * 5}px`,
             zIndex: 10,
           }}

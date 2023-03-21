@@ -18,6 +18,10 @@
   background-color: #3b7a34;
 }
 
+.ghost {
+  background-color: rgba(100, 100, 100, 0.7);
+}
+
 .nan {
   background-color: #2e2d2d;
   /* background-color: #151d70; */

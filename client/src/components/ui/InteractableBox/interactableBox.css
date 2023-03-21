@@ -8,6 +8,26 @@
   border-color: black;
   border-radius: 10px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+.invisible {
+  height: 150px;
+  width: 265px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border: 1px;
+  border-radius: 10px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 .destroy {
   height: 150px;
@@ -19,6 +39,11 @@
   border-color: black;
   border-radius: 10px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 .moveFar {
   height: 150px;
@@ -30,6 +55,11 @@
   border-color: black;
   border-radius: 10px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
 .moveFar-enter-active {
@@ -45,11 +75,6 @@
   transition: transform 2000ms;
 }
 
-/* .box-exit-active {
-  transform: scale(0);
-  transition: transform 700ms;
-} */
-
 .GreenBox {
   height: 190px;
   width: 280px;
@@ -62,7 +87,19 @@
 }
 
 .info {
-  margin: 0;
+  margin-top: 3%;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.boxHead {
+  position: absolute;
+  top: 7%;
   text-align: center;
   font-size: 1.3rem;
+}
+
+.infoContent {
+  margin-left: 10%;
+  width: 100%;
 }
