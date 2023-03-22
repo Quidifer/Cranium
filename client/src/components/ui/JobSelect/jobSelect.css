@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
 
 .Background {
+  /* background-color: #dfdfdf; */
+  background-color: #e0e7ea;
+  overflow: hidden;
 }
 
 .Header {
@@ -15,10 +18,10 @@
 
 .MainContainer {
   display: block;
-  width: 65vh;
-  height: 55vh;
-  top: calc(50% - (55vh / 2));
-  left: calc(50% - (65vh / 2));
+  width: 500px;
+  height: 450px;
+  top: calc(50% - (450px / 2));
+  left: calc(50% - (500px / 2));
   position: absolute;
 
   justify-content: center;
@@ -28,7 +31,6 @@
 .Buttons {
   display: block;
   height: 225px;
-  
 }
 
 .ContinueDiv {
@@ -42,8 +44,8 @@
   display: inline;
   top: 35%;
   size: 30px;
-  height: 35vh;
-  width: 25vh;
+  height: 300px;
+  width: 200px;
   opacity: 1;
 
   background-color: transparent;
@@ -52,7 +54,7 @@
   box-sizing: border-box;
   color: #3b3b3b;
   font-family: gloock;
-  font-size: 5vh;
+  font-size: 30px;
   font-weight: 600;
   min-height: 60px;
   padding: 16px 24px;
@@ -71,7 +73,6 @@
 .Load:active {
   box-shadow: none;
   transform: translateY(0);
-  font-size: 4.5vh;
   color: #d6d6d6;
   background-color: #534e4e;
   border-color: rgb(37, 187, 37);
@@ -80,7 +81,6 @@
 .Load:focus {
   box-shadow: none;
   transform: translateY(0);
-  font-size: 4.5vh;
   color: #d6d6d6;
   background-color: #534e4e;
   border-color: rgb(37, 187, 37);
@@ -88,8 +88,8 @@
 
 .Balance {
   display: inline;
-  height: 35vh;
-  width: 25vh;
+  height: 300px;
+  width: 200px;
   float: right;
 
   background-color: transparent;
@@ -98,7 +98,7 @@
   box-sizing: border-box;
   color: #3b3b3b;
   font-family: gloock;
-  font-size: 4.7vh;
+  font-size: 30px;
   font-weight: 600;
   padding: 16px 24px;
   text-align: center;
@@ -115,7 +115,6 @@
 
 .Balance:active {
   box-shadow: none;
-  font-size: 4.2vh;
   transform: translateY(0);
   color: #d6d6d6;
   background-color: #534e4e;
@@ -124,7 +123,6 @@
 
 .Balance:focus {
   box-shadow: none;
-  font-size: 4.2vh;
   transform: translateY(0);
   color: #d6d6d6;
   background-color: #534e4e;
@@ -140,7 +138,7 @@
   display: relative;
   width: 100%;
   font-family: gloock;
-  font-size: 4.5vh;
+  font-size: 30px;
   font-weight: 600;
   padding: 16px 24px;
   text-align: center;
@@ -170,6 +168,7 @@
   grid-template-columns: 1fr auto 1fr;
   grid-template-rows: 16px 0;
   grid-gap: 22px;
+  background-color: transparent;
 }
 
 .TopHeader:after,
@@ -177,5 +176,5 @@
   content: " ";
   display: flex;
   border-bottom: 4px solid #ccc;
-  background-color: #f8f8f8;
+  background-color: transparent;
 }

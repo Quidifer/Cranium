@@ -8,6 +8,7 @@ import Load from "../components/ui/Load/load";
 import CrateMovement from "../components/ui/CrateMovement/crateMovement";
 import JobSelect from "../components/ui/JobSelect/jobSelect";
 import { stringify } from "uuid";
+import Calculating from "../components/ui/Calculating/Calculating";
 
 const moveSet = [
   {
@@ -134,7 +135,7 @@ function App() {
     />
   ) : screenState === "load" ? (
     <Load
-      updateScreenState={() => setScreenState("crateMovement")}
+      updateScreenState={() => setScreenState("calculating")}
       updatePrevScreenState={() => setPrevScreenState("load")}
       goToSignIn={() => setScreenState("signIn")}
       setManifest={setManifest}
@@ -142,6 +143,8 @@ function App() {
       manifestName={manifestName}
       duplicates={duplicates}
     />
+  ) : screenState === "calculating" ? (
+    <Calculating updateScreenState={() => setScreenState("crateMovement")} />
   ) : screenState === "crateMovement" ? (
     <CrateMovement
       updateScreenState={() => setScreenState("uploadManifest")}
