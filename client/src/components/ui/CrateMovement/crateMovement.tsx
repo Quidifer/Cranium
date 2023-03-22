@@ -28,8 +28,7 @@ interface Props {
 }
 
 export default function CrateMovement(props: Props) {
-<<<<<<< HEAD
-  const { moveSet, manifest, setManifest, buffer, setBuffer } = props;
+  const { moveSet, manifest, setManifest, buffer, setBuffer, manifestName, updatePrevScreenState, updateScreenState, goToSignIn } = props;
 
   const [items, setItems] = useState(() => {
     let items = [];
@@ -54,25 +53,6 @@ export default function CrateMovement(props: Props) {
     });
     return items;
   });
-=======
-  const {
-    manifest,
-    manifestName,
-    updateScreenState,
-    updatePrevScreenState,
-    goToSignIn,
-  } = props;
-
-  const [items, setItems] = useState([
-    "This is a test of a lot of information that is long",
-    "test2",
-    "test3",
-    "test4",
-    "test5",
-    "test6",
-    "test7",
-  ]);
->>>>>>> 21dd2c3 (return to prev state from sign in works)
 
   const [animateBoxes, setAnimateBoxes] = useState(false);
 
