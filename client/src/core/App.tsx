@@ -106,7 +106,7 @@ function App() {
   const [duplicates, setDuplicates] = useState([]);
   const [manifestName, setManifestName] = useState("");
   const [prevScreenState, setPrevScreenState] = useState("uploadManifest");
-  debugger;
+
   return screenState === "password" ? (
     <Password
       updateScreenState={() => setScreenState("signIn")}
