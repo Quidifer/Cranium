@@ -3,9 +3,11 @@ import "./password.css";
 // import '../SignIn/signIn.css'
 import { IconButton, InputAdornment, Input } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import cranium from "../../../resources/cranium.svg";
 
 interface Props {
   updateScreenState: () => void;
+  updatePrevScreenState: (type: string) => void;
 }
 const websitePassword = "pw";
 
@@ -45,6 +47,8 @@ export default function Password(props: Props) {
   };
 
   return (
+    <div className="CraniumDiv"> 
+      <img src={cranium} alt="Cranium" className="Cranium"></img>
     <div className="screen">
       <form onSubmit={onSubmit}>
         <div>
@@ -70,8 +74,9 @@ export default function Password(props: Props) {
             }
           />
         </div>
-        <input type="submit" value="Enter" className="button" />
+        <input type="submit" value="Enter" className="passwordbutton" />
       </form>
+      </div>
 
       {/* <div>
             Password entered: {password}
@@ -90,6 +95,7 @@ export default function Password(props: Props) {
       ) : (
         ""
       )}
-    </div>
+      </div>
+      
   );
 }

@@ -58,6 +58,9 @@ p {
   width: 100%;
   background-color: rgb(59, 58, 58);
   bottom: 0;
+  border-top: solid black;
+  border-width: 0px; 
+  /* IF YOU WANT BORDER FOR FOOOTER THEN MAKE WIDTH ABOVE 0 */
 }
 
 .columnFooter {
@@ -141,6 +144,7 @@ p {
   position: block;
   margin: auto;
   border-radius: 5px;
+  margin-top: 1.5%;
   height: 9.5vh;
   width: 85%;
   float: left;
@@ -152,10 +156,11 @@ p {
 
 .SubmitComment {
   position: relative;
-  height: 70%;
+  height: 90%;
   width: 10%;
   margin-left: 1%;
   border-radius: 0;
+  border-style: none;
   background-color: rgb(59, 58, 58);
 }
 
