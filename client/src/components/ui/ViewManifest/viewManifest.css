@@ -24,7 +24,7 @@
   padding-bottom: 10px;
 }
 .modal > .modalContent {
-  overflow: scroll;
+  overflow: auto;
   border: dashed;
   width: calc(100vw - 500px);
   height: calc(100vh - 310px);
@@ -52,7 +52,7 @@
   border-right: 1px solid;
   border-bottom: 1px solid;
   padding: 5px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 /* .modal > .actions {

@@ -1,13 +1,12 @@
-import React from "react";
 import ColorPallet from "../../../utils/ColorPallet";
 import CraniumButton from "../CraniumButton/CraniumButton";
-import "./CraniumToolbar.css";
-import CraniumLogo from "../../../resources/CraniumLogo.png";
 import ViewManifest from "../ViewManifest/viewManifest";
 import ViewLog from "../ViewLog/viewLog";
+import { CraniumContainer } from "../../../types/CraniumContainer";
+import "./CraniumToolbar.css";
 
 interface Props {
-  manifest: any;
+  manifest: CraniumContainer[];
   manifestName: string;
   updateScreenState: () => void;
   updatePrevScreenState: () => void;
@@ -22,6 +21,7 @@ export default function CraniumToolbar(props: Props) {
     updatePrevScreenState,
     goToSignIn,
   } = props;
+
   updatePrevScreenState();
   const height = "50px";
   const width = "100px";
@@ -30,15 +30,16 @@ export default function CraniumToolbar(props: Props) {
     <div className="toolbar">
       <div>
         <ViewManifest manifest={manifest} manifestName={manifestName} />
-        <ViewLog manifest={manifest} manifestName={manifestName} />
+        <ViewLog />
       </div>
       <div>
-        
-      </div>
-      <div>
-        
-        <button className="finishCraniumToolbarButton" onClick={updateScreenState}>Finish</button>
-        <button className="returnToSignInButton" onClick={goToSignIn} >
+        <button
+          className="finishCraniumToolbarButton"
+          onClick={updateScreenState}
+        >
+          Finish
+        </button>
+        <button className="returnToSignInButton" onClick={goToSignIn}>
           Sign In
         </button>
       </div>

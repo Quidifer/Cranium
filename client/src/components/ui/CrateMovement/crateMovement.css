@@ -26,7 +26,7 @@ p {
   width: 300px;
   height: 100vh;
   float: right;
-  background-color: rgb(161, 161, 161);
+  background-color: #DFF6FF;
 }
 
 .boxContent {
@@ -84,8 +84,8 @@ p {
   height: 200px;
   background: linear-gradient(
     to top,
-    rgba(161, 161, 161, 1) 0%,
-    rgba(161, 161, 161, 0) 100%
+    rgba(228, 244, 243, 1) 0%,
+    rgba(228, 244, 243, 0) 100%
   );
   position: fixed;
   top: auto;
@@ -96,8 +96,8 @@ p {
   height: 160px;
   background: linear-gradient(
     to top,
-    rgba(161, 161, 161, 1) 0%,
-    rgba(161, 161, 161, 0) 100%
+    rgba(228, 244, 243, 1) 0%,
+    rgba(228, 244, 243, 0) 100%
   );
   position: fixed;
   top: auto;
@@ -108,8 +108,8 @@ p {
   height: 100px;
   background: linear-gradient(
     to top,
-    rgba(161, 161, 161, 1) 0%,
-    rgba(161, 161, 161, 0) 100%
+    rgba(228, 244, 243, 1) 0%,
+    rgba(228, 244, 243, 0) 100%
   );
   position: fixed;
   top: auto;

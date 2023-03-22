@@ -1,16 +1,18 @@
 import React, { useState, useRef, useMemo, useCallback } from "react";
 import { CSSTransition } from "react-transition-group";
-import "./AnimeCrates.css";
-import "./Tile.css";
 import { Tile } from "./Tile";
 import { hashedCrateClass } from "../utility";
+import { CraniumContainer } from "../../../types/CraniumContainer";
+
+import "./AnimeCrates.css";
+import "./Tile.css";
 
 interface Props {
   scale: number;
   tileHeight: number;
   widthScale: number;
-  manifest: any;
-  buffer: any;
+  manifest: CraniumContainer[];
+  buffer: CraniumContainer[];
   movementProps: {
     moveSet: {
       row_start: number;

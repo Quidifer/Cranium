@@ -31,7 +31,7 @@ export function Tile(props: any) {
           border:
             color === "nan"
               ? "1px solid #2e2e2e"
-              : color === "unselected"
+              : color === "normal"
               ? "1px solid rgba(46, 46, 46, 0.3)"
               : "1px solid rgb(46, 46, 46)",
           borderRadius: name !== "" ? `${scale * 1.6}px` : "",

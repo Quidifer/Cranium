@@ -1,38 +1,33 @@
 import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "./viewLog.css";
+import API from "../../../utils/API";
+
 interface Props {
-  manifest: any;
-  manifestName: string;
 }
 
 export default function ViewLog(props: Props) {
-  const { manifest, manifestName } = props;
-  const logButton = <button className={"button"}>Log</button>;
   const currentYear = new Date().getFullYear();
+  const [log, setLog] = useState("");
 
-  function pad(num: number, size: number) {
-    var s = "00000" + num;
-    return s.substring(s.length - size);
-  }
+  const handleGetLog = () => {
+    debugger;
+    API.getLog().then((data) => {
+      debugger;
+      setLog(data);
+    });
+  };
+
+  const logButton = (
+    <button className={"button"} onClick={handleGetLog}>
+      Log
+    </button>
+  );
 
   const downloadLog = () => {
-    let fileData = "";
-    manifest.forEach((item: any) => {
-      let row =
-        "[" +
-        pad(item.row, 2) +
-        "," +
-        pad(item.col, 2) +
-        "], {" +
-        pad(item.weight, 5) +
-        "}, " +
-        item.name +
-        "\n";
-      fileData += row;
-    });
+    debugger;
     // const fileData = JSON.stringify(manifest);
-    const blob = new Blob([fileData], { type: "text/plain" });
+    const blob = new Blob([log], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.download = "KeoghLongBeach" + currentYear + ".txt";
@@ -41,32 +36,10 @@ export default function ViewLog(props: Props) {
   };
 
   return (
-    <Popup trigger={logButton} modal>
+    <Popup trigger={logButton} onOpen={handleGetLog} modal>
       <div className="modal">
         <div className="modalHeader"> {currentYear} Log </div>
-        <div className="modalContent">
-          <table className="modalTable">
-            <thead>
-              <tr>
-                <th>Position</th>
-                <th>Weight</th>
-                <th>Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {manifest &&
-                manifest.map((item: any) => (
-                  <tr key={item.id}>
-                    <td>
-                      [{item.row}, {item.col}]
-                    </td>
-                    <td>{item.weight}</td>
-                    <td>{item.name}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
+        <div className="modalContent">{log}</div>
         <button
           className={"button"}
           style={{
