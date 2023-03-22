@@ -8,8 +8,9 @@ import CraniumToolbar from "../Toolbar/CraniumToolbar";
 import "./crateMovement.css";
 
 interface Props {
-  updatePrevScreenState: () => void;
   updateScreenState: () => void;
+  updatePrevScreenState: () => void;
+  goToSignIn: () => void;
   setManifest: any;
   manifest: any;
   setBuffer: any;
@@ -24,10 +25,10 @@ interface Props {
     container_name: string;
     container_weight: number;
   }[];
-  goToSignIn: () => void;
 }
 
 export default function CrateMovement(props: Props) {
+<<<<<<< HEAD
   const { moveSet, manifest, setManifest, buffer, setBuffer } = props;
 
   const [items, setItems] = useState(() => {
@@ -53,6 +54,25 @@ export default function CrateMovement(props: Props) {
     });
     return items;
   });
+=======
+  const {
+    manifest,
+    manifestName,
+    updateScreenState,
+    updatePrevScreenState,
+    goToSignIn,
+  } = props;
+
+  const [items, setItems] = useState([
+    "This is a test of a lot of information that is long",
+    "test2",
+    "test3",
+    "test4",
+    "test5",
+    "test6",
+    "test7",
+  ]);
+>>>>>>> 21dd2c3 (return to prev state from sign in works)
 
   const [animateBoxes, setAnimateBoxes] = useState(false);
 
@@ -70,8 +90,13 @@ export default function CrateMovement(props: Props) {
     <div className="page">
       <div className="leftcontent">
         <div className="header">
-        <CraniumToolbar manifest={manifest} manifestName={manifestName} updateScreenState={updateScreenState} updatePrevScreenState={updatePrevScreenState} goToSignIn={goToSignIn} />
-          
+          <CraniumToolbar
+            manifest={manifest}
+            manifestName={manifestName}
+            updateScreenState={updateScreenState}
+            updatePrevScreenState={updatePrevScreenState}
+            goToSignIn={goToSignIn}
+          />
         </div>
         <div className="crane">
           <Cranimations
@@ -120,9 +145,7 @@ export default function CrateMovement(props: Props) {
           />
         </div>
         <div className="footer">
-          <div className="CommentTitle">
-            {/* Add Comment */}
-          </div>
+          <div className="CommentTitle">{/* Add Comment */}</div>
           <div className="CommentBar">
             <textarea
               className="CommentInput"

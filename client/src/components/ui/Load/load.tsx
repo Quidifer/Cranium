@@ -12,15 +12,22 @@ import CraniumToolbar from "../Toolbar/CraniumToolbar";
 interface Props {
   updateScreenState: () => void;
   updatePrevScreenState: () => void;
+  goToSignIn: () => void;
   setManifest: any;
   manifest: any;
   manifestName: string;
   duplicates: any;
-  goToSignIn: () => void;
 }
 
 export default function Load(props: Props) {
-  const { manifest, manifestName, duplicates, updateScreenState, updatePrevScreenState, goToSignIn } = props;
+  const {
+    manifest,
+    manifestName,
+    duplicates,
+    updateScreenState,
+    updatePrevScreenState,
+    goToSignIn,
+  } = props;
   const [counts, setCounts] = useState<Record<string, number>[]>([]);
   const [onloadContainers, setOnloadContainers] = useState<
     Record<string, number>[]
@@ -38,7 +45,13 @@ export default function Load(props: Props) {
   return (
     <div>
       <div className="split left">
-        <CraniumToolbar manifest={manifest} manifestName={manifestName} updateScreenState={updateScreenState} updatePrevScreenState={updatePrevScreenState} goToSignIn={goToSignIn} />
+        <CraniumToolbar
+          manifest={manifest}
+          manifestName={manifestName}
+          updateScreenState={updateScreenState}
+          updatePrevScreenState={updatePrevScreenState}
+          goToSignIn={goToSignIn}
+        />
         {/* <div className="parent">
           <div className="child">
             <ViewManifest manifest={manifest} manifestName={manifestName} />

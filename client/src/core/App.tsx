@@ -85,7 +85,11 @@ function App() {
       .then(() => console.log("Response Received"));
   }, []);
 
+<<<<<<< HEAD
   const [screenState, setScreenState] = useState("load");
+=======
+  const [screenState, setScreenState] = useState("signIn");
+>>>>>>> 21dd2c3 (return to prev state from sign in works)
   const [manifest, setManifest] = useState([]);
   const [buffer, setBuffer] = useState(() => {
     let cells: { row: number; col: number; weight: number; name: string }[] =
@@ -104,20 +108,22 @@ function App() {
   });
   const [duplicates, setDuplicates] = useState([]);
   const [manifestName, setManifestName] = useState("");
-  const [prevScreenState, setPrevScreenState] = useState("");
-
+  const [prevScreenState, setPrevScreenState] = useState("uploadManifest");
+  debugger;
   return screenState === "password" ? (
     <Password
       updateScreenState={() => setScreenState("signIn")}
       updatePrevScreenState={() => setPrevScreenState("password")}
     />
   ) : screenState === "signIn" ? (
-      <SignIn updateScreenState={() => setScreenState("uploadManifest")}
-      updatePrevScreenState={() => setPrevScreenState("signIn")} />
+    <SignIn
+      updateScreenState={() => setScreenState(prevScreenState)}
+      updatePrevScreenState={() => setPrevScreenState("signIn")}
+    />
   ) : screenState === "uploadManifest" ? (
     <UploadManifest
       updateScreenState={() => setScreenState("jobSelect")}
-      updatePrevScreenState={() => setPrevScreenState("UploadManifest")}
+      updatePrevScreenState={() => setPrevScreenState("uploadManifest")}
       setManifest={setManifest}
       setDuplicates={setDuplicates}
       duplicates={duplicates}
@@ -128,39 +134,41 @@ function App() {
       updateScreenState={(type: string) =>
         type === "Load" ? setScreenState("load") : setScreenState("load")
       }
-      prevScreenState={() => setPrevScreenState("JobSelect")}
+      prevScreenState={() => setPrevScreenState("jobSelect")}
     />
   ) : screenState === "load" ? (
     <Load
       updateScreenState={() => setScreenState("crateMovement")}
+      updatePrevScreenState={() => setPrevScreenState("load")}
+      goToSignIn={() => setScreenState("signIn")}
       setManifest={setManifest}
       manifest={manifest}
       manifestName={manifestName}
       duplicates={duplicates}
-      updatePrevScreenState={() => setPrevScreenState("load")}
-      goToSignIn={() => setScreenState("signInReturnState")}
-    />
-  ) :  screenState === "signInReturnState" ? (
-    <SignIn
-      updateScreenState={() => setScreenState("load")}
-      updatePrevScreenState={() => setPrevScreenState("load")}
     />
   ) : screenState === "crateMovement" ? (
     <CrateMovement
+      updateScreenState={() => setScreenState("uploadManifest")}
+      updatePrevScreenState={() => setPrevScreenState("crateMovement")}
+      goToSignIn={() => setScreenState("signIn")}
       setManifest={setManifest}
       manifest={manifest}
       manifestName={manifestName}
       buffer={buffer}
       setBuffer={setBuffer}
       moveSet={moveSet}
-      updatePrevScreenState={() => setPrevScreenState("crateMovement")}
-      updateScreenState={() => setScreenState("crateMovement")}
-      goToSignIn={() => setScreenState("signInReturnState")}
     />
   ) : (
     <p>test</p>
   );
   // <Load setScreenState={setScreenState} setManifest={setManifest} manifest={manifest}/>
 }
+
+// : screenState === "signInReturnState" ? (
+//   <SignIn
+//     updateScreenState={() => setScreenState("load")}
+//     updatePrevScreenState={() => setPrevScreenState("load")}
+//   />
+// )
 
 export default App;
