@@ -85,11 +85,7 @@ function App() {
       .then(() => console.log("Response Received"));
   }, []);
 
-<<<<<<< HEAD
   const [screenState, setScreenState] = useState("load");
-=======
-  const [screenState, setScreenState] = useState("signIn");
->>>>>>> 21dd2c3 (return to prev state from sign in works)
   const [manifest, setManifest] = useState([]);
   const [buffer, setBuffer] = useState(() => {
     let cells: { row: number; col: number; weight: number; name: string }[] =

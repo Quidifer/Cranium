@@ -33,40 +33,12 @@ export default function CraniumToolbar(props: Props) {
         <ViewLog manifest={manifest} manifestName={manifestName} />
       </div>
       <div>
-<<<<<<< HEAD
         
       </div>
       <div>
         
         <button className="finishCraniumToolbarButton" onClick={updateScreenState}>Finish</button>
         <button className="returnToSignInButton" onClick={goToSignIn} >
-=======
-        {/* <CraniumButton
-          height={height}
-          width={width}
-          color={ColorPallet.LightGreen}
-        >
-          Finish
-        </CraniumButton> */}
-        <button
-          className="button"
-          style={{ color: "white", background: "green" }}
-          onClick={() => {
-            debugger;
-            updatePrevScreenState();
-            updateScreenState();
-          }}
-        >
-          Finish
-        </button>
-        <button
-          className="returnToSignInButton"
-          onClick={() => {
-            updatePrevScreenState();
-            goToSignIn();
-          }}
-        >
->>>>>>> 21dd2c3 (return to prev state from sign in works)
           Sign In
         </button>
       </div>
