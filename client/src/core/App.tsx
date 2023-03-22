@@ -86,7 +86,7 @@ function App() {
       .then(() => console.log("Response Received"));
   }, []);
 
-  const [screenState, setScreenState] = useState("load");
+  const [screenState, setScreenState] = useState("password");
   const [manifest, setManifest] = useState([]);
   const [buffer, setBuffer] = useState(() => {
     let cells: { row: number; col: number; weight: number; name: string }[] =

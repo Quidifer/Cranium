@@ -6,7 +6,6 @@ import standingCrane from "../../../resources/standingCrane.svg";
 interface Props {
   updatePrevScreenState: () => void;
   updateScreenState: () => void;
-  
 }
 
 export default function SignIn(props: Props) {
@@ -81,14 +80,19 @@ export default function SignIn(props: Props) {
       >
         <div
           style={{
+            display: "flex",
             marginTop: "100px",
             alignItems: "center",
             marginLeft: "auto",
             marginRight: "auto",
-            display: "flex",
           }}
         >
-          <img src={cranium} alt="Cranium" className="Cranium"></img>
+          <img
+            style={{ position: "inherit" }}
+            src={cranium}
+            alt="Cranium"
+            className="Cranium"
+          ></img>
         </div>
         <div
           style={{
@@ -127,7 +131,8 @@ export default function SignIn(props: Props) {
               display: "flex",
             }}
           >
-            <button className="SignInButton"
+            <button
+              className="SignInButton"
               onClick={() => {
                 updateScreenState();
                 console.log(name);
