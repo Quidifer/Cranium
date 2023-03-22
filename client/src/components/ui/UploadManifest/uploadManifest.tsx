@@ -1,13 +1,12 @@
 import React, { useCallback, useMemo } from "react";
 import { useDropzone, FileWithPath } from "react-dropzone";
+import { CraniumContainer } from "../../../types/CraniumContainer";
 
 interface Props {
   updateScreenState: () => void;
-  setManifest: any;
-  setDuplicates: any;
-  duplicates: any;
-  setManifestName: any;
   updatePrevScreenState: () => void;
+  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  setManifestName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const baseStyle = {
@@ -39,8 +38,6 @@ export default function UploadManifest(props: Props) {
     updateScreenState,
     updatePrevScreenState,
     setManifest,
-    setDuplicates,
-    duplicates,
     setManifestName,
   } = props;
 
@@ -50,11 +47,10 @@ export default function UploadManifest(props: Props) {
 
       reader.onabort = () => console.log("file reading was aborted");
       reader.onerror = () => console.log("file reading has failed");
-      reader.onload = (e: any) => {
-        let rows = e.target.result.split("\n");
-        let cells: any[] = [];
-        let dups: any[] = [];
-        rows.forEach((element: any) => {
+      reader.onload = (e) => {
+        let rows = String(e.target?.result).split("\n");
+        let cells: CraniumContainer[] = [];
+        rows.forEach((element) => {
           let row = element.split(",");
 
           let name = row[3].trim();
@@ -67,30 +63,9 @@ export default function UploadManifest(props: Props) {
             weight: Number(row[2].replace("{", "").replace("}", "")),
             name: name,
           });
-
-          if (!dups.some((item: any) => item.name === name)) {
-            dups.push({
-              name: name,
-              count: 1,
-              dup: [{ r, c }],
-            });
-          } else {
-            let index = dups.findIndex((item: any) => item.name === name);
-            let oldCount = dups[index].count;
-            let oldDup = dups[index].dup;
-            dups = [...dups.slice(0, index)].concat(
-              {
-                ...dups[index],
-                count: oldCount + 1,
-                dup: [...oldDup, { r, c }],
-              },
-              [...dups.slice(index + 1)]
-            );
-          }
         });
         setManifest(cells);
-        setDuplicates(dups);
-        setManifestName(file.path);
+        setManifestName(file.path!);
         updateScreenState();
       };
       reader.readAsText(file);

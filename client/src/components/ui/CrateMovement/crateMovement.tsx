@@ -5,17 +5,19 @@ import InteractableBox from "../InteractableBox/interactableBox";
 import submitButton from "../../../resources/SubmitButton.svg";
 import Loading from "../../../resources/loadingballs.gif";
 import CraniumToolbar from "../Toolbar/CraniumToolbar";
+
+import { CraniumContainer } from "../../../types/CraniumContainer";
 import "./crateMovement.css";
 
 interface Props {
   updateScreenState: () => void;
   updatePrevScreenState: () => void;
   goToSignIn: () => void;
-  setManifest: any;
-  manifest: any;
-  setBuffer: any;
-  buffer: any;
   manifestName: string;
+  manifest: CraniumContainer[];
+  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  buffer: CraniumContainer[];
+  setBuffer: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
   moveSet: {
     row_start: number;
     col_start: number;

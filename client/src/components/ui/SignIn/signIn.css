@@ -85,14 +85,10 @@ body {
   left: 0;
   margin-left: "auto";
   margin-right: "auto";
-  
+
   margin: auto;
   border: 0;
   background-color: #9b9b9b;
-}
-
-.SignInButton{
-  
 }
 
 .ButtonFont {
@@ -100,7 +96,6 @@ body {
   color: #eee;
   font-size: 1.2rem;
   width: 20%;
-  
 }
 
 .Cranium {
@@ -119,7 +114,7 @@ body {
   margin-top: 2vh;
 }
 
-.SignInTable{
+.SignInTable {
   position: absolute;
   top: 70%;
   width: 6vh;
@@ -127,19 +122,17 @@ body {
   border-spacing: 3vh;
   height: 6vh;
   font-size: 1.1rem;
-  
+
   font-family: gloock;
   text-align: left;
-  
-
 }
 
-.TableRow{
+.TableRow {
   border-bottom: 1px solid black;
   width: 10wh;
 }
 
-.TableElement{
-  font-weight:100;
+.TableElement {
+  font-weight: 100;
   color: #aaa;
 }

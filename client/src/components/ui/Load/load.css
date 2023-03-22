@@ -11,90 +11,68 @@
   left: 30%;
 }
 
-/* split screen */
-.split {
+.loadLeftContent {
+  width: calc(100% - 300px);
   height: 100%;
+  float: left;
+  background-color: gray;
+  position: relative;
+}
+
+.loadScreen {
+  height: calc(100vh - 95px);
+  width: 100%;
+  background-color: gray;
+  position: relative;
+}
+
+.loadBoxContent {
+  height: calc(93% - 50px);
+  overflow-y: auto;
+}
+
+.columnButtonGroup {
+  height: 70%;
+  width: 250px;
+  margin-left: 25px;
+  margin-right: 25px;
+  box-shadow: none !important;
+  background-color: #47b5ff;
+  border-radius: 30px !important;
+  border: gray;
+}
+
+.columnButtonFirst {
+  border-top-left-radius: 30px !important;
+  border-bottom-left-radius: 30px !important;
+}
+
+.columnButtonLast {
+  border-top-right-radius: 30px !important;
+  border-bottom-right-radius: 30px !important;
+}
+
+.loadGradient {
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(
+    to top,
+    rgba(228, 244, 243, 1) 0%,
+    rgba(228, 244, 243, 0) 100%
+  );
   position: fixed;
-  z-index: 1;
-  top: 0;
-  overflow-x: hidden;
+  top: auto;
+  bottom: 4%;
 }
-.left {
-  width: 70%;
-  left: 0;
-  background-color: #d1d1d1;
-  overflow: hidden;
-}
-.right {
-  width: 30%;
-  right: 0;
-  background-color: rgb(255, 255, 255);
-}
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* form */
-form.form-example {
-  display: table;
-  background-color: white;
-  font-size: 15px;
-  width: 200px;
-  padding: 5px 10px 0 10px;
-}
-
-div.form-example {
-  display: table-row;
-}
-
-label,
-.form-exampel.input {
-  display: table-cell;
-  width: 80%;
-}
-
-label {
-  padding-right: 10px;
-  font-size: 15px;
-  padding: 7px;
-}
-
-.form.button {
-  width: 400px;
-  padding: 40px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #191919;
-  text-align: center;
-}
-
-.flex-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.flex-child {
-  flex: 1;
-  padding: 10px;
-}
-
-.flex-child:first-child {
-  margin-right: 50px;
-}
-
-/* manifest and log buttons */
-.parent {
-  padding: 10px 30px;
-  text-align: left;
-}
-.child {
-  display: inline-block;
-  padding: 0 10px;
-  vertical-align: middle;
+.loadGradient1 {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(
+    to top,
+    rgba(228, 244, 243, 1) 0%,
+    rgba(228, 244, 243, 0) 100%
+  );
+  position: fixed;
+  top: auto;
+  bottom: 4%;
 }

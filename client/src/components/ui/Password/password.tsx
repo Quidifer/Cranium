@@ -7,7 +7,6 @@ import cranium from "../../../resources/cranium.svg";
 
 interface Props {
   updateScreenState: () => void;
-  updatePrevScreenState: (type: string) => void;
 }
 const websitePassword = "pw";
 
@@ -25,10 +24,6 @@ export default function Password(props: Props) {
   const onMouseDownShowPassword = (event: any) => {
     event.preventDefault();
   };
-
-  //   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-  //     setPassword(e.currentTarget.value);
-  //   }
 
   const onChange = (event: any) => {
     setPassword(event.currentTarget.value);

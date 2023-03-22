@@ -2,7 +2,7 @@ import "./Cranimations.css";
 import React, { useState, useRef, useCallback } from "react";
 import { CSSTransition } from "react-transition-group";
 import Draggable from "react-draggable";
-import ZoomButton from "./zoomButton";
+import ZoomButton from "../ui/ZoomButton/zoomButton";
 import AnimeCrate from "./Crates/AnimeCrate";
 import Crane from "./Crane";
 import Ship from "../../resources/boat.gif";
@@ -11,12 +11,13 @@ import Shark from "../../resources/shark.gif";
 import Truck from "../../resources/truck.svg";
 import Fog from "../../resources/fog.png";
 import { Tile } from "./Crates/Tile";
+import { CraniumContainer } from "../../types/CraniumContainer";
 
 interface Props {
-  setManifest: any;
-  manifest: any;
-  setBuffer: any;
-  buffer: any;
+  manifest: CraniumContainer[];
+  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  buffer: CraniumContainer[];
+  setBuffer: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
   movementProps: {
     moveSet: {
       row_start: number;
@@ -59,8 +60,8 @@ export default function Craninmations(props: Props) {
   const nodeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const fogRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  const isInList = (list: any, row: any, col: any) => {
-    return list.some((item: any) => item.row === row && item.col === col);
+  const isInList = (list: CraniumContainer[], row: number, col: number) => {
+    return list.some((item) => item.row === row && item.col === col);
   };
 
   const widthScale = 17 / 25;
@@ -103,9 +104,9 @@ export default function Craninmations(props: Props) {
       for (let col = 1; col <= m; col++) {
         let color = "unselected";
         const cell = isManifest
-          ? manifest.find((item: any) => item.row === row && item.col === col)
+          ? manifest.find((item) => item.row === row && item.col === col)
           : isBuffer
-          ? buffer.find((item: any) => item.row === row && item.col === col)
+          ? buffer.find((item) => item.row === row && item.col === col)
           : "";
         let name = cell ? cell.name : "";
         if (

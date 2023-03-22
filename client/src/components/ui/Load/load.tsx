@@ -1,50 +1,91 @@
-import React, { useState, useEffect } from "react";
-import "./load.css";
-// import UploadManifest from '../UploadManifest/uploadManifest';
-// import { ContextMenu, MenuContextContainer } from '../ContextMenu/contextMenu';
-import Grid from "../Grid/grid";
-import Draggable from "react-draggable";
-import OnloadInput from "../OnloadInput/onloadInput";
-import ViewManifest from "../ViewManifest/viewManifest";
-import ViewLog from "../ViewLog/viewLog";
+import React, { useState, useCallback } from "react";
+import Loadimations from "../../Loadimations/Loadimations";
 import CraniumToolbar from "../Toolbar/CraniumToolbar";
+import InteractableBox from "../InteractableBox/loadinteractableBox";
+
+import { CraniumContainer } from "../../../types/CraniumContainer";
+import { CraniumCount } from "../../../types/CraniumCount";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+
+import "./load.css";
+
+const ONLOAD_OFFSET = 1e5;
 
 interface Props {
   updateScreenState: () => void;
   updatePrevScreenState: () => void;
   goToSignIn: () => void;
-  setManifest: any;
-  manifest: any;
   manifestName: string;
-  duplicates: any;
+  manifest: CraniumContainer[];
+  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
 }
 
 export default function Load(props: Props) {
   const {
-    manifest,
-    manifestName,
-    duplicates,
     updateScreenState,
     updatePrevScreenState,
     goToSignIn,
+    manifest,
+    manifestName,
   } = props;
-  const [counts, setCounts] = useState<Record<string, number>[]>([]);
-  const [onloadContainers, setOnloadContainers] = useState<
-    Record<string, number>[]
-  >([]);
-  const [isGridSelectable, setIsGridSelectable] = useState(true);
-  const [selectedCell, setSelectedCell] = useState({
-    row: 0,
-    col: 0,
-    name: "",
-    weight: "",
-    count: 0,
-  });
-  const [rightClicked, setRightClicked] = useState(false);
+
+  const [destroyedIndex, setDestroyedIndex] = useState(1e9);
+  const [animateBoxes, setAnimateBoxes] = useState(false);
+
+  const [onloadContainers, setOnloadContainers] = useState<CraniumContainer[]>(
+    []
+  );
+  const [selectedCells, setSelectedCells] = useState<CraniumContainer[]>([]);
+  const [selectedNames, setSelectedNames] = useState<string[]>([]);
+  const [counts, setCounts] = useState<CraniumCount[]>([]);
+
+  const [displayOffload, setDisplayOffload] = useState(true);
+  const [displayOnload, setDisplayOnload] = useState(true);
+
+  const [alignment, setAlignment] = useState("both");
+
+  const updateItems = useCallback(() => {
+    if (destroyedIndex >= ONLOAD_OFFSET) {
+      setOnloadContainers(
+        onloadContainers
+          .slice(0, destroyedIndex)
+          .concat(
+            onloadContainers.slice(destroyedIndex + 1, onloadContainers.length)
+          )
+      );
+    } else {
+      console.log(counts);
+      let name = counts[destroyedIndex]["name"];
+      setSelectedCells(selectedCells.filter((item) => item.name !== name));
+      setSelectedNames(selectedNames.filter((item) => item !== name));
+      setCounts(
+        counts
+          .slice(0, destroyedIndex)
+          .concat(counts.slice(destroyedIndex + 1, counts.length))
+      );
+    }
+
+    setAnimateBoxes(false);
+  }, [
+    counts,
+    destroyedIndex,
+    onloadContainers,
+    selectedCells,
+    selectedNames,
+    setCounts,
+    setSelectedNames,
+  ]);
+
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string
+  ) => {
+    setAlignment(newAlignment);
+  };
 
   return (
-    <div>
-      <div className="split left">
+    <div className="page">
+      <div className="loadLeftContent">
         <CraniumToolbar
           manifest={manifest}
           manifestName={manifestName}
@@ -52,149 +93,100 @@ export default function Load(props: Props) {
           updatePrevScreenState={updatePrevScreenState}
           goToSignIn={goToSignIn}
         />
-        {/* <div className="parent">
-          <div className="child">
-            <ViewManifest manifest={manifest} manifestName={manifestName} />
-          </div>
-          <div className="child">
-            <ViewLog manifest={manifest} manifestName={manifestName} />
-          </div>
-        </div> */}
-        <div className="centered flex-container">
-          {/* input onload container info */}
-          <div
-            className="flex-child"
-            style={{ border: "solid", backgroundColor: "white" }}
-          >
-            <OnloadInput
-              onloadContainers={onloadContainers}
-              setOnloadContainers={setOnloadContainers}
-            />
-          </div>
-
-          <div className="flex-child">
-            <Grid
-              manifest={manifest}
-              duplicates={duplicates}
-              n={8}
-              m={12}
-              counts={counts}
-              isGridSelectable={isGridSelectable}
-              selectedCell={selectedCell}
-              setSelectedCell={setSelectedCell}
-              rightClicked={rightClicked}
-              setRightClicked={setRightClicked}
-              setCounts={setCounts}
-            />
-            <button
-              onClick={() => {
-                setIsGridSelectable(!isGridSelectable);
-              }}
-              style={{ width: "130px", height: "30px", marginTop: "15px" }}
-            >
-              {isGridSelectable ? "is selectable" : "is NOT selectable"}
-            </button>
-          </div>
-        </div>
-        <div
-          style={{
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {rightClicked && (
-            <Draggable>
-              <div
-                style={{
-                  height: "117px",
-                  width: "230px",
-                  backgroundColor: "white",
-                  fontSize: "16px",
-                  padding: "15px",
-                  borderStyle: "solid",
-                  position: "relative",
-                  overflow: "auto",
-                }}
-              >
-                <button
-                  style={{
-                    backgroundColor: "rgba(0, 0, 0, 0)",
-                    position: "absolute",
-                    padding: "0px",
-                    height: "25px",
-                    width: "25px",
-                    fontWeight: "bold",
-                    fontSize: "15px",
-                    top: "0",
-                    left: "calc(100% - 25px)",
-                  }}
-                  onClick={() => {
-                    setRightClicked(!rightClicked);
-                  }}
-                >
-                  x
-                </button>
-                <div
-                  style={{
-                    textAlign: "center",
-                    fontSize: "12px",
-                    fontWeight: "bold",
-                    padding: "5px 0 10px 0",
-                  }}
-                >
-                  Selected Container Information
-                </div>
-                Name: {selectedCell.name} <br />
-                Weight: {selectedCell.weight} <br />
-                Location: ({selectedCell.row}, {selectedCell.col}) <br />
-                Number of Duplicates: {selectedCell.count} <br />
-              </div>
-            </Draggable>
-          )}
+        <div className="loadScreen">
+          <Loadimations
+            {...props}
+            selectedCells={selectedCells}
+            setSelectedCells={setSelectedCells}
+            onloadContainers={onloadContainers}
+            setOnloadContainers={setOnloadContainers}
+            counts={counts}
+            setCounts={setCounts}
+            selectedNames={selectedNames}
+            setSelectedNames={setSelectedNames}
+          />
         </div>
       </div>
-
-      <div className="split right">
-        <div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <tbody>
-              {counts &&
-                counts.map((item) => (
-                  <tr key={item.name}>
-                    <td>{item.name}</td>
-                    <td>{item.count}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+      <div className="column">
+        <div className="loadBoxContent scrollbar-hidden">
+          {displayOffload &&
+            counts.map((item, index) => {
+              let info = `OFFLOAD '${item.name}' ${
+                manifest.find((u) => u.name === item.name)?.weight ?? -1
+              } kg Count: ${item.count}`;
+              return (
+                <InteractableBox
+                  info={info}
+                  index={index}
+                  animationStart={animateBoxes}
+                  setAnimationStart={setAnimateBoxes}
+                  updateItems={updateItems}
+                  destroyedIndex={destroyedIndex}
+                  setDestroyedIndex={setDestroyedIndex}
+                />
+              );
+            })}
+          {displayOnload &&
+            onloadContainers.map((item, index) => {
+              let info = 'ONLOAD "' + item.name + '" ' + item.weight;
+              return (
+                <InteractableBox
+                  info={info}
+                  index={index + ONLOAD_OFFSET}
+                  animationStart={animateBoxes}
+                  setAnimationStart={setAnimateBoxes}
+                  updateItems={updateItems}
+                  destroyedIndex={destroyedIndex}
+                  setDestroyedIndex={setDestroyedIndex}
+                />
+              );
+            })}
         </div>
-        <div>
-          <table className="table" style={{ top: "350px" }}>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Weight</th>
-              </tr>
-            </thead>
-            <tbody>
-              {onloadContainers &&
-                onloadContainers.map((item) => (
-                  <tr key={item.name}>
-                    <td>{item.name}</td>
-                    <td>{item.weight}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+        <div className="columnFooter">
+          <ToggleButtonGroup
+            // color="primary"
+            value={alignment}
+            exclusive
+            onChange={handleChange}
+            aria-label="Platform"
+            className="columnButtonGroup"
+          >
+            <ToggleButton
+              value="onload"
+              className="columnButtonFirst"
+              onClick={() => {
+                setDisplayOnload(true);
+                setDisplayOffload(false);
+              }}
+            >
+              Onload
+            </ToggleButton>
+            <ToggleButton
+              value="both"
+              onClick={() => {
+                setDisplayOnload(true);
+                setDisplayOffload(true);
+              }}
+            >
+              BOTH
+            </ToggleButton>
+            <ToggleButton
+              value="offload"
+              className="columnButtonLast"
+              onClick={() => {
+                setDisplayOnload(false);
+                setDisplayOffload(true);
+              }}
+            >
+              Offload
+            </ToggleButton>
+          </ToggleButtonGroup>
         </div>
+        <div className="loadGradient" />
+        <div className="loadGradient" />
+        <div className="loadGradient" />
+        <div className="loadGradient1" />
+        <div className="loadGradient1" />
       </div>
     </div>
   );

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "./viewManifest.css";
+import { CraniumContainer } from "../../../types/CraniumContainer";
+
 interface Props {
-  manifest: any;
+  manifest: CraniumContainer[];
   manifestName: string;
 }
 
@@ -24,7 +26,7 @@ export default function ViewManifest(props: Props) {
 
   const downloadManifest = () => {
     let fileData = "";
-    manifest.forEach((item: any) => {
+    manifest.forEach((item) => {
       let row =
         "[" +
         pad(item.row, 2) +
@@ -61,8 +63,8 @@ export default function ViewManifest(props: Props) {
             </thead>
             <tbody>
               {manifest &&
-                manifest.map((item: any) => (
-                  <tr key={item.id}>
+                manifest.map((item) => (
+                  <tr key={`${item.col},${item.row}`}>
                     <td>
                       [{item.row}, {item.col}]
                     </td>

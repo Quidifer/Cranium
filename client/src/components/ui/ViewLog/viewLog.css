@@ -24,13 +24,15 @@
   padding-bottom: 10px;
 }
 .modal > .modalContent {
-  overflow: scroll;
+  overflow: auto;
   border: dashed;
   width: calc(100vw - 500px);
   height: calc(100vh - 310px);
   display: block;
   margin: 0px auto;
   padding: 25px;
+  font-size: 20px;
+  white-space: pre-line;
 }
 
 .modalContent > .modalTable {
@@ -52,7 +54,7 @@
   border-right: 1px solid;
   border-bottom: 1px solid;
   padding: 5px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 /* .modal > .actions {
