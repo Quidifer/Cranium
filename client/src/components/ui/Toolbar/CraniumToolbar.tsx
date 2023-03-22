@@ -1,7 +1,7 @@
 import ColorPallet from "../../../utils/ColorPallet";
 import CraniumButton from "../CraniumButton/CraniumButton";
-import ViewManifest from "../ViewManifest/viewManifest";
-import ViewLog from "../ViewLog/viewLog";
+import ViewManifest from "../ViewButton/viewManifest";
+import ViewLog from "../ViewButton/viewLog";
 import { CraniumContainer } from "../../../types/CraniumContainer";
 import "./CraniumToolbar.css";
 
@@ -36,10 +36,15 @@ export default function CraniumToolbar(props: Props) {
         <button
           className="finishCraniumToolbarButton"
           onClick={updateScreenState}
+          style={{ backgroundColor: ColorPallet.Green }}
         >
           Finish
         </button>
-        <button className="returnToSignInButton" onClick={goToSignIn}>
+        <button
+          className="returnToSignInButton"
+          onClick={goToSignIn}
+          style={{ backgroundColor: ColorPallet.Red }}
+        >
           Sign In
         </button>
       </div>

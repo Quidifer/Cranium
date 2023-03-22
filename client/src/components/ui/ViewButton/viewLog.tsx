@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
-import "./viewLog.css";
+import "./viewButton.css";
 import API from "../../../utils/API";
 
 interface Props {
@@ -19,7 +19,7 @@ export default function ViewLog(props: Props) {
   };
 
   const logButton = (
-    <button className={"button"} onClick={handleGetLog}>
+    <button className={"viewButton"} onClick={handleGetLog}>
       Log
     </button>
   );

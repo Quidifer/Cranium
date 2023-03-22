@@ -87,7 +87,7 @@ function App() {
       .then(() => console.log("Response Received"));
   }, []);
 
-  const [screenState, setScreenState] = useState("password");
+  const [screenState, setScreenState] = useState("uploadManifest");
   const [manifest, setManifest] = useState<CraniumContainer[]>([]);
   const [manifestName, setManifestName] = useState("");
   const [buffer, setBuffer] = useState<CraniumContainer[]>(() => {
@@ -108,13 +108,9 @@ function App() {
   const [prevScreenState, setPrevScreenState] = useState("uploadManifest");
 
   return screenState === "password" ? (
-    <Password
-      updateScreenState={() => setScreenState("signIn")}
-    />
+    <Password updateScreenState={() => setScreenState("signIn")} />
   ) : screenState === "signIn" ? (
-    <SignIn
-      updateScreenState={() => setScreenState(prevScreenState)}
-    />
+    <SignIn updateScreenState={() => setScreenState(prevScreenState)} />
   ) : screenState === "uploadManifest" ? (
     <UploadManifest
       updateScreenState={() => setScreenState("jobSelect")}

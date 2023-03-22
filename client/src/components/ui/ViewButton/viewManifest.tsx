@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
-import "./viewManifest.css";
+import "./viewButton.css";
 import { CraniumContainer } from "../../../types/CraniumContainer";
 
 interface Props {
@@ -12,7 +12,7 @@ export default function ViewManifest(props: Props) {
   const { manifest, manifestName } = props;
   const manifestButton = (
     <button
-      className={"button"}
+      className={"viewButton"}
       // style={{ top: "50px", left: "50px", position: "fixed" }}
     >
       Manifest

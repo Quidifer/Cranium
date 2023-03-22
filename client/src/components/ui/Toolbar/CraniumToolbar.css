@@ -48,9 +48,10 @@
   height: 55px;
   width: 130px;
   border-radius: 200px;
-  background-color: green;
+  /* background-color: green; */
   color: white;
-  border: 3.5px solid white;
+  /* border: 3.5px solid white; */
+  border: none;
   font-family: "Monaco", sans-serif;
   margin: 0 5px;
   padding: 0;

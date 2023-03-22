@@ -1,14 +1,23 @@
-.button {
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+
+.viewButton {
   height: 50px;
   width: 130px;
   border-radius: 200px;
   border: 0;
   background-color: #9b9b9b;
   color: white;
-  font-family: "Monaco", sans-serif;
+  font-family: "Work Sans", sans-serif;
+  font-size: 17px;
+  /* font-weight: bold; */
   margin: 0 5px;
   padding: 0;
 }
+.viewButton:hover {
+  background-color: white;
+  color: #9b9b9b;
+}
+
 .modal {
   font-size: 12px;
   background-color: white;
