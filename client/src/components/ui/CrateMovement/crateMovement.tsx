@@ -4,14 +4,18 @@ import Cranimations from "../../Cranimations/Cranimations";
 import InteractableBox from "../InteractableBox/interactableBox";
 import submitButton from "../../../resources/SubmitButton.svg";
 import Loading from "../../../resources/loadingballs.gif";
+import CraniumToolbar from "../Toolbar/CraniumToolbar";
 import "./crateMovement.css";
 
 interface Props {
-  prevScreenState: (type: string) => void;
+  updateScreenState: () => void;
+  updatePrevScreenState: () => void;
+  goToSignIn: () => void;
   setManifest: any;
   manifest: any;
   setBuffer: any;
   buffer: any;
+  manifestName: string;
   moveSet: {
     row_start: number;
     col_start: number;
@@ -24,7 +28,7 @@ interface Props {
 }
 
 export default function CrateMovement(props: Props) {
-  const { moveSet, manifest, setManifest, buffer, setBuffer } = props;
+  const { moveSet, manifest, setManifest, buffer, setBuffer, manifestName, updatePrevScreenState, updateScreenState, goToSignIn } = props;
 
   const [items, setItems] = useState(() => {
     let items = [];
@@ -65,7 +69,15 @@ export default function CrateMovement(props: Props) {
   return (
     <div className="page">
       <div className="leftcontent">
-        <div className="header"></div>
+        <div className="header">
+          <CraniumToolbar
+            manifest={manifest}
+            manifestName={manifestName}
+            updateScreenState={updateScreenState}
+            updatePrevScreenState={updatePrevScreenState}
+            goToSignIn={goToSignIn}
+          />
+        </div>
         <div className="crane">
           <Cranimations
             movementProps={{
@@ -113,11 +125,11 @@ export default function CrateMovement(props: Props) {
           />
         </div>
         <div className="footer">
-          <div className="CommentTitle">Add Comment</div>
+          <div className="CommentTitle">{/* Add Comment */}</div>
           <div className="CommentBar">
             <textarea
               className="CommentInput"
-              placeholder="Type here..."
+              placeholder="Add comment..."
               name="comment"
               id="comment"
               onChange={(e) => {
@@ -128,10 +140,10 @@ export default function CrateMovement(props: Props) {
               <img
                 src={submitButton}
                 style={{
-                  height: "150%",
-                  width: "150%",
+                  height: "125%",
+                  width: "125%",
                   marginLeft: "-25%",
-                  marginTop: "-25%",
+                  marginTop: "0%",
                 }}
                 alt="submit"
                 className="ButtonSvg"

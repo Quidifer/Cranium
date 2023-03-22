@@ -132,13 +132,13 @@
 }
 
 .Continue {
-  display: inline;
   background-color: transparent;
   border: 4px solid #1a1a1a;
   border-radius: 15px;
   box-sizing: border-box;
   color: #3b3b3b;
-  display: inline-block;
+  display: relative;
+  width: 100%;
   font-family: gloock;
   font-size: 4.5vh;
   font-weight: 600;
@@ -146,6 +146,7 @@
   text-align: center;
   transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
   touch-action: manipulation;
+
 }
 
 .Continue:hover {

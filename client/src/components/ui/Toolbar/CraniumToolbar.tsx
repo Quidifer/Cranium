@@ -8,12 +8,21 @@ import ViewLog from "../ViewLog/viewLog";
 
 interface Props {
   manifest: any;
-  manifestName: string;        
+  manifestName: string;
   updateScreenState: () => void;
+  updatePrevScreenState: () => void;
+  goToSignIn: () => void;
 }
 
 export default function CraniumToolbar(props: Props) {
-  const { manifest, manifestName, updateScreenState } = props;
+  const {
+    manifest,
+    manifestName,
+    updateScreenState,
+    updatePrevScreenState,
+    goToSignIn,
+  } = props;
+  updatePrevScreenState();
   const height = "50px";
   const width = "100px";
 
@@ -22,20 +31,16 @@ export default function CraniumToolbar(props: Props) {
       <div>
         <ViewManifest manifest={manifest} manifestName={manifestName} />
         <ViewLog manifest={manifest} manifestName={manifestName} />
-        {/* <CraniumToolbar/> */}
       </div>
       <div>
-        {/* <CraniumButton
-          height={height}
-          width={width}
-          color={ColorPallet.LightGreen}
-        >
-          Finish
-        </CraniumButton> */}
-        <button className="button" style={{color: "green"}} onClick={updateScreenState}>Finish</button>
-        <CraniumButton height={height} width={width} color={ColorPallet.Red}>
+        
+      </div>
+      <div>
+        
+        <button className="finishCraniumToolbarButton" onClick={updateScreenState}>Finish</button>
+        <button className="returnToSignInButton" onClick={goToSignIn} >
           Sign In
-        </CraniumButton>
+        </button>
       </div>
     </div>
   );

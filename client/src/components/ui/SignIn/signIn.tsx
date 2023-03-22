@@ -4,11 +4,13 @@ import cranium from "../../../resources/cranium.svg";
 import standingCrane from "../../../resources/standingCrane.svg";
 
 interface Props {
+  updatePrevScreenState: () => void;
   updateScreenState: () => void;
+  
 }
 
 export default function SignIn(props: Props) {
-  const { updateScreenState } = props;
+  const { updateScreenState, updatePrevScreenState } = props;
   const [name, setName] = useState("");
   return (
     <div
@@ -125,7 +127,7 @@ export default function SignIn(props: Props) {
               display: "flex",
             }}
           >
-            <button
+            <button className="SignInButton"
               onClick={() => {
                 updateScreenState();
                 console.log(name);

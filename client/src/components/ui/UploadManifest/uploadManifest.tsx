@@ -7,7 +7,7 @@ interface Props {
   setDuplicates: any;
   duplicates: any;
   setManifestName: any;
-  prevScreenState: (type: string) => void;
+  updatePrevScreenState: () => void;
 }
 
 const baseStyle = {
@@ -37,6 +37,7 @@ const rejectStyle = {
 export default function UploadManifest(props: Props) {
   const {
     updateScreenState,
+    updatePrevScreenState,
     setManifest,
     setDuplicates,
     duplicates,
