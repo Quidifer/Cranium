@@ -1,24 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.f6d8787d.css",
-    "main.js": "/static/js/main.4a165b3c.js",
+    "main.css": "/static/css/main.549ebe1d.css",
+    "main.js": "/static/js/main.67dd249c.js",
     "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
     "static/media/standingCrane.svg": "/static/media/standingCrane.5ad687bf89d981640488b4ecc7f7d5df.svg",
+    "static/media/loadingbox.gif": "/static/media/loadingbox.e9f5cafa2ccdc2cbb3cd.gif",
     "static/media/JobSelectBackground.png": "/static/media/JobSelectBackground.18a0dfd2ad9efb23d1a7.png",
     "static/media/fog.png": "/static/media/fog.f3907fa6b3f033d73bcb.png",
     "static/media/cranium.svg": "/static/media/cranium.26ba8e149829c3cfcd72a221cd870e7b.svg",
     "static/media/boat.gif": "/static/media/boat.301d73c7f41d99111c60.gif",
+    "static/media/loadingballs.gif": "/static/media/loadingballs.41bf0a9288e25e139d5a.gif",
     "static/media/ocean.gif": "/static/media/ocean.a62d0eb11e1b2b57505c.gif",
     "static/media/shark.gif": "/static/media/shark.a9a05bce6242b9687cd5.gif",
     "static/media/truck.svg": "/static/media/truck.171f5cf4c8ca4e515042f02f5d3202c4.svg",
     "static/media/SubmitButton.svg": "/static/media/SubmitButton.34458e4303750c016ce5bea5672b371a.svg",
     "index.html": "/index.html",
-    "main.f6d8787d.css.map": "/static/css/main.f6d8787d.css.map",
-    "main.4a165b3c.js.map": "/static/js/main.4a165b3c.js.map",
+    "main.549ebe1d.css.map": "/static/css/main.549ebe1d.css.map",
+    "main.67dd249c.js.map": "/static/js/main.67dd249c.js.map",
     "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
   },
-  "entrypoints": [
-    "static/css/main.f6d8787d.css",
-    "static/js/main.4a165b3c.js"
-  ]
+  "entrypoints": ["static/css/main.549ebe1d.css", "static/js/main.67dd249c.js"]
 }

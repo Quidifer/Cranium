@@ -79,14 +79,19 @@ export default function SignIn(props: Props) {
       >
         <div
           style={{
+            display: "flex",
             marginTop: "100px",
             alignItems: "center",
             marginLeft: "auto",
             marginRight: "auto",
-            display: "flex",
           }}
         >
-          <img src={cranium} alt="Cranium" className="Cranium"></img>
+          <img
+            style={{ position: "inherit" }}
+            src={cranium}
+            alt="Cranium"
+            className="Cranium"
+          ></img>
         </div>
         <div
           style={{
