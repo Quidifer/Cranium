@@ -5,9 +5,6 @@ import InteractableBox from "../InteractableBox/interactableBox";
 import submitButton from "../../../resources/SubmitButton.svg";
 import Loading from "../../../resources/loadingballs.gif";
 import CraniumToolbar from "../Toolbar/CraniumToolbar";
-
-import API from "../../../utils/API";
-
 import { FrontEndContainer } from "../../../types/APISolution";
 import "./crateMovement.css";
 import {
