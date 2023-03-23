@@ -2,7 +2,8 @@ import React, { useState, useCallback } from "react";
 import Cranimations from "../../Cranimations/Cranimations";
 
 import InteractableBox from "../InteractableBox/interactableBox";
-import submitButton from "../../../resources/SubmitButton.svg";
+import submitButton from "../../../resources/SubmitButton.png";
+import submitButtonActive from "../../../resources/submitButtonActive.png";
 import Loading from "../../../resources/loadingballs.gif";
 import CraniumToolbar from "../Toolbar/CraniumToolbar";
 import { FrontEndContainer } from "../../../types/APISolution";
@@ -73,6 +74,8 @@ export default function CrateMovement(props: Props) {
     return items;
   });
 
+  const [submitButtonHover, setSubmitButtonHover] = useState(false);
+
   const [animateBoxes, setAnimateBoxes] = useState(false);
 
   const updateItems = useCallback(() => {
@@ -133,14 +136,13 @@ export default function CrateMovement(props: Props) {
                 console.log(comment);
                 API.sendLog(comment, "NONE");
               }}
+              onMouseEnter={() => setSubmitButtonHover(true)}
+              onMouseLeave={() => setSubmitButtonHover(false)}
             >
               <img
-                src={submitButton}
+                src={submitButtonHover ? submitButtonActive : submitButton}
                 style={{
-                  height: "125%",
-                  width: "125%",
-                  marginLeft: "-25%",
-                  marginTop: "0%",
+                  height: "100%",
                 }}
                 alt="submit"
                 className="ButtonSvg"
@@ -151,7 +153,18 @@ export default function CrateMovement(props: Props) {
       </div>
       <div className="column">
         <div className="timeEstimates">
-          <p>time estimates here</p>
+          <p style={{ marginTop: "10px" }}>
+            <b>Estimated Time Remaining:</b>{" "}
+          </p>
+          <p>
+            {moveSet.moves[moveSet.moves.length - 1].minutesLeft -
+              moveSet.moves[currentStep].minutesLeft}{" "}
+            minutes{" "}
+          </p>
+          <p style={{ marginTop: "10px" }}>
+            <b>Estimated Of Move:</b>{" "}
+          </p>
+          <p>{moveSet.moves[currentStep].minutesLeft} minutes </p>
         </div>
         <div className="boxContent scrollbar-hidden">
           {items.map((item, index) => {

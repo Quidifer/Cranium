@@ -50,9 +50,12 @@ export default function Load(props: Props) {
     if (destroyedIndex >= ONLOAD_OFFSET) {
       setOnloadContainers(
         onloadContainers
-          .slice(0, destroyedIndex)
+          .slice(0, destroyedIndex - ONLOAD_OFFSET)
           .concat(
-            onloadContainers.slice(destroyedIndex + 1, onloadContainers.length)
+            onloadContainers.slice(
+              destroyedIndex + 1 - ONLOAD_OFFSET,
+              onloadContainers.length
+            )
           )
       );
     } else {
