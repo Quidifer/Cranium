@@ -181,7 +181,11 @@ export default function Loadimations(props: Props) {
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
-                backgroundColor: "#BEF5FF",
+                backgroundColor: "white",
+                // borderBottom: "2px",
+                // borderColor: "#9b9b9b",
+                // borderStyle: "ridge",
+                boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 12px 12px",
               }}
             >
               <div

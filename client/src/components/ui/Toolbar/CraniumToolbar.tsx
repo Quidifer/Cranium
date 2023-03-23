@@ -36,15 +36,10 @@ export default function CraniumToolbar(props: Props) {
         <button
           className="finishCraniumToolbarButton"
           onClick={updateScreenState}
-          style={{ backgroundColor: ColorPallet.Green }}
         >
           Finish
         </button>
-        <button
-          className="returnToSignInButton"
-          onClick={goToSignIn}
-          style={{ backgroundColor: ColorPallet.Red }}
-        >
+        <button className="returnToSignInButton" onClick={goToSignIn}>
           Sign In
         </button>
       </div>

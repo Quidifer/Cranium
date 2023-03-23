@@ -19,7 +19,7 @@ export default function OnloadInput(props: Props) {
     const weight = parseFloat(
       (document.getElementById("weight") as HTMLInputElement).value
     );
-    debugger;
+
     setOnloadContainers([
       ...onloadContainers,
       { name: name, weight: weight, row: -1, col: -1 },

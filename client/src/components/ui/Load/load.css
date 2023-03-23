@@ -1,5 +1,5 @@
 .App {
-  font-family: sans-serif;
+  font-family: "Work Sans" sans-serif;
   text-align: center;
 }
 
@@ -15,31 +15,32 @@
   width: calc(100% - 300px);
   height: 100%;
   float: left;
-  background-color: gray;
+  background-color: #f4f4f4;
   position: relative;
 }
 
 .loadScreen {
   height: calc(100vh - 95px);
   width: 100%;
-  background-color: gray;
+  background-color: #f4f4f4;
   position: relative;
 }
 
 .loadBoxContent {
-  height: calc(93% - 50px);
+  /* height: calc(93% - 50px); */
+  height: inherit;
   overflow-y: auto;
 }
 
 .columnButtonGroup {
   height: 70%;
-  width: 250px;
-  margin-left: 25px;
-  margin-right: 25px;
-  box-shadow: none !important;
-  background-color: #47b5ff;
+  /* box-shadow: none !important; */
+  color: white;
+  background-color: #4c4c4c;
   border-radius: 30px !important;
-  border: gray;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px 15px;
+  border: 3px;
 }
 
 .columnButtonFirst {
@@ -57,8 +58,8 @@
   height: 150px;
   background: linear-gradient(
     to top,
-    rgba(228, 244, 243, 1) 0%,
-    rgba(228, 244, 243, 0) 100%
+    rgba(155, 155, 155, 1) 0%,
+    rgba(155, 155, 155, 0) 100%
   );
   position: fixed;
   top: auto;
@@ -69,8 +70,8 @@
   height: 200px;
   background: linear-gradient(
     to top,
-    rgba(228, 244, 243, 1) 0%,
-    rgba(228, 244, 243, 0) 100%
+    rgba(155, 155, 155, 1) 0%,
+    rgba(155, 155, 155, 0) 100%
   );
   position: fixed;
   top: auto;

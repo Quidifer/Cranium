@@ -111,9 +111,16 @@ export default function Load(props: Props) {
         <div className="loadBoxContent scrollbar-hidden">
           {displayOffload &&
             counts.map((item, index) => {
-              let info = `OFFLOAD '${item.name}' ${
-                manifest.find((u) => u.name === item.name)?.weight ?? -1
-              } kg Count: ${item.count}`;
+              // let info = `OFFLOAD '${item.name}' ${
+              //   manifest.find((u) => u.name === item.name)?.weight ?? -1
+              // } kg Count: ${item.count}`;
+              let info = {
+                name: item.name,
+                weight:
+                  manifest.find((u) => u.name === item.name)?.weight ?? -1,
+                count: item.count,
+                type: "OFFLOAD",
+              };
               return (
                 <InteractableBox
                   info={info}
@@ -128,7 +135,13 @@ export default function Load(props: Props) {
             })}
           {displayOnload &&
             onloadContainers.map((item, index) => {
-              let info = 'ONLOAD "' + item.name + '" ' + item.weight;
+              let info = {
+                name: item.name,
+                weight:
+                  manifest.find((u) => u.name === item.name)?.weight ?? -1,
+                count: -1,
+                type: "ONLOAD",
+              };
               return (
                 <InteractableBox
                   info={info}
@@ -158,6 +171,11 @@ export default function Load(props: Props) {
                 setDisplayOnload(true);
                 setDisplayOffload(false);
               }}
+              style={{
+                border: "none",
+                color: "white",
+                fontWeight: "bold",
+              }}
             >
               Onload
             </ToggleButton>
@@ -166,6 +184,11 @@ export default function Load(props: Props) {
               onClick={() => {
                 setDisplayOnload(true);
                 setDisplayOffload(true);
+              }}
+              style={{
+                border: "none",
+                color: "white",
+                fontWeight: "bold",
               }}
             >
               BOTH
@@ -177,16 +200,21 @@ export default function Load(props: Props) {
                 setDisplayOnload(false);
                 setDisplayOffload(true);
               }}
+              style={{
+                border: "none",
+                color: "white",
+                fontWeight: "bold",
+              }}
             >
               Offload
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
-        <div className="loadGradient" />
+        {/* <div className="loadGradient" />
         <div className="loadGradient" />
         <div className="loadGradient" />
         <div className="loadGradient1" />
-        <div className="loadGradient1" />
+        <div className="loadGradient1" /> */}
       </div>
     </div>
   );

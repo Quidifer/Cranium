@@ -15,7 +15,13 @@ export default function ZoomButton(props: Props) {
   return (
     <div className="ZoomDiv">
       <button
-        style={{ backgroundColor: plusBackground }}
+        // className="viewButton"
+        style={{
+          backgroundColor: "red",
+          width: "10px",
+          height: "10px",
+          borderRadius: "10px",
+        }}
         onClick={() => onPlus()}
         onMouseOver={() => setPlusBackground("#999")}
         onMouseLeave={() => setPlusBackground("#666")}

@@ -3,7 +3,12 @@ import { CSSTransition } from "react-transition-group";
 import "./interactableBox.css";
 
 interface Props {
-  info?: string;
+  info: {
+    name: string;
+    weight: number;
+    count: number;
+    type: string;
+  };
   index: number;
   greenBox?: boolean;
   animationStart: boolean;
@@ -52,7 +57,6 @@ export default function InteractableBox(props: Props) {
         ref={nodeRef}
         style={{ position: "relative" }}
       >
-        <div style={{ height: "30px" }}></div>
         <button
           style={{
             backgroundColor: "rgba(0, 0, 0, 0)",
@@ -73,7 +77,19 @@ export default function InteractableBox(props: Props) {
         >
           x
         </button>
-        <p className="info">{info}</p>
+        <p className="boxHead">{info.type}</p>
+        <div className="infoContent">
+          <p className="info">
+            <b>Crate</b>: '{info.name}' {info.weight} kg
+          </p>
+          {info.count !== -1 ? (
+            <p className="info">
+              <b>Count</b>: {info.count}
+            </p>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </CSSTransition>
   );
