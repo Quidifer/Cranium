@@ -25,4 +25,4 @@ yarn-error.log*
 # Dev environment
 ./.vscode
 
-/dist
+dist
