@@ -4,18 +4,20 @@ import Draggable from "react-draggable";
 import ZoomButton from "../ui/ZoomButton/zoomButton";
 import { Tile } from "./Tile";
 import OnloadInput from "../ui/Load/onloadInput";
-import { CraniumContainer } from "../../types/CraniumContainer";
+import { FrontEndContainer } from "../../types/APISolution";
 import { CraniumCount } from "../../types/CraniumCount";
 
 interface Props {
   updateScreenState: () => void;
   manifestName: string;
-  manifest: CraniumContainer[];
-  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
-  selectedCells: CraniumContainer[];
-  setSelectedCells: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
-  onloadContainers: CraniumContainer[];
-  setOnloadContainers: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  manifest: FrontEndContainer[];
+  setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
+  selectedCells: FrontEndContainer[];
+  setSelectedCells: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
+  onloadContainers: FrontEndContainer[];
+  setOnloadContainers: React.Dispatch<
+    React.SetStateAction<FrontEndContainer[]>
+  >;
   counts: CraniumCount[];
   setCounts: React.Dispatch<React.SetStateAction<CraniumCount[]>>;
   selectedNames: string[];
@@ -51,7 +53,7 @@ export default function Loadimations(props: Props) {
     col: 0,
   });
 
-  const isInList = (list: CraniumContainer[], row: number, col: number) => {
+  const isInList = (list: FrontEndContainer[], row: number, col: number) => {
     return list.some((item) => item.row === row && item.col === col);
   };
 

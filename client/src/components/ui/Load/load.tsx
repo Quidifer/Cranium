@@ -3,9 +3,11 @@ import Loadimations from "../../Loadimations/Loadimations";
 import CraniumToolbar from "../Toolbar/CraniumToolbar";
 import InteractableBox from "../InteractableBox/loadinteractableBox";
 
-import { CraniumContainer } from "../../../types/CraniumContainer";
+import { FrontEndContainer } from "../../../types/APISolution";
 import { CraniumCount } from "../../../types/CraniumCount";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+
+import API from "../../../utils/API";
 
 import "./load.css";
 
@@ -16,8 +18,8 @@ interface Props {
   updatePrevScreenState: () => void;
   goToSignIn: () => void;
   manifestName: string;
-  manifest: CraniumContainer[];
-  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  manifest: FrontEndContainer[];
+  setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
 }
 
 export default function Load(props: Props) {
@@ -32,10 +34,10 @@ export default function Load(props: Props) {
   const [destroyedIndex, setDestroyedIndex] = useState(1e9);
   const [animateBoxes, setAnimateBoxes] = useState(false);
 
-  const [onloadContainers, setOnloadContainers] = useState<CraniumContainer[]>(
+  const [onloadContainers, setOnloadContainers] = useState<FrontEndContainer[]>(
     []
   );
-  const [selectedCells, setSelectedCells] = useState<CraniumContainer[]>([]);
+  const [selectedCells, setSelectedCells] = useState<FrontEndContainer[]>([]);
   const [selectedNames, setSelectedNames] = useState<string[]>([]);
   const [counts, setCounts] = useState<CraniumCount[]>([]);
 
@@ -87,6 +89,9 @@ export default function Load(props: Props) {
     <div className="page">
       <div className="loadLeftContent">
         <CraniumToolbar
+          fromLoad
+          onloads={onloadContainers}
+          offloads={selectedCells}
           manifest={manifest}
           manifestName={manifestName}
           updateScreenState={updateScreenState}

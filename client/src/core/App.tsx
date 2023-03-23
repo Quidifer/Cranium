@@ -7,7 +7,7 @@ import UploadManifest from "../components/ui/UploadManifest/uploadManifest";
 import Load from "../components/ui/Load/load";
 import CrateMovement from "../components/ui/CrateMovement/crateMovement";
 import JobSelect from "../components/ui/JobSelect/jobSelect";
-import { CraniumContainer } from "../types/CraniumContainer";
+import { FrontEndContainer } from "../types/APISolution";
 import { stringify } from "uuid";
 import Calculating from "../components/ui/Calculating/Calculating";
 
@@ -88,9 +88,9 @@ function App() {
   }, []);
 
   const [screenState, setScreenState] = useState("password");
-  const [manifest, setManifest] = useState<CraniumContainer[]>([]);
+  const [manifest, setManifest] = useState<FrontEndContainer[]>([]);
   const [manifestName, setManifestName] = useState("");
-  const [buffer, setBuffer] = useState<CraniumContainer[]>(() => {
+  const [buffer, setBuffer] = useState<FrontEndContainer[]>(() => {
     let cells: { row: number; col: number; weight: number; name: string }[] =
       [];
     for (let r = 1; r <= 4; ++r) {
@@ -108,7 +108,10 @@ function App() {
   const [prevScreenState, setPrevScreenState] = useState("uploadManifest");
 
   return screenState === "password" ? (
-    <Password updateScreenState={() => setScreenState("signIn")} />
+    <Password
+      updateScreenState={() => setScreenState("signIn")}
+      restoreSession={() => setScreenState(prevScreenState)}
+    />
   ) : screenState === "signIn" ? (
     <SignIn updateScreenState={() => setScreenState(prevScreenState)} />
   ) : screenState === "uploadManifest" ? (
