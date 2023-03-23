@@ -62,7 +62,7 @@ export default function UploadManifest(props: Props) {
 
   useEffect(() => {
     if (prevRef !== manifestName) {
-      console.log(manifestName);
+      console.log(`${manifestName} is uploaded.`);
       API.sendLog(`${manifestName} is uploaded.`);
       updateScreenState();
     }

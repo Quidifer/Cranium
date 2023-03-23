@@ -12,7 +12,7 @@ interface Props {
   updateScreenState: () => void;
   updatePrevScreenState: () => void;
   goToSignIn: () => void;
-  fromLoad?: boolean;
+  fromLoadScreen?: boolean;
   onloads?: FrontEndContainer[];
   offloads?: FrontEndContainer[];
 }
@@ -24,7 +24,7 @@ export default function CraniumToolbar(props: Props) {
     updateScreenState,
     updatePrevScreenState,
     goToSignIn,
-    fromLoad,
+    fromLoadScreen,
     onloads,
     offloads,
   } = props;
@@ -44,9 +44,9 @@ export default function CraniumToolbar(props: Props) {
           className="finishCraniumToolbarButton"
           style={{ fontFamily: "work sans" }}
           onClick={() => {
-            if (fromLoad) {
-              if (onloads && offloads)
-                API.sendJob("TRANSFER", manifest, onloads, offloads);
+            if (fromLoadScreen && onloads && offloads) {
+              console.log("sending transfer job...");
+              API.sendJob("TRANSFER", manifest, onloads, offloads);
             }
             updateScreenState();
           }}
