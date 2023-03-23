@@ -214,6 +214,7 @@ export default function Craninmations(props: Props) {
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 backgroundColor: "#BEF5FF",
+                boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 20px 15px",
               }}
             >
               <img
@@ -623,6 +624,14 @@ export default function Craninmations(props: Props) {
                   }}
                 />
               )}
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${contentHeight}px`,
+                  width: `${contentWidth}px`,
+                  backgroundColor: "transparent",
+                }}
+              />
             </div>
           </Draggable>
         </div>
