@@ -15,6 +15,23 @@
   }
 }
 
+@keyframes Jiggle {
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
 .fog-enter-active {
   animation: slideRight 60s forwards linear;
+}
+
+.cloudshort {
+  animation: Jiggle 30s forwards linear infinite;
+}
+
+.cloudlong {
+  animation: Jiggle 80s forwards linear infinite;
 }

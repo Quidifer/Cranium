@@ -5,11 +5,22 @@ import Draggable from "react-draggable";
 import ZoomButton from "../ui/ZoomButton/zoomButton";
 import AnimeCrate from "./Crates/AnimeCrate";
 import Crane from "./Crane";
-import Ship from "../../resources/boat.gif";
 import Water from "../../resources/ocean.gif";
 import Shark from "../../resources/shark.gif";
 import Truck from "../../resources/truck.svg";
 import Fog from "../../resources/fog.png";
+import background0 from "../../resources/background0.png";
+import background1 from "../../resources/background1.png";
+import background2 from "../../resources/background2.png";
+import background3 from "../../resources/background3.png";
+import Boat from "../../resources/boat.png";
+import Smoke from "../../resources/smoke.gif";
+import Cloud1 from "../../resources/clouds/cloud1.png";
+import Cloud2 from "../../resources/clouds/cloud2.png";
+import Cloud3 from "../../resources/clouds/cloud3.png";
+import Cloud4 from "../../resources/clouds/cloud4.png";
+import Cloud5 from "../../resources/clouds/cloud5.png";
+import Cloud6 from "../../resources/clouds/cloud6.png";
 import { Tile } from "./Crates/Tile";
 import { CraniumContainer } from "../../types/CraniumContainer";
 
@@ -214,12 +225,202 @@ export default function Craninmations(props: Props) {
               <img
                 style={{
                   position: "absolute",
-                  height: `${400 * scale}px`,
+                  height: `${330 * scale}px`,
                   bottom: `${-20 * scale}px`,
-                  left: `${705 * scale}px`,
+                  left: `${-220 * scale}px`,
                 }}
-                src={Ship}
-                alt="shipoutline"
+                src={background0}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${50 * scale}px`,
+                  width: `${100 * scale}px`,
+                  bottom: `${240 * scale}px`,
+                  left: `${230 * scale}px`,
+                }}
+              >
+                <img
+                  className="cloudshort"
+                  style={{
+                    position: "absolute",
+                    height: `${50 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud1}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${390 * scale}px`,
+                  bottom: `${-20 * scale}px`,
+                  left: `${-80 * scale}px`,
+                }}
+                src={background1}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${40 * scale}px`,
+                  width: `${100 * scale}px`,
+                  bottom: `${200 * scale}px`,
+                  left: `${650 * scale}px`,
+                }}
+              >
+                <img
+                  className="cloudshort"
+                  style={{
+                    position: "absolute",
+                    height: `${60 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud3}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${300 * scale}px`,
+                  bottom: `${-25 * scale}px`,
+                  left: `${400 * scale}px`,
+                }}
+                src={background2}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${40 * scale}px`,
+                  width: `${670 * scale}px`,
+                  bottom: `${150 * scale}px`,
+                  left: `${10 * scale}px`,
+                }}
+              >
+                <img
+                  className="cloudlong"
+                  style={{
+                    position: "absolute",
+                    height: `${30 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud5}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${395 * scale}px`,
+                  bottom: `${-130 * scale}px`,
+                  left: `${-180 * scale}px`,
+                }}
+                src={background3}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${40 * scale}px`,
+                  width: `${450 * scale}px`,
+                  bottom: `${180 * scale}px`,
+                  left: `${10 * scale}px`,
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    height: `${40 * scale}px`,
+                    width: `${670 * scale}px`,
+                    bottom: `${100 * scale}px`,
+                    left: `${10 * scale}px`,
+                  }}
+                >
+                  <img
+                    className="cloudlong"
+                    style={{
+                      position: "absolute",
+                      height: `${30 * scale}px`,
+                      left: 0,
+                    }}
+                    src={Cloud4}
+                    alt=""
+                  />
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    height: `${40 * scale}px`,
+                    width: `${600 * scale}px`,
+                    bottom: `${190 * scale}px`,
+                    left: `${100 * scale}px`,
+                  }}
+                >
+                  <img
+                    className="cloudlong"
+                    style={{
+                      position: "absolute",
+                      height: `${30 * scale}px`,
+                      left: 0,
+                    }}
+                    src={Cloud6}
+                    alt=""
+                  />
+                </div>
+                <img
+                  className="cloudlong"
+                  style={{
+                    position: "absolute",
+                    height: `${30 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud2}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${100 * scale}px`,
+                  bottom: `${317 * scale}px`,
+                  left: `${732 * scale}px`,
+                }}
+                src={Smoke}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${50 * scale}px`,
+                  width: `${150 * scale}px`,
+                  bottom: `${200 * scale}px`,
+                  left: `${200 * scale}px`,
+                }}
+              >
+                <img
+                  className="cloudshort"
+                  style={{
+                    position: "absolute",
+                    height: `${50 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud3}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${480 * scale}px`,
+                  bottom: `${-111 * scale}px`,
+                  left: `${653 * scale}px`,
+                }}
+                src={Boat}
+                alt=""
               />
               <CSSTransition
                 in={animate}
