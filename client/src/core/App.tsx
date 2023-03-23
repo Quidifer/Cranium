@@ -8,87 +8,21 @@ import Load from "../components/ui/Load/load";
 import CrateMovement from "../components/ui/CrateMovement/crateMovement";
 import JobSelect from "../components/ui/JobSelect/jobSelect";
 import { FrontEndContainer } from "../types/APISolution";
-import { stringify } from "uuid";
 import Calculating from "../components/ui/Calculating/Calculating";
+import API from "../utils/API";
+import { APISolution } from "../types/APISolution";
+import { CraniumContainer } from "../types/CraniumContainer";
 
-const moveSet = [
-  {
-    row_start: 6,
-    col_start: 4,
-    row_end: 1,
-    col_end: 10,
-    move_type: "SHIP_TO_BUFFER",
-    container_name: "your mom is soooo gay lollllllll",
-    container_weight: 9999,
-  },
-  {
-    row_start: 5,
-    col_start: 4,
-    row_end: 2,
-    col_end: 10,
-    move_type: "SHIP_MOVE",
-    container_name: "your mom",
-    container_weight: 100,
-  },
-  {
-    row_start: 4,
-    col_start: 4,
-    row_end: 3,
-    col_end: 10,
-    move_type: "SHIP_MOVE",
-    container_name: "your mom",
-    container_weight: 100,
-  },
-  {
-    row_start: 3,
-    col_start: 4,
-    row_end: 4,
-    col_end: 10,
-    move_type: "SHIP_MOVE",
-    container_name: "your mom",
-    container_weight: 100,
-  },
-  {
-    row_start: 2,
-    col_start: 4,
-    row_end: 5,
-    col_end: 10,
-    move_type: "SHIP_MOVE",
-    container_name: "your mom",
-    container_weight: 100,
-  },
-  {
-    row_start: 1,
-    col_start: 4,
-    row_end: -1,
-    col_end: -1,
-    move_type: "OFFLOAD",
-    container_name: "your mom",
-    container_weight: 100,
-  },
-  {
-    row_start: -1,
-    col_start: -1,
-    row_end: 2,
-    col_end: 1,
-    move_type: "ONLOAD",
-    container_name: "your mom is soooo gay lollllllll",
-    container_weight: 100,
-  },
-];
+let data: APISolution | null = null;
+
+API.getSolution().then((_data) => {
+  console.log("There's so much data, holy wow you're so fantastic");
+  data = _data;
+});
 
 function App() {
-  const [data, setData] = useState(0);
-
-  React.useEffect(() => {
-    fetch("/manifest")
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .then(() => console.log("Response Received"));
-  }, []);
-
   const [screenState, setScreenState] = useState("password");
-  const [manifest, setManifest] = useState<FrontEndContainer[]>([]);
+  const [manifest, setManifest] = useState<CraniumContainer[]>([]);
   const [manifestName, setManifestName] = useState("");
   const [buffer, setBuffer] = useState<FrontEndContainer[]>(() => {
     let cells: { row: number; col: number; weight: number; name: string }[] =
@@ -106,6 +40,18 @@ function App() {
     return cells;
   });
   const [prevScreenState, setPrevScreenState] = useState("uploadManifest");
+
+  const [moveSet, setMoveSet] = useState<APISolution>(
+    data
+      ? data
+      : {
+          username: "",
+          moves: [],
+          index: -1,
+          final_manifest: [],
+        }
+  );
+  const [currentStep, setCurrentStep] = useState(data ? data.index : 0);
 
   return screenState === "password" ? (
     <Password
@@ -130,7 +76,9 @@ function App() {
     />
   ) : screenState === "load" ? (
     <Load
-      updateScreenState={() => setScreenState("calculating")}
+      updateScreenState={() => {
+        setScreenState("calculating");
+      }}
       updatePrevScreenState={() => setPrevScreenState("load")}
       goToSignIn={() => setScreenState("signIn")}
       manifest={manifest}
@@ -138,7 +86,19 @@ function App() {
       setManifest={setManifest}
     />
   ) : screenState === "calculating" ? (
-    <Calculating updateScreenState={() => setScreenState("crateMovement")} />
+    <Calculating
+      updateScreenState={() => {
+        API.getSolution().then((data) => {
+          if (data) {
+            setMoveSet(data);
+            setCurrentStep(data.index);
+            setManifest(data.moves[data.index].manifest);
+            setBuffer(data.moves[data.index].buffer);
+            setScreenState("crateMovement");
+          }
+        });
+      }}
+    />
   ) : screenState === "crateMovement" ? (
     <CrateMovement
       updateScreenState={() => setScreenState("uploadManifest")}
@@ -150,6 +110,8 @@ function App() {
       buffer={buffer}
       setBuffer={setBuffer}
       moveSet={moveSet}
+      currentStep={currentStep}
+      setCurrentStep={setCurrentStep}
     />
   ) : (
     <p>test</p>
