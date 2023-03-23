@@ -6,6 +6,8 @@ import submitButton from "../../../resources/SubmitButton.svg";
 import Loading from "../../../resources/loadingballs.gif";
 import CraniumToolbar from "../Toolbar/CraniumToolbar";
 
+import API from "../../../utils/API";
+
 import { CraniumContainer } from "../../../types/CraniumContainer";
 import "./crateMovement.css";
 
@@ -30,7 +32,17 @@ interface Props {
 }
 
 export default function CrateMovement(props: Props) {
-  const { moveSet, manifest, setManifest, buffer, setBuffer, manifestName, updatePrevScreenState, updateScreenState, goToSignIn } = props;
+  const {
+    moveSet,
+    manifest,
+    setManifest,
+    buffer,
+    setBuffer,
+    manifestName,
+    updatePrevScreenState,
+    updateScreenState,
+    goToSignIn,
+  } = props;
 
   const [items, setItems] = useState(() => {
     let items = [];
@@ -138,7 +150,12 @@ export default function CrateMovement(props: Props) {
                 setComment(e.target.value);
               }}
             ></textarea>
-            <button className="SubmitComment">
+            <button
+              className="SubmitComment"
+              onClick={() => {
+                API.sendLog(comment, "NONE");
+              }}
+            >
               <img
                 src={submitButton}
                 style={{

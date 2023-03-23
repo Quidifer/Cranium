@@ -3,17 +3,14 @@ import Popup from "reactjs-popup";
 import "./viewButton.css";
 import API from "../../../utils/API";
 
-interface Props {
-}
+interface Props {}
 
 export default function ViewLog(props: Props) {
   const currentYear = new Date().getFullYear();
   const [log, setLog] = useState("");
 
   const handleGetLog = () => {
-    debugger;
     API.getLog().then((data) => {
-      debugger;
       setLog(data);
     });
   };
@@ -25,7 +22,6 @@ export default function ViewLog(props: Props) {
   );
 
   const downloadLog = () => {
-    debugger;
     // const fileData = JSON.stringify(manifest);
     const blob = new Blob([log], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
@@ -41,12 +37,12 @@ export default function ViewLog(props: Props) {
         <div className="modalHeader"> {currentYear} Log </div>
         <div className="modalContent">{log}</div>
         <button
-          className={"button"}
+          className="viewButton"
           style={{
             textAlign: "center",
             margin: "20px auto",
             display: "block",
-            width: "190px",
+            width: "200px",
           }}
           onClick={downloadLog}
         >

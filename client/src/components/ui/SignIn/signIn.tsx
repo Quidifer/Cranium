@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./signIn.css";
 import cranium from "../../../resources/cranium.svg";
 import standingCrane from "../../../resources/standingCrane.svg";
+import API from "../../../utils/API";
 
 interface Props {
   updateScreenState: () => void;
@@ -135,6 +136,7 @@ export default function SignIn(props: Props) {
               onClick={() => {
                 updateScreenState();
                 console.log(name);
+                API.sendLog(name, "SIGN_IN");
               }}
             >
               <label className="ButtonFont">Sign In</label>

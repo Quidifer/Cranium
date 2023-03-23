@@ -14,17 +14,6 @@
   justify-content: center;
   align-items: center;
 }
-.stationary {
-  height: 150px;
-  width: 265px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  border: 1px solid;
-  border-color: black;
-  border-radius: 10px;
-  background-color: white;
-}
 .invisible {
   height: 150px;
   width: 265px;
@@ -73,29 +62,6 @@
   align-items: center;
 }
 
-.fastmove {
-  height: 150px;
-  width: 265px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  border: 1px solid;
-  border-color: black;
-  border-radius: 10px;
-  background-color: white;
-}
-.fastdestroy {
-  height: 150px;
-  width: 265px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  border: 1px solid;
-  border-color: black;
-  border-radius: 10px;
-  background-color: white;
-}
-
 .moveFar-enter-active {
   transform: translateX(0px) translateY(-192px);
   transition: transform 2000ms;
@@ -107,14 +73,6 @@
 .destroy-enter-active {
   transform: scale(0);
   transition: transform 2000ms;
-}
-.fastmove-enter-active {
-  transform: translateX(0px) translateY(-172px);
-  transition: transform 500ms;
-}
-.fastdestroy-enter-active {
-  transform: scale(0);
-  transition: transform 500ms;
 }
 
 .GreenBox {
@@ -135,13 +93,59 @@
 }
 
 .boxHead {
-  position: absolute;
   top: 7%;
-  text-align: center;
   font-size: 1.3rem;
 }
 
 .infoContent {
   margin-left: 10%;
   width: 100%;
+}
+
+/* load */
+.stationary {
+  height: 90px;
+  width: 235px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border-radius: 15px;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 12px 12px;
+}
+
+.fastmove {
+  height: 90px;
+  width: 235px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border-radius: 15px;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 12px 12px;
+}
+.fastdestroy {
+  height: 90px;
+  width: 235px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border-radius: 15px;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 12px 12px;
+}
+
+.fastmove-enter-active {
+  transform: translateX(0px) translateY(-130px);
+  transition: transform 500ms;
+}
+.fastdestroy-enter-active {
+  transform: scale(0);
+  transition: transform 500ms;
 }

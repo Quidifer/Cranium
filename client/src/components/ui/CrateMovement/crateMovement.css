@@ -26,7 +26,7 @@ p {
   width: 300px;
   height: 100vh;
   float: right;
-  background-color: #DFF6FF;
+  background-color: #9b9b9b;
 }
 
 .boxContent {
@@ -56,19 +56,21 @@ p {
 .footer {
   height: 15%;
   width: 100%;
-  background-color: rgb(59, 58, 58);
+  background-color: rgba(59, 58, 58, 0);
   bottom: 0;
   border-top: solid black;
-  border-width: 0px; 
+  border-width: 0px;
   /* IF YOU WANT BORDER FOR FOOOTER THEN MAKE WIDTH ABOVE 0 */
 }
 
 .columnFooter {
   height: 10%;
-  width: 100%;
+  width: inherit;
   bottom: 0;
   position: fixed;
   z-index: 3;
+  text-align: center;
+  background-color: rgba(59, 58, 58, 0);
 }
 
 .nextButton {
@@ -84,8 +86,8 @@ p {
   height: 200px;
   background: linear-gradient(
     to top,
-    rgba(228, 244, 243, 1) 0%,
-    rgba(228, 244, 243, 0) 100%
+    rgba(155, 155, 155, 1) 0%,
+    rgba(155, 155, 155, 0) 100%
   );
   position: fixed;
   top: auto;
@@ -96,8 +98,8 @@ p {
   height: 160px;
   background: linear-gradient(
     to top,
-    rgba(228, 244, 243, 1) 0%,
-    rgba(228, 244, 243, 0) 100%
+    rgba(155, 155, 155, 1) 0%,
+    rgba(155, 155, 155, 0) 100%
   );
   position: fixed;
   top: auto;
@@ -108,8 +110,8 @@ p {
   height: 100px;
   background: linear-gradient(
     to top,
-    rgba(228, 244, 243, 1) 0%,
-    rgba(228, 244, 243, 0) 100%
+    rgba(155, 155, 155, 1) 0%,
+    rgba(155, 155, 155, 0) 100%
   );
   position: fixed;
   top: auto;

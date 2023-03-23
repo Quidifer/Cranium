@@ -76,12 +76,12 @@ export default function ViewManifest(props: Props) {
           </table>
         </div>
         <button
-          className={"button"}
+          className="viewButton"
           style={{
             textAlign: "center",
             margin: "20px auto",
             display: "block",
-            width: "190px",
+            width: "210px",
           }}
           onClick={downloadManifest}
         >

@@ -1,32 +1,32 @@
 .toolbar {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(59, 58, 58);
-  border: 2px;
-  border-color: black;
-  border-style: ridge;
+  border: 0;
+  /* border-bottom: 1px;
+  border-color: rgb(244, 244, 244);
+  border-style: ridge; */
   padding: 20px;
   margin: 0;
-  /* width: 99%; */
   height: 50px;
+  /* background-color: #d9d9d9; */
+  background-color: #d9d9d9;
 }
 
-.button {
+/* .button {
   height: 50px;
   width: 130px;
   border-radius: 200px;
   border: 0;
   background-color: white;
-  color: #9b9b9b;
-  border: 3.5px solid green;
+  color: #534e4e;
   font-family: "Monaco", sans-serif;
   margin: 0 5px;
   padding: 0;
   touch-action: manipulation;
   transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
-}
+} */
 
-.button:hover {
+/* .button:hover {
   height: 50px;
   width: 130px;
   border-radius: 200px;
@@ -38,54 +38,55 @@
   padding: 0;
   border: 3.5px solid white;
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-}
+} */
 
-.manifestHeaderBlock{
+.manifestHeaderBlock {
   color: white;
 }
 
-.finishCraniumToolbarButton{
+.finishCraniumToolbarButton {
+  font-family: "Work Sans" sans-serif;
+  font-size: 17px;
   height: 55px;
   width: 130px;
   border-radius: 200px;
-  /* background-color: green; */
-  color: white;
-  /* border: 3.5px solid white; */
   border: none;
-  font-family: "Monaco", sans-serif;
   margin: 0 5px;
   padding: 0;
   touch-action: manipulation;
-  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  /* transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1); */
+  color: white;
+  background-color: #57aa36;
 }
 
 .finishCraniumToolbarButton:hover {
-  color: green;
-  background-color: white;
-  border: 3.5px solid green;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-  transform: translateY(-2px);
+  font-weight: bold;
+  background-color: #368b14;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 8px 15px;
+  /* transform: translateY(-2px); */
+  color: white;
 }
 
-.returnToSignInButton{
+.returnToSignInButton {
+  font-family: "Work Sans" sans-serif;
+  font-size: 17px;
   height: 55px;
   width: 130px;
   border-radius: 200px;
-  border: 0;
-  background-color: red;
-  color: white;
-  border: 3.5px solid white;
-  font-family: "Monaco", sans-serif;
+  border: none;
+  /* border: 3.5px solid white; */
   margin: 0 5px;
   padding: 0;
   touch-action: manipulation;
-  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  /* transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1); */
+  color: white;
+  background-color: rgb(217, 65, 65);
 }
 
 .returnToSignInButton:hover {
-  color: red;
-  background-color: white;
-  border: 3.5px solid red;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-  transform: translateY(-2px);
+  font-weight: bold;
+  background-color: rgb(198, 31, 31);
+  box-shadow: rgba(0, 0, 0, 0.15) 0 8px 15px;
+  /* transform: translateY(-2px); */
+  color: white;
 }

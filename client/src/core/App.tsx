@@ -87,7 +87,7 @@ function App() {
       .then(() => console.log("Response Received"));
   }, []);
 
-  const [screenState, setScreenState] = useState("uploadManifest");
+  const [screenState, setScreenState] = useState("password");
   const [manifest, setManifest] = useState<CraniumContainer[]>([]);
   const [manifestName, setManifestName] = useState("");
   const [buffer, setBuffer] = useState<CraniumContainer[]>(() => {
