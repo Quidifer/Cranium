@@ -1,6 +1,6 @@
 import "./Tile.css";
 import React, { useState } from "react";
-import { CraniumContainer } from "../../types/CraniumContainer";
+import { FrontEndContainer } from "../../types/APISolution";
 import { CraniumCount } from "../../types/CraniumCount";
 
 interface Props {
@@ -14,15 +14,15 @@ interface Props {
   scale: number;
   tileHeight: number;
   widthScale: number;
-  manifest: CraniumContainer[];
+  manifest: FrontEndContainer[];
   rightClicked: boolean;
   setRightClicked: React.Dispatch<React.SetStateAction<boolean>>;
   counts: CraniumCount[];
   setCounts: React.Dispatch<React.SetStateAction<CraniumCount[]>>;
-  selectedCell: CraniumContainer;
-  setSelectedCell: React.Dispatch<React.SetStateAction<CraniumContainer>>;
-  selectedCells: CraniumContainer[];
-  setSelectedCells: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  selectedCell: FrontEndContainer;
+  setSelectedCell: React.Dispatch<React.SetStateAction<FrontEndContainer>>;
+  selectedCells: FrontEndContainer[];
+  setSelectedCells: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
   selectedNames: string[];
   setSelectedNames: React.Dispatch<React.SetStateAction<string[]>>;
 }
@@ -52,7 +52,7 @@ export function Tile(props: Props) {
     setSelectedNames,
   } = props;
 
-  const isInList = (list: CraniumContainer[], row: number, col: number) => {
+  const isInList = (list: FrontEndContainer[], row: number, col: number) => {
     return list.some((item) => item.row === row && item.col === col);
   };
 

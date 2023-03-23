@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo } from "react";
 import { useDropzone, FileWithPath } from "react-dropzone";
-import { CraniumContainer } from "../../../types/CraniumContainer";
+import { FrontEndContainer } from "../../../types/APISolution";
 
 interface Props {
   updateScreenState: () => void;
   updatePrevScreenState: () => void;
-  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
   setManifestName: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -49,7 +49,7 @@ export default function UploadManifest(props: Props) {
       reader.onerror = () => console.log("file reading has failed");
       reader.onload = (e) => {
         let rows = String(e.target?.result).split("\n");
-        let cells: CraniumContainer[] = [];
+        let cells: FrontEndContainer[] = [];
         rows.forEach((element) => {
           let row = element.split(",");
 
@@ -65,7 +65,7 @@ export default function UploadManifest(props: Props) {
           });
         });
         setManifest(cells);
-        setManifestName(file.path!);
+        setManifestName(file.path ?? "Undefined Name");
         updateScreenState();
       };
       reader.readAsText(file);

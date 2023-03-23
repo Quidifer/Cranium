@@ -2,7 +2,7 @@ import React, { useState, useRef, useMemo, useCallback } from "react";
 import { CSSTransition } from "react-transition-group";
 import { Tile } from "./Tile";
 import { hashedCrateClass } from "../utility";
-import { CraniumContainer } from "../../../types/CraniumContainer";
+import { FrontEndContainer } from "../../../types/APISolution";
 
 import "./AnimeCrates.css";
 import "./Tile.css";
@@ -11,8 +11,8 @@ interface Props {
   scale: number;
   tileHeight: number;
   widthScale: number;
-  manifest: CraniumContainer[];
-  buffer: CraniumContainer[];
+  manifest: FrontEndContainer[];
+  buffer: FrontEndContainer[];
   movementProps: {
     moveSet: {
       row_start: number;

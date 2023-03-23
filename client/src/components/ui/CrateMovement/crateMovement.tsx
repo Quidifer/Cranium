@@ -8,7 +8,7 @@ import CraniumToolbar from "../Toolbar/CraniumToolbar";
 
 import API from "../../../utils/API";
 
-import { CraniumContainer } from "../../../types/CraniumContainer";
+import { FrontEndContainer } from "../../../types/APISolution";
 import "./crateMovement.css";
 
 interface Props {
@@ -16,10 +16,10 @@ interface Props {
   updatePrevScreenState: () => void;
   goToSignIn: () => void;
   manifestName: string;
-  manifest: CraniumContainer[];
-  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
-  buffer: CraniumContainer[];
-  setBuffer: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  manifest: FrontEndContainer[];
+  setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
+  buffer: FrontEndContainer[];
+  setBuffer: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
   moveSet: {
     row_start: number;
     col_start: number;

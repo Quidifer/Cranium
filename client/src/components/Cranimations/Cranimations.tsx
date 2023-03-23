@@ -23,13 +23,13 @@ import Cloud5 from "../../resources/clouds/cloud5.png";
 import Cloud6 from "../../resources/clouds/cloud6.png";
 import Birdy from "../../resources/lilbirdy.gif";
 import { Tile } from "./Crates/Tile";
-import { CraniumContainer } from "../../types/CraniumContainer";
+import { FrontEndContainer } from "../../types/APISolution";
 
 interface Props {
-  manifest: CraniumContainer[];
-  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
-  buffer: CraniumContainer[];
-  setBuffer: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  manifest: FrontEndContainer[];
+  setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
+  buffer: FrontEndContainer[];
+  setBuffer: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
   movementProps: {
     moveSet: {
       row_start: number;
@@ -72,7 +72,7 @@ export default function Craninmations(props: Props) {
   const nodeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const fogRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  const isInList = (list: CraniumContainer[], row: number, col: number) => {
+  const isInList = (list: FrontEndContainer[], row: number, col: number) => {
     return list.some((item) => item.row === row && item.col === col);
   };
 
