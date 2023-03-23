@@ -21,6 +21,7 @@ import Cloud3 from "../../resources/clouds/cloud3.png";
 import Cloud4 from "../../resources/clouds/cloud4.png";
 import Cloud5 from "../../resources/clouds/cloud5.png";
 import Cloud6 from "../../resources/clouds/cloud6.png";
+import Birdy from "../../resources/lilbirdy.gif";
 import { Tile } from "./Crates/Tile";
 import { CraniumContainer } from "../../types/CraniumContainer";
 
@@ -290,6 +291,81 @@ export default function Craninmations(props: Props) {
                   left: `${400 * scale}px`,
                 }}
                 src={background2}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${7 * scale}px`,
+                  bottom: `${200 * scale}px`,
+                  left: `${580 * scale}px`,
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${7 * scale}px`,
+                  bottom: `${280 * scale}px`,
+                  left: `${345 * scale}px`,
+                  transform: "rotate(30deg)",
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${7 * scale}px`,
+                  bottom: `${235 * scale}px`,
+                  left: `${130 * scale}px`,
+                  transform: "rotate(45deg)",
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${7 * scale}px`,
+                  bottom: `${235 * scale}px`,
+                  left: `${40 * scale}px`,
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${8 * scale}px`,
+                  bottom: `${280 * scale}px`,
+                  left: `${750 * scale}px`,
+                  transform: "rotate(-30deg)",
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${9 * scale}px`,
+                  bottom: `${390 * scale}px`,
+                  left: `${900 * scale}px`,
+                  transform: "rotate(30deg)",
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${9 * scale}px`,
+                  bottom: `${420 * scale}px`,
+                  left: `${100 * scale}px`,
+                  transform: "rotate(-20deg)",
+                }}
+                src={Birdy}
                 alt=""
               />
               <div
