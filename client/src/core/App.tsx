@@ -66,12 +66,19 @@ function App() {
       updatePrevScreenState={() => setPrevScreenState("uploadManifest")}
       setManifest={setManifest}
       setManifestName={setManifestName}
+      manifestName={manifestName}
     />
   ) : screenState === "jobSelect" ? (
     <JobSelect
-      updateScreenState={(type: string) =>
-        type === "Load" ? setScreenState("load") : setScreenState("load")
-      }
+      updateScreenState={(type: string) => {
+        if (type === "Load") {
+          setScreenState("load");
+        } else {
+          console.log("sending balance job...");
+          API.sendJob("BALANCE", manifest, [], []);
+          setScreenState("calculating");
+        }
+      }}
       prevScreenState={() => setPrevScreenState("jobSelect")}
     />
   ) : screenState === "load" ? (

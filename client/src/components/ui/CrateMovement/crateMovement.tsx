@@ -130,6 +130,7 @@ export default function CrateMovement(props: Props) {
             <button
               className="SubmitComment"
               onClick={() => {
+                console.log(comment);
                 API.sendLog(comment, "NONE");
               }}
             >

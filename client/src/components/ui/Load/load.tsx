@@ -89,7 +89,7 @@ export default function Load(props: Props) {
     <div className="page">
       <div className="loadLeftContent">
         <CraniumToolbar
-          fromLoad
+          fromLoadScreen
           onloads={onloadContainers}
           offloads={selectedCells}
           manifest={manifest}

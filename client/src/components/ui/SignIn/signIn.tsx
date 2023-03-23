@@ -134,9 +134,9 @@ export default function SignIn(props: Props) {
             <button
               className="SignInButton"
               onClick={() => {
-                updateScreenState();
                 console.log(name);
                 API.sendLog(name, "SIGN_IN");
+                updateScreenState();
               }}
             >
               <label className="ButtonFont">Sign In</label>

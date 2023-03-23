@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "./viewButton.css";
 import { FrontEndContainer } from "../../../types/APISolution";
+import API from "../../../utils/API";
 
 interface Props {
   manifest: FrontEndContainer[];
@@ -82,9 +83,13 @@ export default function ViewManifest(props: Props) {
             margin: "20px auto",
             display: "block",
             width: "210px",
-            boxShadow: "none"
+            boxShadow: "none",
           }}
-          onClick={downloadManifest}
+          onClick={() => {
+            downloadManifest();
+            console.log(`${manifestName} is downloaded.`);
+            API.sendLog(`${manifestName} is downloaded.`);
+          }}
         >
           Download Manifest
         </button>
