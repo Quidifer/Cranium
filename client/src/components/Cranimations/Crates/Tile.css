@@ -28,5 +28,9 @@
 }
 .normal {
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.unselected {
+  background-color: rgba(255, 255, 255, 0.7);
   border-color: rgba(46, 46, 46, 0.2);
 }
