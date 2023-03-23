@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import Draggable from "react-draggable";
 import ZoomButton from "../ui/ZoomButton/zoomButton";
 import { Tile } from "./Tile";
-import OnloadInput from "../ui/Load/onloadInput";
+import OnloadInput from "./onloadInput";
 import { CraniumContainer } from "../../types/CraniumContainer";
 import { CraniumCount } from "../../types/CraniumCount";
 
@@ -249,6 +249,7 @@ export default function Loadimations(props: Props) {
                           fontSize: `${20 * scale}px`,
                           top: "0",
                           left: `calc(100% - ${30 * scale}px)`,
+                          border: "none",
                         }}
                         onClick={() => {
                           setRightClicked(!rightClicked);

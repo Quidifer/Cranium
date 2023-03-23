@@ -36,10 +36,15 @@ export default function CraniumToolbar(props: Props) {
         <button
           className="finishCraniumToolbarButton"
           onClick={updateScreenState}
+          style={{ fontFamily: "work sans" }}
         >
           Finish
         </button>
-        <button className="returnToSignInButton" onClick={goToSignIn}>
+        <button
+          className="returnToSignInButton"
+          onClick={goToSignIn}
+          style={{ fontFamily: "work sans" }}
+        >
           Sign In
         </button>
       </div>

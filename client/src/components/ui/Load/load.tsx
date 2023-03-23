@@ -189,9 +189,10 @@ export default function Load(props: Props) {
                 border: "none",
                 color: "white",
                 fontWeight: "bold",
+                fontFamily: "work sans",
               }}
             >
-              BOTH
+              Both
             </ToggleButton>
             <ToggleButton
               value="offload"

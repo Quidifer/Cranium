@@ -68,6 +68,7 @@ export default function InteractableBox(props: Props) {
             fontSize: "20px",
             top: "0",
             left: "calc(100% - 30px)",
+            border: "none",
           }}
           onClick={() => {
             setAnimationStart(true);
@@ -80,7 +81,11 @@ export default function InteractableBox(props: Props) {
         <p className="boxHead">{info.type}</p>
         <div className="infoContent">
           <p className="info">
-            <b>Crate</b>: '{info.name}' {info.weight} kg
+            <b>Crate</b>: '
+            {`${
+              info.name.length > 10 ? info.name.slice(0, 10) + "..." : info.name
+            }`}
+            ' {info.weight} kg
           </p>
           {info.count !== -1 ? (
             <p className="info">

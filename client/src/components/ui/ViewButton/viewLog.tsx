@@ -43,6 +43,7 @@ export default function ViewLog(props: Props) {
             margin: "20px auto",
             display: "block",
             width: "200px",
+            boxShadow: "none",
           }}
           onClick={downloadLog}
         >

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CraniumContainer } from "../../../types/CraniumContainer";
+import { CraniumContainer } from "../../types/CraniumContainer";
 
 interface Props {
   onloadContainers: CraniumContainer[];
@@ -124,13 +124,16 @@ export default function OnloadInput(props: Props) {
       <button
         type="submit"
         onClick={saveOnload}
+        className="onloadButton"
         style={{
           position: "absolute",
+          border: "none",
           width: `${100 * scale}px`,
           height: `${30 * scale}px`,
           left: `${75 * scale}px`,
           top: `${108 * scale}px`,
           fontSize: `${13 * scale}px`,
+          borderRadius: `${200 * scale}px`,
         }}
       >
         Add
