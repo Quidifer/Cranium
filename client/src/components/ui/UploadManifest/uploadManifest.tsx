@@ -1,12 +1,20 @@
-import React, { useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import { useDropzone, FileWithPath } from "react-dropzone";
 import { FrontEndContainer } from "../../../types/APISolution";
+import API from "../../../utils/API";
 
 interface Props {
   updateScreenState: () => void;
   updatePrevScreenState: () => void;
   setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
   setManifestName: React.Dispatch<React.SetStateAction<string>>;
+  manifestName: string;
 }
 
 const baseStyle = {
@@ -39,7 +47,26 @@ export default function UploadManifest(props: Props) {
     updatePrevScreenState,
     setManifest,
     setManifestName,
+    manifestName,
   } = props;
+
+  const usePrevious = <T extends unknown>(value: T): T | undefined => {
+    const ref = useRef<T>();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  };
+
+  const prevRef = usePrevious(manifestName) ?? manifestName;
+
+  useEffect(() => {
+    if (prevRef !== manifestName) {
+      console.log(manifestName);
+      API.sendLog(`${manifestName} is uploaded.`);
+      updateScreenState();
+    }
+  }, [manifestName]);
 
   const onDrop = useCallback((acceptedFiles: any) => {
     acceptedFiles.forEach((file: FileWithPath) => {
@@ -66,12 +93,8 @@ export default function UploadManifest(props: Props) {
         });
         setManifest(cells);
         setManifestName(file.path ?? "Undefined Name");
-        updateScreenState();
       };
       reader.readAsText(file);
-      // file.text().then(res => {
-      //   setContent(res)
-      // })
     });
   }, []);
 

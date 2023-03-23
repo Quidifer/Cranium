@@ -7,6 +7,7 @@ interface Props {}
 
 export default function ViewLog(props: Props) {
   const currentYear = new Date().getFullYear();
+  const logName = `KeoghLongBeach${currentYear}.txt`;
   const [log, setLog] = useState("");
 
   const handleGetLog = () => {
@@ -26,7 +27,7 @@ export default function ViewLog(props: Props) {
     const blob = new Blob([log], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.download = "KeoghLongBeach" + currentYear + ".txt";
+    link.download = logName;
     link.href = url;
     link.click();
   };
@@ -45,7 +46,11 @@ export default function ViewLog(props: Props) {
             width: "200px",
             boxShadow: "none",
           }}
-          onClick={downloadLog}
+          onClick={() => {
+            downloadLog();
+            console.log(`${logName} is downloaded.`);
+            API.sendLog(`${logName} is downloaded.`);
+          }}
         >
           Download Log
         </button>

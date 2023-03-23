@@ -66,6 +66,7 @@ function App() {
       updatePrevScreenState={() => setPrevScreenState("uploadManifest")}
       setManifest={setManifest}
       setManifestName={setManifestName}
+      manifestName={manifestName}
     />
   ) : screenState === "jobSelect" ? (
     <JobSelect
