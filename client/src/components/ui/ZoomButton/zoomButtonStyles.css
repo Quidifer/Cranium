@@ -8,3 +8,10 @@
   margin-top: 10px;
   z-index: 10;
 }
+
+.zoomButton {
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 50%;
+}

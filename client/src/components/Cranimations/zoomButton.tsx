@@ -15,7 +15,6 @@ export default function ZoomButton(props: Props) {
   return (
     <div className="ZoomDiv">
       <button
-        // className="viewButton"
         style={{
           backgroundColor: "red",
           width: "10px",
