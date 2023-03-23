@@ -82,6 +82,7 @@ export default function ViewManifest(props: Props) {
             margin: "20px auto",
             display: "block",
             width: "210px",
+            boxShadow: "none"
           }}
           onClick={downloadManifest}
         >

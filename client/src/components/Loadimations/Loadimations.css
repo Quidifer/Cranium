@@ -52,3 +52,18 @@ label,
 .flex-child:first-child {
   margin-right: 50px;
 }
+
+.onloadButton {
+  background-color: #797979;
+  color: white;
+  font-size: 17px;
+  margin: 0 5px;
+  padding: 0;
+  font-family: work sans;
+}
+
+.onloadButton:hover {
+  color: white;
+  background-color: #4c4c4c;
+  font-weight: bold;
+}

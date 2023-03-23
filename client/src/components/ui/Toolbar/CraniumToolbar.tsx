@@ -42,6 +42,7 @@ export default function CraniumToolbar(props: Props) {
       <div>
         <button
           className="finishCraniumToolbarButton"
+          style={{ fontFamily: "work sans" }}
           onClick={() => {
             if (fromLoad) {
               if (onloads && offloads)
@@ -52,7 +53,11 @@ export default function CraniumToolbar(props: Props) {
         >
           Finish
         </button>
-        <button className="returnToSignInButton" onClick={goToSignIn}>
+        <button
+          className="returnToSignInButton"
+          onClick={goToSignIn}
+          style={{ fontFamily: "work sans" }}
+        >
           Sign In
         </button>
       </div>

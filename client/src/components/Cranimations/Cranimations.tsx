@@ -107,7 +107,7 @@ export default function Craninmations(props: Props) {
     for (let row = n; row >= 1; row--) {
       const boardRow = [];
       for (let col = 1; col <= m; col++) {
-        let color = "unselected";
+        let color = "normal";
         const cell = isManifest
           ? manifest.find((item) => item.row === row && item.col === col)
           : isBuffer

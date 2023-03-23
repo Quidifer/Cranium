@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FrontEndContainer } from "../../../types/APISolution";
+import { FrontEndContainer } from "../../types/APISolution";
 
 interface Props {
   onloadContainers: FrontEndContainer[];
@@ -126,13 +126,16 @@ export default function OnloadInput(props: Props) {
       <button
         type="submit"
         onClick={saveOnload}
+        className="onloadButton"
         style={{
           position: "absolute",
+          border: "none",
           width: `${100 * scale}px`,
           height: `${30 * scale}px`,
           left: `${75 * scale}px`,
           top: `${108 * scale}px`,
           fontSize: `${13 * scale}px`,
+          borderRadius: `${200 * scale}px`,
         }}
       >
         Add
