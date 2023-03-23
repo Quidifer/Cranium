@@ -28,11 +28,12 @@ export enum CraneMoveType {
   BUFFER_MOVE = "BUFFER_MOVE",
   SHIP_TO_BUFFER = "SHIP_TO_BUFFER",
   BUFFER_TO_SHIP = "BUFFER_TO_SHIP",
+  DUMMY = "",
 }
 
 export type APISolution = {
   username: string;
   moves: CraneMove[];
   index: number;
-  manifest: FrontEndManifest;
+  final_manifest: FrontEndManifest;
 };

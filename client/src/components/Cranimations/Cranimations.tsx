@@ -23,7 +23,7 @@ import Cloud5 from "../../resources/clouds/cloud5.png";
 import Cloud6 from "../../resources/clouds/cloud6.png";
 import Birdy from "../../resources/lilbirdy.gif";
 import { Tile } from "./Crates/Tile";
-import { FrontEndContainer } from "../../types/APISolution";
+import { FrontEndContainer, APISolution } from "../../types/APISolution";
 
 interface Props {
   manifest: FrontEndContainer[];
@@ -31,15 +31,7 @@ interface Props {
   buffer: FrontEndContainer[];
   setBuffer: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
   movementProps: {
-    moveSet: {
-      row_start: number;
-      col_start: number;
-      row_end: number;
-      col_end: number;
-      move_type: string;
-      container_name: string;
-      container_weight: number;
-    }[];
+    moveSet: APISolution;
     currentStep: number;
     isGhost: boolean;
     finishedMoved: () => void;
@@ -52,9 +44,10 @@ export default function Craninmations(props: Props) {
   const { manifest, buffer, movementProps } = props;
   const { moveSet, currentStep } = movementProps;
 
+  // make sure the current step is indexible
   const move =
-    currentStep < moveSet.length
-      ? moveSet[currentStep]
+    currentStep < moveSet.moves.length
+      ? moveSet.moves[currentStep]
       : {
           row_start: -1,
           col_start: -1,
@@ -552,7 +545,7 @@ export default function Craninmations(props: Props) {
               </div>
               <Crane height={`${550 * scale}px`} width={`${1100 * scale}px`} />
               {props.movementProps.currentStep <
-                props.movementProps.moveSet.length && (
+                props.movementProps.moveSet.moves.length && (
                 <>
                   {props.movementProps.isGhost ? (
                     <AnimeCrate

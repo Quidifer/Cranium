@@ -1,17 +1,10 @@
 import React, { useState, useRef, useMemo } from "react";
 import { CSSTransition } from "react-transition-group";
+import { CraneMove } from "../../../types/APISolution";
 import "./interactableBox.css";
 
 interface Props {
-  info: {
-    row_start: number;
-    col_start: number;
-    row_end: number;
-    col_end: number;
-    move_type: string;
-    container_name: string;
-    container_weight: number;
-  };
+  info: CraneMove;
   index: number;
   greenBox?: boolean;
   animationStart: boolean;
@@ -108,7 +101,7 @@ export default function InteractableBox(props: Props) {
                 </p>
                 <div className="infoContent">
                   <p className="info">
-                    <b>Crate</b>: '{container_name}' {info.container_weight} kg
+                    <b>Crate</b>: '{container_name}' {info.weight} kg
                   </p>
                   <p className="info">
                     <b>Source</b>:{" "}
@@ -158,7 +151,7 @@ export default function InteractableBox(props: Props) {
               </p>
               <div className="infoContent">
                 <p className="info">
-                  <b>Crate</b>: '{container_name}' {info.container_weight} kg
+                  <b>Crate</b>: '{container_name}' {info.weight} kg
                 </p>
                 <p className="info">
                   <b>Source</b>:{" "}

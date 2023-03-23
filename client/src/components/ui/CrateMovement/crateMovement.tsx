@@ -5,11 +5,14 @@ import InteractableBox from "../InteractableBox/interactableBox";
 import submitButton from "../../../resources/SubmitButton.svg";
 import Loading from "../../../resources/loadingballs.gif";
 import CraniumToolbar from "../Toolbar/CraniumToolbar";
-
-import API from "../../../utils/API";
-
 import { FrontEndContainer } from "../../../types/APISolution";
 import "./crateMovement.css";
+import {
+  APISolution,
+  CraneMove,
+  CraneMoveType,
+} from "../../../types/APISolution";
+import API from "../../../utils/API";
 
 interface Props {
   updateScreenState: () => void;
@@ -20,15 +23,9 @@ interface Props {
   setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
   buffer: FrontEndContainer[];
   setBuffer: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
-  moveSet: {
-    row_start: number;
-    col_start: number;
-    row_end: number;
-    col_end: number;
-    move_type: string;
-    container_name: string;
-    container_weight: number;
-  }[];
+  moveSet: APISolution;
+  currentStep: number;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function CrateMovement(props: Props) {
@@ -42,28 +39,36 @@ export default function CrateMovement(props: Props) {
     updatePrevScreenState,
     updateScreenState,
     goToSignIn,
+    currentStep,
+    setCurrentStep,
   } = props;
 
-  const [items, setItems] = useState(() => {
+  const [items, setItems] = useState<CraneMove[]>(() => {
     let items = [];
     items.push({
       row_start: -1,
-      col_start: -1,
       row_end: -1,
+      col_start: -1,
       col_end: -1,
-      move_type: "invis",
+      move_type: CraneMoveType.DUMMY,
       container_name: "invis",
-      container_weight: -1,
+      weight: -1,
+      manifest: [],
+      buffer: [],
+      minutesLeft: -1,
     });
-    items.push(...moveSet);
+    items.push(...moveSet.moves.slice(currentStep));
     items.push({
       row_start: -1,
-      col_start: -1,
       row_end: -1,
+      col_start: -1,
       col_end: -1,
-      move_type: "invis",
+      move_type: CraneMoveType.DUMMY,
       container_name: "invis",
-      container_weight: -1,
+      weight: -1,
+      manifest: [],
+      buffer: [],
+      minutesLeft: -1,
     });
     return items;
   });
@@ -75,7 +80,6 @@ export default function CrateMovement(props: Props) {
     setAnimateBoxes(false);
   }, [items, setAnimateBoxes]);
 
-  const [currentStep, setCurrentStep] = useState(0);
   const [isGhost, setIsGhost] = useState(true);
 
   const [comment, setComment] = useState("");
@@ -100,39 +104,12 @@ export default function CrateMovement(props: Props) {
               isGhost: isGhost,
               finishedMoved: () => {
                 setIsGhost(true);
+                setAnimateBoxes(true);
                 setCurrentStep(currentStep + 1);
-
-                const move = moveSet[currentStep];
-                setManifest(() => {
-                  switch (move.move_type) {
-                    case "SHIP_MOVE":
-                    case "ONLOAD":
-                    case "BUFFER_TO_SHIP":
-                      manifest[
-                        (move.row_end - 1) * 12 + (move.col_end - 1)
-                      ].name = move.container_name;
-                      manifest[
-                        (move.row_end - 1) * 12 + (move.col_end - 1)
-                      ].weight = move.container_weight;
-                      break;
-                  }
-                  return manifest;
-                });
-                setBuffer(() => {
-                  switch (move.move_type) {
-                    case "BUFFER_MOVE":
-                    case "SHIP_TO_BUFFER":
-                      buffer[(move.row_end - 1) * 4 + (move.col_end - 1)].name =
-                        move.container_name;
-                      buffer[
-                        (move.row_end - 1) * 4 + (move.col_end - 1)
-                      ].weight = move.container_weight;
-                      break;
-                  }
-                  return buffer;
-                });
-
-                console.log(manifest, buffer);
+                if (currentStep < moveSet.moves.length - 1) {
+                  setManifest(moveSet.moves[currentStep + 1].manifest);
+                  setBuffer(moveSet.moves[currentStep + 1].buffer);
+                }
               },
             }}
             {...props}
@@ -193,9 +170,12 @@ export default function CrateMovement(props: Props) {
           <button
             className="nextButton"
             onClick={() => {
-              setAnimateBoxes(true);
               setIsGhost(false);
-              const move = moveSet[currentStep];
+
+              API.nextMove();
+
+              const move = moveSet.moves[currentStep];
+
               setManifest(() => {
                 switch (move.move_type) {
                   case "SHIP_MOVE":
@@ -228,7 +208,7 @@ export default function CrateMovement(props: Props) {
                 return buffer;
               });
             }}
-            disabled={!isGhost || currentStep >= moveSet.length}
+            disabled={!isGhost || currentStep >= moveSet.moves.length}
           >
             {isGhost ? (
               <label>Next</label>
