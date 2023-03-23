@@ -5,29 +5,33 @@ import Draggable from "react-draggable";
 import ZoomButton from "../ui/ZoomButton/zoomButton";
 import AnimeCrate from "./Crates/AnimeCrate";
 import Crane from "./Crane";
-import Ship from "../../resources/boat.gif";
 import Water from "../../resources/ocean.gif";
 import Shark from "../../resources/shark.gif";
 import Truck from "../../resources/truck.svg";
 import Fog from "../../resources/fog.png";
+import background0 from "../../resources/background0.png";
+import background1 from "../../resources/background1.png";
+import background2 from "../../resources/background2.png";
+import background3 from "../../resources/background3.png";
+import Boat from "../../resources/boat.png";
+import Smoke from "../../resources/smoke.gif";
+import Cloud1 from "../../resources/clouds/cloud1.png";
+import Cloud2 from "../../resources/clouds/cloud2.png";
+import Cloud3 from "../../resources/clouds/cloud3.png";
+import Cloud4 from "../../resources/clouds/cloud4.png";
+import Cloud5 from "../../resources/clouds/cloud5.png";
+import Cloud6 from "../../resources/clouds/cloud6.png";
+import Birdy from "../../resources/lilbirdy.gif";
 import { Tile } from "./Crates/Tile";
-import { CraniumContainer } from "../../types/CraniumContainer";
+import { FrontEndContainer, APISolution } from "../../types/APISolution";
 
 interface Props {
-  manifest: CraniumContainer[];
-  setManifest: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
-  buffer: CraniumContainer[];
-  setBuffer: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  manifest: FrontEndContainer[];
+  setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
+  buffer: FrontEndContainer[];
+  setBuffer: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
   movementProps: {
-    moveSet: {
-      row_start: number;
-      col_start: number;
-      row_end: number;
-      col_end: number;
-      move_type: string;
-      container_name: string;
-      container_weight: number;
-    }[];
+    moveSet: APISolution;
     currentStep: number;
     isGhost: boolean;
     finishedMoved: () => void;
@@ -40,9 +44,10 @@ export default function Craninmations(props: Props) {
   const { manifest, buffer, movementProps } = props;
   const { moveSet, currentStep } = movementProps;
 
+  // make sure the current step is indexible
   const move =
-    currentStep < moveSet.length
-      ? moveSet[currentStep]
+    currentStep < moveSet.moves.length
+      ? moveSet.moves[currentStep]
       : {
           row_start: -1,
           col_start: -1,
@@ -60,7 +65,7 @@ export default function Craninmations(props: Props) {
   const nodeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const fogRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  const isInList = (list: CraniumContainer[], row: number, col: number) => {
+  const isInList = (list: FrontEndContainer[], row: number, col: number) => {
     return list.some((item) => item.row === row && item.col === col);
   };
 
@@ -102,7 +107,7 @@ export default function Craninmations(props: Props) {
     for (let row = n; row >= 1; row--) {
       const boardRow = [];
       for (let col = 1; col <= m; col++) {
-        let color = "unselected";
+        let color = "normal";
         const cell = isManifest
           ? manifest.find((item) => item.row === row && item.col === col)
           : isBuffer
@@ -214,12 +219,277 @@ export default function Craninmations(props: Props) {
               <img
                 style={{
                   position: "absolute",
-                  height: `${400 * scale}px`,
+                  height: `${330 * scale}px`,
                   bottom: `${-20 * scale}px`,
-                  left: `${705 * scale}px`,
+                  left: `${-220 * scale}px`,
                 }}
-                src={Ship}
-                alt="shipoutline"
+                src={background0}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${50 * scale}px`,
+                  width: `${100 * scale}px`,
+                  bottom: `${240 * scale}px`,
+                  left: `${230 * scale}px`,
+                }}
+              >
+                <img
+                  className="cloudshort"
+                  style={{
+                    position: "absolute",
+                    height: `${50 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud1}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${390 * scale}px`,
+                  bottom: `${-20 * scale}px`,
+                  left: `${-80 * scale}px`,
+                }}
+                src={background1}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${40 * scale}px`,
+                  width: `${100 * scale}px`,
+                  bottom: `${200 * scale}px`,
+                  left: `${650 * scale}px`,
+                }}
+              >
+                <img
+                  className="cloudshort"
+                  style={{
+                    position: "absolute",
+                    height: `${60 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud3}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${300 * scale}px`,
+                  bottom: `${-25 * scale}px`,
+                  left: `${400 * scale}px`,
+                }}
+                src={background2}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${7 * scale}px`,
+                  bottom: `${200 * scale}px`,
+                  left: `${580 * scale}px`,
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${7 * scale}px`,
+                  bottom: `${280 * scale}px`,
+                  left: `${345 * scale}px`,
+                  transform: "rotate(30deg)",
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${7 * scale}px`,
+                  bottom: `${235 * scale}px`,
+                  left: `${130 * scale}px`,
+                  transform: "rotate(45deg)",
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${7 * scale}px`,
+                  bottom: `${235 * scale}px`,
+                  left: `${40 * scale}px`,
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${8 * scale}px`,
+                  bottom: `${280 * scale}px`,
+                  left: `${750 * scale}px`,
+                  transform: "rotate(-30deg)",
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${9 * scale}px`,
+                  bottom: `${390 * scale}px`,
+                  left: `${900 * scale}px`,
+                  transform: "rotate(30deg)",
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${9 * scale}px`,
+                  bottom: `${420 * scale}px`,
+                  left: `${100 * scale}px`,
+                  transform: "rotate(-20deg)",
+                }}
+                src={Birdy}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${40 * scale}px`,
+                  width: `${670 * scale}px`,
+                  bottom: `${150 * scale}px`,
+                  left: `${10 * scale}px`,
+                }}
+              >
+                <img
+                  className="cloudlong"
+                  style={{
+                    position: "absolute",
+                    height: `${30 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud5}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${395 * scale}px`,
+                  bottom: `${-130 * scale}px`,
+                  left: `${-180 * scale}px`,
+                }}
+                src={background3}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${40 * scale}px`,
+                  width: `${450 * scale}px`,
+                  bottom: `${180 * scale}px`,
+                  left: `${10 * scale}px`,
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    height: `${40 * scale}px`,
+                    width: `${670 * scale}px`,
+                    bottom: `${100 * scale}px`,
+                    left: `${10 * scale}px`,
+                  }}
+                >
+                  <img
+                    className="cloudlong"
+                    style={{
+                      position: "absolute",
+                      height: `${30 * scale}px`,
+                      left: 0,
+                    }}
+                    src={Cloud4}
+                    alt=""
+                  />
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    height: `${40 * scale}px`,
+                    width: `${600 * scale}px`,
+                    bottom: `${190 * scale}px`,
+                    left: `${100 * scale}px`,
+                  }}
+                >
+                  <img
+                    className="cloudlong"
+                    style={{
+                      position: "absolute",
+                      height: `${30 * scale}px`,
+                      left: 0,
+                    }}
+                    src={Cloud6}
+                    alt=""
+                  />
+                </div>
+                <img
+                  className="cloudlong"
+                  style={{
+                    position: "absolute",
+                    height: `${30 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud2}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${100 * scale}px`,
+                  bottom: `${317 * scale}px`,
+                  left: `${732 * scale}px`,
+                }}
+                src={Smoke}
+                alt=""
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  height: `${50 * scale}px`,
+                  width: `${150 * scale}px`,
+                  bottom: `${200 * scale}px`,
+                  left: `${200 * scale}px`,
+                }}
+              >
+                <img
+                  className="cloudshort"
+                  style={{
+                    position: "absolute",
+                    height: `${50 * scale}px`,
+                    left: 0,
+                  }}
+                  src={Cloud3}
+                  alt=""
+                />
+              </div>
+              <img
+                style={{
+                  position: "absolute",
+                  height: `${480 * scale}px`,
+                  bottom: `${-111 * scale}px`,
+                  left: `${653 * scale}px`,
+                }}
+                src={Boat}
+                alt=""
               />
               <CSSTransition
                 in={animate}
@@ -275,7 +545,7 @@ export default function Craninmations(props: Props) {
               </div>
               <Crane height={`${550 * scale}px`} width={`${1100 * scale}px`} />
               {props.movementProps.currentStep <
-                props.movementProps.moveSet.length && (
+                props.movementProps.moveSet.moves.length && (
                 <>
                   {props.movementProps.isGhost ? (
                     <AnimeCrate

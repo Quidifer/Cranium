@@ -2,15 +2,19 @@ import ColorPallet from "../../../utils/ColorPallet";
 import CraniumButton from "../CraniumButton/CraniumButton";
 import ViewManifest from "../ViewButton/viewManifest";
 import ViewLog from "../ViewButton/viewLog";
-import { CraniumContainer } from "../../../types/CraniumContainer";
+import { FrontEndContainer } from "../../../types/APISolution";
+import API from "../../../utils/API";
 import "./CraniumToolbar.css";
 
 interface Props {
-  manifest: CraniumContainer[];
+  manifest: FrontEndContainer[];
   manifestName: string;
   updateScreenState: () => void;
   updatePrevScreenState: () => void;
   goToSignIn: () => void;
+  fromLoad?: boolean;
+  onloads?: FrontEndContainer[];
+  offloads?: FrontEndContainer[];
 }
 
 export default function CraniumToolbar(props: Props) {
@@ -20,6 +24,9 @@ export default function CraniumToolbar(props: Props) {
     updateScreenState,
     updatePrevScreenState,
     goToSignIn,
+    fromLoad,
+    onloads,
+    offloads,
   } = props;
 
   updatePrevScreenState();
@@ -35,8 +42,14 @@ export default function CraniumToolbar(props: Props) {
       <div>
         <button
           className="finishCraniumToolbarButton"
-          onClick={updateScreenState}
           style={{ fontFamily: "work sans" }}
+          onClick={() => {
+            if (fromLoad) {
+              if (onloads && offloads)
+                API.sendJob("TRANSFER", manifest, onloads, offloads);
+            }
+            updateScreenState();
+          }}
         >
           Finish
         </button>

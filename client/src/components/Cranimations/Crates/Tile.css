@@ -26,7 +26,8 @@
   background-color: #2e2d2d;
   /* background-color: #151d70; */
 }
+
 .normal {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   border-color: rgba(46, 46, 46, 0.2);
 }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "./viewButton.css";
-import { CraniumContainer } from "../../../types/CraniumContainer";
+import { FrontEndContainer } from "../../../types/APISolution";
 
 interface Props {
-  manifest: CraniumContainer[];
+  manifest: FrontEndContainer[];
   manifestName: string;
 }
 

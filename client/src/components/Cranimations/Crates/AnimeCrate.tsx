@@ -2,27 +2,20 @@ import React, { useState, useRef, useMemo, useCallback } from "react";
 import { CSSTransition } from "react-transition-group";
 import { Tile } from "./Tile";
 import { hashedCrateClass } from "../utility";
-import { CraniumContainer } from "../../../types/CraniumContainer";
+import { FrontEndContainer } from "../../../types/APISolution";
 
 import "./AnimeCrates.css";
 import "./Tile.css";
+import { APISolution } from "../../../types/APISolution";
 
 interface Props {
   scale: number;
   tileHeight: number;
   widthScale: number;
-  manifest: CraniumContainer[];
-  buffer: CraniumContainer[];
+  manifest: FrontEndContainer[];
+  buffer: FrontEndContainer[];
   movementProps: {
-    moveSet: {
-      row_start: number;
-      col_start: number;
-      row_end: number;
-      col_end: number;
-      move_type: string;
-      container_name: string;
-      container_weight: number;
-    }[];
+    moveSet: APISolution;
     currentStep: number;
     isGhost: boolean;
     finishedMoved: () => void;
@@ -53,7 +46,7 @@ export default function AnimeCrate(props: Props) {
   const ropeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const excessRopeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  const move = moveSet[currentStep];
+  const move = moveSet.moves[currentStep];
 
   const start: coord = useMemo(() => {
     let type: "ship" | "buffer" | "truck";
@@ -131,7 +124,6 @@ export default function AnimeCrate(props: Props) {
         }
       }
     }
-    console.log("best", best, leftCoord.type, leftCoord.row, rightCoord.row);
     return best;
   }, [
     buffer,
@@ -278,8 +270,6 @@ export default function AnimeCrate(props: Props) {
     return index <= 1 ? crateBoundingBoxInit : crateBoundingBoxFinal;
   }, [crateBoundingBoxFinal, crateBoundingBoxInit, index]);
 
-  console.log(currBoundingBox.height);
-
   const classBoxStages = ["crate0", "crate1", "crate2"];
   const classRopeStages = ["rope0", "rope1", "rope2"];
 
@@ -310,7 +300,6 @@ export default function AnimeCrate(props: Props) {
         onEntered={() => {
           // if the animation is real
           if (!isGhost && index === 2) {
-            console.log("fukcasjkcdjaskl");
             finishedMoved();
           }
           setIndex((index + 1) % 3);

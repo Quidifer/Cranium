@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { CraniumContainer } from "../../types/CraniumContainer";
+import { FrontEndContainer } from "../../types/APISolution";
 
 interface Props {
-  onloadContainers: CraniumContainer[];
-  setOnloadContainers: React.Dispatch<React.SetStateAction<CraniumContainer[]>>;
+  onloadContainers: FrontEndContainer[];
+  setOnloadContainers: React.Dispatch<
+    React.SetStateAction<FrontEndContainer[]>
+  >;
   scale: number;
 }
 
