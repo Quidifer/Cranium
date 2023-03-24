@@ -4,6 +4,8 @@ import ViewManifest from "../ViewButton/viewManifest";
 import ViewLog from "../ViewButton/viewLog";
 import { FrontEndContainer } from "../../../types/APISolution";
 import API from "../../../utils/API";
+import PopupRemider from "../PopupReminder/popupReminder";
+
 import "./CraniumToolbar.css";
 
 interface Props {
@@ -40,19 +42,23 @@ export default function CraniumToolbar(props: Props) {
         <ViewLog />
       </div>
       <div>
-        <button
-          className="finishCraniumToolbarButton"
-          style={{ fontFamily: "work sans" }}
-          onClick={() => {
-            if (fromLoadScreen && onloads && offloads) {
-              console.log("sending transfer job...");
-              API.sendJob("TRANSFER", manifest, onloads, offloads);
-            }
-            updateScreenState();
-          }}
-        >
-          Finish
-        </button>
+        {fromLoadScreen ? (
+          <button
+            className="finishCraniumToolbarButton"
+            style={{ fontFamily: "work sans" }}
+            onClick={() => {
+              if (onloads && offloads) {
+                console.log("sending transfer job...");
+                API.sendJob("TRANSFER", manifest, onloads, offloads);
+              }
+              updateScreenState();
+            }}
+          >
+            Finish
+          </button>
+        ) : (
+          <PopupRemider func={updateScreenState} />
+        )}
         <button
           className="returnToSignInButton"
           onClick={goToSignIn}

@@ -113,6 +113,7 @@ function App() {
       goToSignIn={() => setScreenState("signIn")}
       setManifest={setManifest}
       manifest={manifest}
+      setManifestName={setManifestName}
       manifestName={manifestName}
       buffer={buffer}
       setBuffer={setBuffer}

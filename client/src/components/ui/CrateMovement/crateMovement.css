@@ -79,12 +79,12 @@ p {
 }
 
 .nextButton {
+  font-family: work sans;
   background-color: #54b12f;
   border-radius: 200px;
   border: none;
-  font-size: 25px;
-  font-weight: 400;
-  color: #f5f5f5;
+  font-size: 17px;
+  color: white;
   height: 60%;
   width: 200px;
   margin-left: 25px;
