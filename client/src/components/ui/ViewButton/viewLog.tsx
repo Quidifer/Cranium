@@ -46,8 +46,8 @@ export default function ViewLog(props: Props) {
           }}
           onClick={() => {
             downloadLog();
-            console.log(`${logName} is downloaded.`);
-            API.sendLog(`${logName} is downloaded.`);
+            console.log(`${logName} is downloaded.`, 'NONE');
+            API.sendLog(`${logName} is downloaded.`, 'NONE');
           }}
         >
           Download Log

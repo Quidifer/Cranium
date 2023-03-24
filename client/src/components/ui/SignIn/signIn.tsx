@@ -121,7 +121,7 @@ export default function SignIn(props: Props) {
               Name
             </label>
           </div>
-          <div
+          <div className="frontPageSignInButton"
             style={{
               height: "50px",
               width: "240px",

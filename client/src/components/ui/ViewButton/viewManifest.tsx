@@ -87,8 +87,8 @@ export default function ViewManifest(props: Props) {
           }}
           onClick={() => {
             downloadManifest();
-            console.log(`${manifestName} is downloaded.`);
-            API.sendLog(`${manifestName} is downloaded.`);
+            console.log(`${manifestName} is downloaded.`, 'NONE');
+            API.sendLog(`${manifestName} is downloaded.`, 'NONE');
           }}
         >
           Download Manifest

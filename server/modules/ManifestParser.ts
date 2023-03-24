@@ -1,6 +1,8 @@
-import { ParsedManifest, ParsedManifestEntry } from "../types/ParsedManifest";
+import { ParsedManifest } from "../types/ParsedManifest";
 import { Service } from "typedi";
 import fs from 'fs';
+import { ContainerArea } from "../types/ContainerLocation";
+import { ShipContainer } from "../types/ShipContainer";
 
 @Service()
 export default class ManifestParser {
@@ -20,23 +22,24 @@ export default class ManifestParser {
         return manifest;
     }
 
-    private async parseManifestEntry(stream: string): Promise<ParsedManifestEntry> {
+    private async parseManifestEntry(stream: string): Promise<ShipContainer> {
         const trimmedStream = stream.replace('[', '').replace(']','').replace('{', '').replace('}','');
         const items = trimmedStream.split(',');
         return {
-            // Looks like Y comes before X in manifest examples
-            Y: parseInt(items[0]),
-            X: parseInt(items[1]),
+            name: items[3].trim(),
             weight: parseInt(items[2]),
-            text: items[3].trim()
+            // Looks like Y comes before X in manifest examples
+            row: parseInt(items[0]),
+            col: parseInt(items[1]),
+            location: ContainerArea.SHIP
         };
     }
 
     // Sort entries to appear in the same order as raw manifest file
     public sortManifest(manifest: ParsedManifest): void {
-        manifest.sort((a: ParsedManifestEntry, b: ParsedManifestEntry) => {
-            if(a.Y === b.Y ) return a.X - b.X;
-            else return a.Y - b.Y;
+        manifest.sort((a: ShipContainer, b: ShipContainer) => {
+            if(a.row === b.row ) return a.col - b.col;
+            else return a.row - b.row;
         });
     }
 }

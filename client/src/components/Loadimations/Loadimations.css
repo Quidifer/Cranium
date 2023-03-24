@@ -67,3 +67,7 @@ label,
   background-color: #4c4c4c;
   font-weight: bold;
 }
+
+.LoadingDragScreen:active{
+  cursor: grabbing;
+}

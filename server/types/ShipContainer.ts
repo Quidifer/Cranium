@@ -1,10 +1,33 @@
-import { ContainerLocation } from "./ContainerLocation";
+import { ContainerArea } from "./ContainerLocation";
 
-type ShipContainer = {
-    id: string;
+export type FrontEndContainer = {
+    name: string,
+    weight: number,
+    row: number,
+    col: number
+};
+
+export type FrontEndManifest = Array<FrontEndContainer>;
+
+export type ShipContainer = {
+    name: string;
     weight: number;
-    metadata: object;
-    location: ContainerLocation;
+    row: number,
+    col: number,
+    location: ContainerArea;
 }
 
-export default ShipContainer;
+export type Location = {
+    row: number,
+    col: number
+};
+
+export type Onload = {
+    name: string;
+    weight: number;
+}
+
+export type Offload = FrontEndContainer;
+
+export type Ship = Array<Array<ShipContainer | null | undefined>>;
+export type Buffer = Array<Array<ShipContainer | null>>;

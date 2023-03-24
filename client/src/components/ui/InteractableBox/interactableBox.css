@@ -1,11 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
+
 .move {
   height: 150px;
   width: 265px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  border: 1px solid;
-  border-color: black;
   border-radius: 10px;
   background-color: white;
   display: flex;
@@ -20,7 +20,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  border: 1px;
   border-radius: 10px;
   background-color: transparent;
   display: flex;
@@ -29,7 +28,7 @@
   justify-content: center;
   align-items: center;
 }
-.destroy {
+.stationary {
   height: 150px;
   width: 265px;
   margin-left: auto;
@@ -37,6 +36,15 @@
   margin-top: 20px;
   border: 1px solid;
   border-color: black;
+  border-radius: 10px;
+  background-color: white;
+}
+.destroy {
+  height: 150px;
+  width: 265px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
   border-radius: 10px;
   background-color: white;
   display: flex;
@@ -51,8 +59,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  border: 1px solid;
-  border-color: black;
   border-radius: 10px;
   background-color: white;
   display: flex;
@@ -61,18 +67,48 @@
   justify-content: center;
   align-items: center;
 }
+.fastmove {
+  height: 150px;
+  width: 265px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border: 1px solid;
+  border-color: black;
+  border-radius: 10px;
+  background-color: white;
+}
+.fastdestroy {
+  height: 150px;
+  width: 265px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border: 1px solid;
+  border-color: black;
+  border-radius: 10px;
+  background-color: white;
+}
 
 .moveFar-enter-active {
   transform: translateX(0px) translateY(-192px);
   transition: transform 2000ms;
 }
 .move-enter-active {
-  transform: translateX(0px) translateY(-172px);
+  transform: translateX(0px) translateY(-170px);
   transition: transform 2000ms;
 }
 .destroy-enter-active {
   transform: scale(0);
   transition: transform 2000ms;
+}
+.fastmove-enter-active {
+  transform: translateX(0px) translateY(-172px);
+  transition: transform 500ms;
+}
+.fastdestroy-enter-active {
+  transform: scale(0);
+  transition: transform 500ms;
 }
 
 .GreenBox {
@@ -98,6 +134,8 @@
 }
 
 .infoContent {
+  font-family: work sans;
+  margin-top: 5px;
   margin-left: 5%;
   width: 100%;
 }
@@ -145,7 +183,7 @@
 }
 
 .fastmove-enter-active {
-  transform: translateX(0px) translateY(-130px);
+  transform: translateX(0px) translateY(-120px);
   transition: transform 500ms;
 }
 .fastdestroy-enter-active {

@@ -29,12 +29,13 @@
   color: white;
   background-color: #54b12f;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 6px 3px;
+  cursor: pointer;
 }
 
 .finishCraniumToolbarButton:hover {
-  font-weight: bold;
+  font-weight: 500;
   background-color: #3e9a1a;
-  box-shadow: rgba(0, 0, 0, 0.15) 0 8px 15px;
+  box-shadow: rgba(0, 0, 0, 0.10) 0 8px 15px;
   /* transform: translateY(-2px); */
   color: white;
 }
@@ -53,12 +54,13 @@
   color: white;
   background-color: rgb(217, 65, 65);
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 6px 3px;
+  cursor: pointer;
 }
 
 .returnToSignInButton:hover {
-  font-weight: bold;
+  font-weight: 500;
   background-color: rgb(198, 31, 31);
-  box-shadow: rgba(0, 0, 0, 0.15) 0 8px 15px;
+  box-shadow: rgba(0, 0, 0, 0.10) 0 8px 15px;
   /* transform: translateY(-2px); */
   color: white;
 }

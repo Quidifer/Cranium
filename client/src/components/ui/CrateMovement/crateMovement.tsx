@@ -4,7 +4,7 @@ import Cranimations from "../../Cranimations/Cranimations";
 import InteractableBox from "../InteractableBox/interactableBox";
 import submitButton from "../../../resources/SubmitButton.png";
 import submitButtonActive from "../../../resources/submitButtonActive.png";
-import Loading from "../../../resources/loadingballs.gif";
+import Loading from "../../../resources/loadingboxes.gif";
 import CraniumToolbar from "../Toolbar/CraniumToolbar";
 import { FrontEndContainer } from "../../../types/APISolution";
 import "./crateMovement.css";
@@ -75,6 +75,7 @@ export default function CrateMovement(props: Props) {
   });
 
   const [submitButtonHover, setSubmitButtonHover] = useState(false);
+  const [nextButtonHover, setNextButtonHover] = useState(false);
 
   const [animateBoxes, setAnimateBoxes] = useState(false);
 
@@ -94,7 +95,12 @@ export default function CrateMovement(props: Props) {
           <CraniumToolbar
             manifest={manifest}
             manifestName={manifestName}
-            updateScreenState={updateScreenState}
+            updateScreenState={() => {
+              setManifest([]);
+              setBuffer([]);
+              setCurrentStep(0);
+              updateScreenState();
+            }}
             updatePrevScreenState={updatePrevScreenState}
             goToSignIn={goToSignIn}
           />
@@ -106,6 +112,7 @@ export default function CrateMovement(props: Props) {
               currentStep: currentStep,
               isGhost: isGhost,
               finishedMoved: () => {
+                console.log("finishedMove", currentStep);
                 setIsGhost(true);
                 setAnimateBoxes(true);
                 setCurrentStep(currentStep + 1);
@@ -124,6 +131,7 @@ export default function CrateMovement(props: Props) {
             <textarea
               className="CommentInput"
               placeholder="Add comment..."
+              value={comment}
               name="comment"
               id="comment"
               onChange={(e) => {
@@ -134,6 +142,7 @@ export default function CrateMovement(props: Props) {
               className="SubmitComment"
               onClick={() => {
                 console.log(comment);
+                setComment("");
                 API.sendLog(comment, "NONE");
               }}
               onMouseEnter={() => setSubmitButtonHover(true)}
@@ -153,18 +162,28 @@ export default function CrateMovement(props: Props) {
       </div>
       <div className="column">
         <div className="timeEstimates">
-          <p style={{ marginTop: "10px" }}>
+          <p style={{ marginTop: "15px" }}>
             <b>Estimated Time Remaining:</b>{" "}
           </p>
           <p>
-            {moveSet.moves[moveSet.moves.length - 1].minutesLeft -
-              moveSet.moves[currentStep].minutesLeft}{" "}
+            {currentStep < moveSet.moves.length
+              ? moveSet.moves[moveSet.moves.length - 1].minutesLeft -
+                (currentStep > 0 ? moveSet.moves[currentStep-1].minutesLeft : 0)
+              : 0}{" "}
             minutes{" "}
           </p>
           <p style={{ marginTop: "10px" }}>
-            <b>Estimated Of Move:</b>{" "}
+            <b>Estimated Time Of Move:</b>{" "}
           </p>
-          <p>{moveSet.moves[currentStep].minutesLeft} minutes </p>
+          <p>
+            {currentStep < moveSet.moves.length
+              ? moveSet.moves[currentStep].minutesLeft -
+                (currentStep > 0
+                  ? moveSet.moves[currentStep - 1].minutesLeft
+                  : 0)
+              : 0}{" "}
+            minutes{" "}
+          </p>
         </div>
         <div className="boxContent scrollbar-hidden">
           {items.map((item, index) => {
@@ -183,57 +202,77 @@ export default function CrateMovement(props: Props) {
         <div className="columnFooter">
           <button
             className="nextButton"
-            onClick={() => {
-              setIsGhost(false);
-
-              API.nextMove();
-
-              const move = moveSet.moves[currentStep];
-
-              setManifest(() => {
-                switch (move.move_type) {
-                  case "SHIP_MOVE":
-                  case "OFFLOAD":
-                  case "SHIP_TO_BUFFER":
-                    manifest[
-                      (move.row_start - 1) * 12 + (move.col_start - 1)
-                    ].name = "UNUSED";
-                    manifest[
-                      (move.row_start - 1) * 12 + (move.col_start - 1)
-                    ].weight = 0;
-                    break;
-                }
-
-                return manifest;
-              });
-
-              setBuffer(() => {
-                switch (move.move_type) {
-                  case "BUFFER_MOVE":
-                  case "BUFFER_TO_SHIP":
-                    buffer[
-                      (move.row_start - 1) * 4 + (move.col_start - 1)
-                    ].name = "UNUSED";
-                    buffer[
-                      (move.row_start - 1) * 4 + (move.col_start - 1)
-                    ].weight = 0;
-                    break;
-                }
-                return buffer;
-              });
+            style={{
+              backgroundColor:
+                !nextButtonHover && isGhost ? "#54b12f" : "#3e9a1a",
             }}
-            disabled={!isGhost || currentStep >= moveSet.moves.length}
+            onClick={() => {
+              if (!isGhost) return;
+              if (currentStep < moveSet.moves.length) {
+                setIsGhost(false);
+
+                API.nextMove();
+
+                const move = moveSet.moves[currentStep];
+
+                console.log("making temp state");
+
+                setManifest(() => {
+                  switch (move.move_type) {
+                    case "SHIP_MOVE":
+                    case "OFFLOAD":
+                    case "SHIP_TO_BUFFER":
+                      manifest[
+                        (move.row_start - 1) * 12 + (move.col_start - 1)
+                      ].name = "UNUSED";
+                      manifest[
+                        (move.row_start - 1) * 12 + (move.col_start - 1)
+                      ].weight = 0;
+                      break;
+                  }
+
+                  return manifest;
+                });
+
+                setBuffer(() => {
+                  switch (move.move_type) {
+                    case "BUFFER_MOVE":
+                    case "BUFFER_TO_SHIP":
+                      buffer[
+                        (move.row_start - 1) * 4 + (move.col_start - 1)
+                      ].name = "UNUSED";
+                      buffer[
+                        (move.row_start - 1) * 4 + (move.col_start - 1)
+                      ].weight = 0;
+                      break;
+                  }
+                  return buffer;
+                });
+              } else {
+                setCurrentStep(0);
+                setManifest([]);
+                setBuffer([]);
+                updateScreenState();
+              }
+            }}
+            onMouseEnter={() => setNextButtonHover(true)}
+            onMouseLeave={() => setNextButtonHover(false)}
           >
-            {isGhost ? (
-              <label>Next</label>
+            {currentStep < moveSet.moves.length-1 ? (
+              isGhost ? (
+                <p>Next</p>
+              ) : (
+                <img
+                  style={{
+                    width: "70px",
+                    marginTop: "5px",
+                  }}
+                  src={Loading}
+                  alt="Loading"
+                />
+              )
             ) : (
-              <img
-                style={{
-                  width: "50px",
-                }}
-                src={Loading}
-                alt="Loading"
-              />
+              <p>Finish</p>
             )}
           </button>
         </div>

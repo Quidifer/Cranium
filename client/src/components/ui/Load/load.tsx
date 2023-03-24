@@ -119,9 +119,6 @@ export default function Load(props: Props) {
         <div className="loadBoxContent scrollbar-hidden">
           {displayOffload &&
             counts.map((item, index) => {
-              // let info = `OFFLOAD '${item.name}' ${
-              //   manifest.find((u) => u.name === item.name)?.weight ?? -1
-              // } kg Count: ${item.count}`;
               let info = {
                 name: item.name,
                 weight:
@@ -145,8 +142,7 @@ export default function Load(props: Props) {
             onloadContainers.map((item, index) => {
               let info = {
                 name: item.name,
-                weight:
-                  manifest.find((u) => u.name === item.name)?.weight ?? -1,
+                weight: item.weight,
                 count: -1,
                 type: "ONLOAD",
               };

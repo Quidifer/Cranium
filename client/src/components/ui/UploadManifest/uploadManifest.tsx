@@ -63,21 +63,22 @@ export default function UploadManifest(props: Props) {
   useEffect(() => {
     if (prevRef !== manifestName) {
       console.log(`${manifestName} is uploaded.`);
-      API.sendLog(`${manifestName} is uploaded.`);
+      API.sendLog(`${manifestName} is uploaded.`, 'NONE');
       updateScreenState();
     }
   }, [manifestName]);
 
-  const onDrop = useCallback((acceptedFiles: any) => {
+  const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
     acceptedFiles.forEach((file: FileWithPath) => {
       const reader = new FileReader();
 
       reader.onabort = () => console.log("file reading was aborted");
       reader.onerror = () => console.log("file reading has failed");
       reader.onload = (e) => {
-        let rows = String(e.target?.result).split("\n");
+        let rows = e.target?.result?.toString().split("\n") ?? [];;
+        if (rows.length === 0) throw new Error("Manifest Ingestion Error");
         let cells: FrontEndContainer[] = [];
-        rows.forEach((element) => {
+        rows.filter(row => row.length > 0 && row[0].trim() !== '').forEach((element: string) => {
           let row = element.split(",");
 
           let name = row[3].trim();
@@ -106,6 +107,7 @@ export default function UploadManifest(props: Props) {
 
   const style = useMemo(
     () => ({
+      cursor: "pointer",
       ...baseStyle,
       ...(isFocused ? focusedStyle : {}),
       ...(isDragAccept ? acceptStyle : {}),
