@@ -6,7 +6,7 @@ export default class EngineNode {
 
     public isInitialState = false;
     public depth = 0;
-    public cost = Infinity;
+    public cost = 0;
     public previousNode: EngineNode | undefined;
 
     readonly id: string;
