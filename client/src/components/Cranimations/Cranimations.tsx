@@ -205,6 +205,7 @@ export default function Craninmations(props: Props) {
         >
           <Draggable nodeRef={nodeRef}>
             <div
+              className="DraggingClassCrate"
               ref={nodeRef}
               style={{
                 height: `${contentHeight}px`,
