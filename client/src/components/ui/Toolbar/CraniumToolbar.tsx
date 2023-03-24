@@ -57,7 +57,7 @@ export default function CraniumToolbar(props: Props) {
             Finish
           </button>
         ) : (
-          <PopupRemider updateScreenState={updateScreenState}/>
+          <PopupRemider func={updateScreenState} />
         )}
         <button
           className="returnToSignInButton"

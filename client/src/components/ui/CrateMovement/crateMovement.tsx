@@ -14,12 +14,14 @@ import {
   CraneMoveType,
 } from "../../../types/APISolution";
 import API from "../../../utils/API";
+import PopupRemider from "../PopupReminder/popupReminder";
 
 interface Props {
   updateScreenState: () => void;
   updatePrevScreenState: () => void;
   goToSignIn: () => void;
   manifestName: string;
+  setManifestName: React.Dispatch<React.SetStateAction<string>>;
   manifest: FrontEndContainer[];
   setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
   buffer: FrontEndContainer[];
@@ -37,6 +39,7 @@ export default function CrateMovement(props: Props) {
     buffer,
     setBuffer,
     manifestName,
+    setManifestName,
     updatePrevScreenState,
     updateScreenState,
     goToSignIn,
@@ -87,6 +90,14 @@ export default function CrateMovement(props: Props) {
   const [isGhost, setIsGhost] = useState(true);
 
   const [comment, setComment] = useState("");
+
+  const finishFunctions = () => {
+    setCurrentStep(0);
+    setManifestName("");
+    setManifest([]);
+    setBuffer([]);
+    updateScreenState();
+  };
 
   return (
     <div className="page">
@@ -168,7 +179,9 @@ export default function CrateMovement(props: Props) {
           <p>
             {currentStep < moveSet.moves.length
               ? moveSet.moves[moveSet.moves.length - 1].minutesLeft -
-                (currentStep > 0 ? moveSet.moves[currentStep-1].minutesLeft : 0)
+                (currentStep > 0
+                  ? moveSet.moves[currentStep - 1].minutesLeft
+                  : 0)
               : 0}{" "}
             minutes{" "}
           </p>
@@ -200,66 +213,66 @@ export default function CrateMovement(props: Props) {
           })}
         </div>
         <div className="columnFooter">
-          <button
-            className="nextButton"
-            style={{
-              backgroundColor:
-                !nextButtonHover && isGhost ? "#54b12f" : "#3e9a1a",
-            }}
-            onClick={() => {
-              if (!isGhost) return;
-              if (currentStep < moveSet.moves.length) {
-                setIsGhost(false);
+          {currentStep < moveSet.moves.length - 1 ? (
+            <button
+              className="nextButton"
+              style={{
+                backgroundColor:
+                  !nextButtonHover && isGhost ? "#54b12f" : "#3e9a1a",
+              }}
+              onClick={() => {
+                if (!isGhost) return;
+                if (currentStep < moveSet.moves.length) {
+                  setIsGhost(false);
 
-                API.nextMove();
+                  API.nextMove();
 
-                const move = moveSet.moves[currentStep];
+                  const move = moveSet.moves[currentStep];
 
-                console.log("making temp state");
+                  console.log("making temp state");
 
-                setManifest(() => {
-                  switch (move.move_type) {
-                    case "SHIP_MOVE":
-                    case "OFFLOAD":
-                    case "SHIP_TO_BUFFER":
-                      manifest[
-                        (move.row_start - 1) * 12 + (move.col_start - 1)
-                      ].name = "UNUSED";
-                      manifest[
-                        (move.row_start - 1) * 12 + (move.col_start - 1)
-                      ].weight = 0;
-                      break;
-                  }
+                  setManifest(() => {
+                    switch (move.move_type) {
+                      case "SHIP_MOVE":
+                      case "OFFLOAD":
+                      case "SHIP_TO_BUFFER":
+                        manifest[
+                          (move.row_start - 1) * 12 + (move.col_start - 1)
+                        ].name = "UNUSED";
+                        manifest[
+                          (move.row_start - 1) * 12 + (move.col_start - 1)
+                        ].weight = 0;
+                        break;
+                    }
 
-                  return manifest;
-                });
+                    return manifest;
+                  });
 
-                setBuffer(() => {
-                  switch (move.move_type) {
-                    case "BUFFER_MOVE":
-                    case "BUFFER_TO_SHIP":
-                      buffer[
-                        (move.row_start - 1) * 4 + (move.col_start - 1)
-                      ].name = "UNUSED";
-                      buffer[
-                        (move.row_start - 1) * 4 + (move.col_start - 1)
-                      ].weight = 0;
-                      break;
-                  }
-                  return buffer;
-                });
-              } else {
-                setCurrentStep(0);
-                setManifest([]);
-                setBuffer([]);
-                updateScreenState();
-              }
-            }}
-            onMouseEnter={() => setNextButtonHover(true)}
-            onMouseLeave={() => setNextButtonHover(false)}
-          >
-            {currentStep < moveSet.moves.length-1 ? (
-              isGhost ? (
+                  setBuffer(() => {
+                    switch (move.move_type) {
+                      case "BUFFER_MOVE":
+                      case "BUFFER_TO_SHIP":
+                        buffer[
+                          (move.row_start - 1) * 4 + (move.col_start - 1)
+                        ].name = "UNUSED";
+                        buffer[
+                          (move.row_start - 1) * 4 + (move.col_start - 1)
+                        ].weight = 0;
+                        break;
+                    }
+                    return buffer;
+                  });
+                } else {
+                  setCurrentStep(0);
+                  setManifest([]);
+                  setBuffer([]);
+                  updateScreenState();
+                }
+              }}
+              onMouseEnter={() => setNextButtonHover(true)}
+              onMouseLeave={() => setNextButtonHover(false)}
+            >
+              {isGhost ? (
                 <p>Next</p>
               ) : (
                 <img
@@ -270,11 +283,11 @@ export default function CrateMovement(props: Props) {
                   src={Loading}
                   alt="Loading"
                 />
-              )
-            ) : (
-              <p>Finish</p>
-            )}
-          </button>
+              )}
+            </button>
+          ) : (
+            <PopupRemider func={finishFunctions} columnFinish />
+          )}
         </div>
         <div className="gradient" />
         <div className="gradient1" />

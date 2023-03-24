@@ -56,7 +56,7 @@ function App() {
   return screenState === "password" ? (
     <Password
       updateScreenState={() => setScreenState("signIn")}
-      restoreSession={() => setScreenState(prevScreenState)}
+      restoreSession={() => setScreenState("calculating")}
     />
   ) : screenState === "signIn" ? (
     <SignIn updateScreenState={() => setScreenState(prevScreenState)} />
@@ -114,6 +114,7 @@ function App() {
       goToSignIn={() => setScreenState("signIn")}
       setManifest={setManifest}
       manifest={manifest}
+      setManifestName={setManifestName}
       manifestName={manifestName}
       buffer={buffer}
       setBuffer={setBuffer}

@@ -5,16 +5,20 @@ import "./popupReminder.css";
 import API from "../../../utils/API";
 
 interface Props {
-  updateScreenState: () => void;
+  func: () => void;
+  columnFinish?: boolean;
 }
 
 export default function PopupRemider(props: Props) {
-  const { updateScreenState } = props;
+  const { func, columnFinish } = props;
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
   return (
     <>
-      <button className="finishButton" onClick={() => setOpen((o) => !o)}>
+      <button
+        className={columnFinish ? "finishColumnButton" : "finishButton"}
+        onClick={() => setOpen((o) => !o)}
+      >
         Finish
       </button>
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
@@ -27,7 +31,7 @@ export default function PopupRemider(props: Props) {
             <br />
             <p>Do you want to exit?</p>
           </div>
-          <button className="yesButton" onClick={updateScreenState}>
+          <button className="yesButton" onClick={func}>
             Yes
           </button>
           <button className="noButton" onClick={closeModal}>

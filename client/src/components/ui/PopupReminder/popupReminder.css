@@ -15,11 +15,29 @@
   font-family: work sans;
 }
 .finishButton:hover {
-  font-weight: bold;
   background-color: #3e9a1a;
   box-shadow: rgba(0, 0, 0, 0.15) 0 8px 15px;
   /* transform: translateY(-2px); */
   color: white;
+}
+
+.finishColumnButton {
+  font-family: work sans;
+  background-color: #54b12f;
+  border-radius: 200px;
+  border: none;
+  font-size: 17px;
+  color: white;
+  height: 60%;
+  width: 200px;
+  margin-left: 25px;
+  margin-right: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 8px 15px;
+}
+.finishColumnButton:hover {
+  background-color: #3e9a1a;
 }
 
 .popup {

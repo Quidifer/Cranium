@@ -127,3 +127,39 @@ Mar 23, 2023 : 21:18 - test-manifest3.txt is uploaded.
 Mar 23, 2023 : 21:24 - test-manifest3.txt is uploaded.
 Mar 23, 2023 : 21:29 - manifest.txt is uploaded.
 Mar 23, 2023 : 21:51 - manifest.txt is uploaded.
+Mar 23, 2023 : 22:58 - tran signs in.
+Mar 23, 2023 : 22:58 - manifest_test2.txt is uploaded.
+Mar 23, 2023 : 22:59 - SHIP_MOVE: 'UN' (Row: 2, Col: 2) => (Row: 3, Col: 1)
+Mar 23, 2023 : 22:59 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 23:06 - manifest_test2.txt is uploaded.
+Mar 23, 2023 : 23:06 - SHIP_MOVE: 'UN' (Row: 2, Col: 2) => (Row: 3, Col: 1)
+Mar 23, 2023 : 23:06 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 23:10 - manifest_test2.txt is uploaded.
+Mar 23, 2023 : 23:10 - SHIP_MOVE: 'UN' (Row: 2, Col: 2) => (Row: 3, Col: 1)
+Mar 23, 2023 : 23:10 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 23:14 - manifest_test2.txt is uploaded.
+Mar 23, 2023 : 23:14 - SHIP_MOVE: 'UN' (Row: 2, Col: 2) => (Row: 3, Col: 1)
+Mar 23, 2023 : 23:14 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 23:15 - manifest_test2.txt is uploaded.
+Mar 23, 2023 : 23:15 - SHIP_MOVE: 'UN' (Row: 2, Col: 2) => (Row: 3, Col: 1)
+Mar 23, 2023 : 23:15 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 23:19 - manifest_test2.txt is uploaded.
+Mar 23, 2023 : 23:19 - SHIP_MOVE: 'UN' (Row: 2, Col: 2) => (Row: 3, Col: 1)
+Mar 23, 2023 : 23:20 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 23:25 - manifest_test2.txt is uploaded.
+Mar 23, 2023 : 23:25 - SHIP_MOVE: 'UN' (Row: 2, Col: 2) => (Row: 3, Col: 1)
+Mar 23, 2023 : 23:25 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 23:28 - manifest_test2.txt is uploaded.
+Mar 23, 2023 : 23:28 - SHIP_MOVE: 'UN' (Row: 2, Col: 2) => (Row: 3, Col: 1)
+Mar 23, 2023 : 23:28 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 23:29 - manifest_test2.txt is uploaded.
+Mar 23, 2023 : 23:29 - SHIP_MOVE: 'UNU' (Row: 2, Col: 3) => (Row: 3, Col: 2)
+Mar 23, 2023 : 23:30 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
+Mar 24, 2023 : 0:01 - tran signs in.
+Mar 24, 2023 : 0:07 - tran signs in.
+Mar 24, 2023 : 0:07 - manifest_test2.txt is uploaded.
+Mar 24, 2023 : 0:07 - SHIP_MOVE: 'UN' (Row: 2, Col: 2) => (Row: 3, Col: 1)
+Mar 24, 2023 : 0:07 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 24, 2023 : 0:07 - manifest_test2.txt is downloaded.
+Mar 24, 2023 : 0:08 - KeoghLongBeach2023.txt is downloaded.
+Mar 24, 2023 : 0:08 - manifest_test2.txt is uploaded.
