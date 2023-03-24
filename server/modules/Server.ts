@@ -35,9 +35,9 @@ export default class Server {
 
     public async start() {
         // // Connect React client files to NodeJS server
-        //const manifest = await Container.get(ManifestParser).parseManifest(path.resolve(process.cwd(), './test/server/modules/manifests/test-manifest3.txt'));
-        //const solution = await Container.get(Engine).calculateMoveSet_Transfer(manifest, [{name: 'John Deer', weight: 123}], [{name: 'D', weight: 5, row: 2, col: 6}, {name: 'Train', weight: 5, row: 5, col: 8}, {name: 'Train', weight: 5, row: 4, col: 7}]); // {row: 5, col: 8}, {row: 4, col: 7}, {row: 3, col: 7}, 
-        //console.log(solution.moves?.map(move => Object.assign(move, {manifest: [], buffer: []})))
+        const manifest = await Container.get(ManifestParser).parseManifest(path.resolve(process.cwd(), './test/server/modules/manifests/shipCase1.txt'));
+        const solution = await Container.get(Engine).calculateMoveSet_Balance(manifest); 
+        console.log(solution.moves?.map(move => Object.assign(move, {manifest: [], buffer: []})))
         //writeFileSync('output.json', JSON.stringify(solution));
         //Container.get(Engine).calculateMoveSet_Balance(manifest);ya
         this.app.use(express.static(this.REACT_FRONT_END));
