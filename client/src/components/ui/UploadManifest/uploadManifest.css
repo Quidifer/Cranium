@@ -1,0 +1,22 @@
+.uploadContainer {
+  display: flex;
+  justify-content: center;
+  width: 700px;
+  margin: auto;
+}
+.exampleButton {
+  /* position: absolute; */
+  margin: 8px 27px;
+  height: 47px;
+  width: 120px;
+  border-radius: 200px;
+  border: 0;
+  background-color: #9b9b9b;
+  color: white;
+  font-size: 15px;
+  font-family: work sans;
+}
+.exampleButton:hover {
+  color: white;
+  background-color: #4c4c4c;
+}

@@ -21,7 +21,7 @@ API.getSolution().then((_data) => {
 });
 
 function App() {
-  const [screenState, setScreenState] = useState("password");
+  const [screenState, setScreenState] = useState("uploadManifest");
   const [manifest, setManifest] = useState<CraniumContainer[]>([]);
   const [manifestName, setManifestName] = useState("");
   const [buffer, setBuffer] = useState<FrontEndContainer[]>(() => {
