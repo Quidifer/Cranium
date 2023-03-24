@@ -16,7 +16,6 @@ import { CraniumContainer } from "../types/CraniumContainer";
 let data: APISolution | null = null;
 
 API.getSolution().then((_data) => {
-  console.log("There's so much data, holy wow you're so fantastic");
   data = _data;
 });
 
@@ -56,7 +55,7 @@ function App() {
   return screenState === "password" ? (
     <Password
       updateScreenState={() => setScreenState("signIn")}
-      restoreSession={() => setScreenState(prevScreenState)}
+      restoreSession={() => setScreenState("calculating")}
     />
   ) : screenState === "signIn" ? (
     <SignIn updateScreenState={() => setScreenState(prevScreenState)} />
