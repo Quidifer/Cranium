@@ -30,7 +30,7 @@ export default class ServerConfiguration {
 
     private async handleCheckRequest(res: Response) {
         const StoredSolution = await this.fetchSession(res);
-        res.status(StoredSolution !== null ? 200 : 404).send();
+        res.status(StoredSolution?.solution !== undefined ? 200 : 404).send();
     }
 
     private async handleJobRequest(res: Response, requestBody: any) {

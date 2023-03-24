@@ -16,7 +16,6 @@ import { CraniumContainer } from "../types/CraniumContainer";
 let data: APISolution | null = null;
 
 API.getSolution().then((_data) => {
-  console.log("There's so much data, holy wow you're so fantastic");
   data = _data;
 });
 
