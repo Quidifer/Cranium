@@ -168,7 +168,7 @@ export default function CrateMovement(props: Props) {
           <p>
             {currentStep < moveSet.moves.length
               ? moveSet.moves[moveSet.moves.length - 1].minutesLeft -
-                moveSet.moves[currentStep].minutesLeft
+                (currentStep > 0 ? moveSet.moves[currentStep-1].minutesLeft : 0)
               : 0}{" "}
             minutes{" "}
           </p>
@@ -258,7 +258,7 @@ export default function CrateMovement(props: Props) {
             onMouseEnter={() => setNextButtonHover(true)}
             onMouseLeave={() => setNextButtonHover(false)}
           >
-            {currentStep < moveSet.moves.length ? (
+            {currentStep < moveSet.moves.length-1 ? (
               isGhost ? (
                 <p>Next</p>
               ) : (

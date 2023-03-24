@@ -28,6 +28,17 @@
   justify-content: center;
   align-items: center;
 }
+.stationary {
+  height: 150px;
+  width: 265px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border: 1px solid;
+  border-color: black;
+  border-radius: 10px;
+  background-color: white;
+}
 .destroy {
   height: 150px;
   width: 265px;
@@ -56,6 +67,28 @@
   justify-content: center;
   align-items: center;
 }
+.fastmove {
+  height: 150px;
+  width: 265px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border: 1px solid;
+  border-color: black;
+  border-radius: 10px;
+  background-color: white;
+}
+.fastdestroy {
+  height: 150px;
+  width: 265px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border: 1px solid;
+  border-color: black;
+  border-radius: 10px;
+  background-color: white;
+}
 
 .moveFar-enter-active {
   transform: translateX(0px) translateY(-192px);
@@ -68,6 +101,14 @@
 .destroy-enter-active {
   transform: scale(0);
   transition: transform 2000ms;
+}
+.fastmove-enter-active {
+  transform: translateX(0px) translateY(-172px);
+  transition: transform 500ms;
+}
+.fastdestroy-enter-active {
+  transform: scale(0);
+  transition: transform 500ms;
 }
 
 .GreenBox {

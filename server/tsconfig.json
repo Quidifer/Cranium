@@ -1,25 +1,6 @@
 {
+    "extends": "../tsconfig.json",
     "compilerOptions": {
-        "target": "es6",
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
-        "allowJs": true,
-        "incremental": true,
-        "skipLibCheck": true,
-        "module": "commonjs",
-        "esModuleInterop": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "moduleResolution": "node",
-        "strict": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "forceConsistentCasingInFileNames": true,
-        "sourceMap": true,
         "outDir": "../dist",
-        "jsx": "react-jsx"
-    }   
-}  
+    },
+}

@@ -5,35 +5,46 @@ import path from 'path';
 import Engine from './Engine';
 import ManifestParser from './ManifestParser';
 import http from 'http';
+import ServerConfiguration from './ServerConfiguration';
+import bodyParser from 'body-parser';
+import { writeFileSync } from 'fs';
+import DatabaseConfiguration from './DatabaseConfiguration';
+import DatabaseManager from './DatabaseManager';
 
 
 @Service()
-export default class e {
+export default class Server {
 
     private app: express.Application;
 
-    private PORT: (string | number) = process.env.PORT || 3001;
+    private PORT: (string | number) = 3001;
 
     private listener!: http.Server;
 
-    private readonly REACT_FRONT_END: string = path.resolve(__dirname, '../client');
+    private readonly REACT_FRONT_END: string = DatabaseManager.isTsNode() ? path.resolve(process.cwd(), './client') : path.resolve(process.cwd(), './dist', './client');
 
     constructor() {
         this.app = express();
+        this.app.use(bodyParser.urlencoded({
+            extended: true
+        }));
+        this.app.use(bodyParser.json());
         process.on('SIGINT', this.onSignalTerminationHandler.bind(this));
         process.on('SIGTERM', this.onSignalTerminationHandler.bind(this));
     }
 
     public async start() {
-        const engine = Container.get(Engine);
-        const manifestParser = Container.get(ManifestParser);
+        //(await Container.get(DatabaseManager).)
+        // // Connect React client files to NodeJS server
+        //const manifest = await Container.get(ManifestParser).parseManifest(path.resolve(process.cwd(), './test/server/modules/manifests/test-manifest3.txt'));
+        //const solution = await Container.get(Engine).calculateMoveSet_Transfer(manifest, [{name: 'John Deer', weight: 123}], [{name: 'D', weight: 5, row: 2, col: 6}, {name: 'Train', weight: 5, row: 5, col: 8}, {name: 'Train', weight: 5, row: 4, col: 7}]); // {row: 5, col: 8}, {row: 4, col: 7}, {row: 3, col: 7}, 
+        //console.log(solution.moves?.map(move => Object.assign(move, {manifest: [], buffer: []})))
+        //writeFileSync('output.json', JSON.stringify(solution));
+        //Container.get(Engine).calculateMoveSet_Balance(manifest);ya
         this.app.use(express.static(this.REACT_FRONT_END));
-        this.app.get("/transfer", (req, res) => res.json(engine.calculateMoveSet_Transfer(req.body)));
-        this.app.get("/balance", (req, res) => res.json(engine.calculateMoveSet_Balance(req.body)));
-        this.app.get("/manifest", async (req, res) => {
-            res.json(await manifestParser.parseManifest('./server/modules/test.txt'));
-        });
+        Container.get(ServerConfiguration).setupEndpoints(this.app);
         this.listener = this.app.listen(this.PORT, () => console.log(`Server listening on ${this.PORT}`));
+    
     }
 
     public close() {

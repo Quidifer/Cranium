@@ -1,10 +1,3 @@
-type ParsedManifestEntry = {
-    Y: number;
-    X: number;
-    weight: number;
-    text: string
-}
-
-type ParsedManifest = Array<ParsedManifestEntry>;
-
-export type { ParsedManifestEntry, ParsedManifest };
+import { ContainerLocation } from "./ContainerLocation";
+import { ShipContainer } from "./ShipContainer";
+export type ParsedManifest = Array<ShipContainer>;
