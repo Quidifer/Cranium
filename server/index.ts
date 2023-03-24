@@ -3,10 +3,6 @@ import Server from "./modules/Server";
 import DatabaseManager from "./modules/DatabaseManager";
 
 const server: Server = Container.get(Server);
-
-Container.get(DatabaseManager).up();
-console.log("Starting Cranium Server...");
-
 process.on('uncaughtException', (error: Error) => {
   // Close listener gracefully
   server.close();
@@ -21,10 +17,14 @@ process.on('unhandledRejection', (error: Error) => {
   process.exit(1);
 });
 
-// Start backend
-server
-.start()
-.catch((error: Error) => {
-  console.log(error);
-  process.exit(1);
-});
+console.log("Starting Cranium Server...");
+Container.get(DatabaseManager).resetDatabase()
+.then(() => Container.get(DatabaseManager).up())
+.then(() => // Start backend
+  server
+  .start()
+  .catch((error: Error) => {
+    console.log(error);
+    process.exit(1);
+  })
+);

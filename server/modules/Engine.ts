@@ -412,14 +412,14 @@ export default class Engine {
         initialState.isInitialState = true;
         queuedStates.enqueue(initialState);
 
-        // if (!isSolvable) {
-        //     goalStates.push(this.SIFT(convertedShip));
-        //     return {
-        //         solved: !(goalStates.length === 0),
-        //         moves: (goalStates.length > 0) ? this.convertGoalStateToMoves(goalStates[0]) : undefined,
-        //         final_manifest: (goalStates.length > 0) ? this.convertToManifest(goalStates[0].state) : undefined
-        //     } 
-        // }
+        if (!isSolvable) {
+            goalStates.push(this.SIFT(initialState));
+            return {
+                solved: !(goalStates.length === 0),
+                moves: (goalStates.length > 0) ? this.convertGoalStateToMoves(goalStates[0]) : undefined,
+                final_manifest: (goalStates.length > 0) ? this.convertToManifest(goalStates[0].state) : undefined
+            } 
+        }
 
         do {
             // Grab next Node and remove from queued set
@@ -685,60 +685,50 @@ export default class Engine {
         }
         
         // Move everything to buffer
-        // while(BufferTargets.length > 0) {
-        //     let possibleMoves = [];
+        while(BufferTargets.length > 0) {
+            let possibleMoves = [];
 
-        //     for(let move of BufferTargets) {
-        //         let point1Available = 
-        //             (move.a.row === this.SHIP_DIMENSIONS.ROW_MAX-1) ||
-        //             (newNode.state[move.a.row+1][move.a.col] === null)
-        //         if (
-        //             newNode.state[move.a.row][move.a.col] ==
-        //         )
-        //     }
+            for(let move of BufferTargets) {
+                let point1Available = 
+                    (move.a.row === this.SHIP_DIMENSIONS.ROW_MAX-1) ||
+                    (newNode.state[move.a.row+1][move.a.col] === null);
 
+                let point2Available = 
+                    ((move.b.row === this.BUFFER_DIMENSIONS.ROW_MAX-1) ||
+                    (newBuffer[move.b.row+1][move.b.col] === null)) &&
+                    ( move.b.row === 0 || newBuffer[move.b.row-1][move.b.col] !== null);
+                
+                if (point1Available && point2Available) {
+                    possibleMoves.push(move);
+                    BufferTargets = BufferTargets.filter(t => Object.values(t) !== Object.values(move));
+                }
+            }
 
-            for(let column = 0; column < this.SHIP_DIMENSIONS.COLUMN_MAX; column++) {
-                for (let row = this.SHIP_DIMENSIONS.ROW_MAX; row >= 0; row--) {
-                    let topCrate = newNode.state[row][column];
-                    if (!topCrate) continue;
-
-                    let new_state_b = cloneDeep(newNode.state);
-                    let new_buffer = cloneDeep(newNode.buffer);
-                    new_state_b[row][column] = null;
-                    let new_row = 0;
-                    let new_col = 0;
-                    for (let col_check = 0; col_check < this.BUFFER_DIMENSIONS.COLUMN_MAX; col_check++) {
-                        new_col = col_check;
-                        for (let row_check = 0; row_check < this.BUFFER_DIMENSIONS.ROW_MAX; row_check++) {
-                            new_row = row_check;
-                            if (new_buffer[row_check][col_check] === null) {
-                                col_check = Infinity;
-                                row_check = Infinity;
-                            }
-                        }
-                    }
-
+            for (let move of possibleMoves) {
                     let new_depth = newNode.depth + 1;
-                    let new_cost = this.Manhatten_Distance({row: row+1, col: column+1}, this.SHIP_VIRTUAL) + this.Manhatten_Distance({row: new_row+1, col:  new_col+1}, this.BUFFER_VIRTUAL) + this.COST.AREA_MOVE;
+                    let new_cost = this.Manhatten_Distance({row: move.a.row+1, col: move.a.col+1}, this.SHIP_VIRTUAL) + this.Manhatten_Distance({row: move.b.row+1, col:  move.b.col+1}, this.BUFFER_VIRTUAL) + this.COST.AREA_MOVE;
                     let new_minutes = new_cost + newNode.minutes;
-                    new_buffer[new_row][new_col] = this.moveContainer(Object.assign({location: ContainerArea.BUFFER}, topCrate), new_row, new_col);
+                    let new_state = cloneDeep(newNode.state);
+                    new_state[move.a.row][move.a.col] = null;
+                    newBuffer[move.b.row][move.b.col] = this.moveContainer(Object.assign({location: ContainerArea.BUFFER}, move.container), move.b.row, move.b.col);
                     let bmove = {
-                        row_start: row+1, col_start: column+1, 
-                        row_end: new_row+1, col_end: new_col+1,
+                        row_start: move.a.row+1, col_start: move.a.col+1, 
+                        row_end: move.b.row+1, col_end: move.b.col+1,
                         move_type: CraneMoveType.SHIP_TO_BUFFER, 
-                        container_name: topCrate.name, 
-                        weight: topCrate.weight,
+                        container_name: move.container.name, 
+                        weight: move.container.weight,
                         manifest: this.convertToManifest(newNode.state),
                         buffer: this.convertToManifest(newNode.buffer),
                         minutesLeft: new_minutes
                     };
-                    let new_leaf = new EngineNode(new_state_b, new_buffer, cloneDeep(newNode.onloads), cloneDeep(newNode.offloads), bmove, new_minutes);
+                    let new_leaf = new EngineNode(new_state, cloneDeep(newBuffer), cloneDeep(newNode.onloads), cloneDeep(newNode.offloads), bmove, new_minutes);
                     new_leaf.depth = new_depth;
                     new_leaf.cost = new_cost + newNode.cost + new_depth + this.heuristic(new_leaf);
                     new_leaf.previousNode = newNode;
-                }
+                    newNode = new_leaf;
             }
+        }
+
         return newNode;
     }
 

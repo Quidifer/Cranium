@@ -31,9 +31,21 @@ export default class DatabaseManager {
         return this.orm.em.fork();
     }
 
+    public async resetDatabase() {
+        console.log('Resetting database...');
+        const orm = await this.getMikroOrm();
+
+        try {
+            await orm.getSchemaGenerator().dropSchema({wrap: true, dropMigrationsTable: true, dropDb: true});
+            await this.setMigration();
+        }
+        catch(e) {
+            console.log(`DatabaseManager: ${e}`);
+        }
+    }
+
     private async getMikroOrm(): Promise<MikroORM> {
         this.orm = await MikroORM.init<PostgreSqlDriver>(DatabaseManager.getConfiguration(), true);
-
         return this.orm;
     }
 
@@ -66,7 +78,7 @@ export default class DatabaseManager {
         const Migrations: MigrationObject[] = [];
         const files = fs.readdirSync(this.MigrationsPath);
         files.forEach((file) => {
-            if((file.match(/\.ts$/) || file.match(/\.js$/)) && !file.match(/\.d\.ts$/)) {
+            if(this.isTsNode() ? (file.match(/\.ts$/)) : file.match(/\.js$/) && !file.match(/\.d\.ts$/)) {
                 //eslint-disable-next-line @typescript-eslint/no-var-requires
                 const module = require(path.resolve(this.MigrationsPath, file));
                 for (const key in module) {

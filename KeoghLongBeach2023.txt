@@ -27,3 +27,36 @@ Mar 24, 2023 : 10:47 - test-manifest3.txt is uploaded.
 Mar 24, 2023 : 12:28 - test-manifest3.txt is uploaded.
 Mar 24, 2023 : 12:28 - Ryan Dalmas signs out.
 Mar 24, 2023 : 12:28 - Ryan signs in.
+Mar 24, 2023 : 13:06 - Ryan Dalmas signs in.
+Mar 24, 2023 : 13:06 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 13:06 - Ryan Dalmas signs out.
+Mar 24, 2023 : 13:06 - John signs in.
+Mar 24, 2023 : 13:13 - Ryan signs in.
+Mar 24, 2023 : 13:13 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 13:14 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 24, 2023 : 13:20 - Ryan signs in.
+Mar 24, 2023 : 13:20 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 13:20 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 24, 2023 : 13:20 - OFFLOAD: 'Train' from (Row: 5, Col: 2).
+Mar 24, 2023 : 13:20 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 24, 2023 : 13:20 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 24, 2023 : 13:22 - Ryan signs in.
+Mar 24, 2023 : 13:22 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 13:23 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 24, 2023 : 13:23 - OFFLOAD: 'Train' from (Row: 5, Col: 2).
+Mar 24, 2023 : 13:23 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 24, 2023 : 13:23 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 24, 2023 : 13:23 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 13:23 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 24, 2023 : 13:26 - Ryan signs in.
+Mar 24, 2023 : 13:26 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 13:27 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 24, 2023 : 13:27 - OFFLOAD: 'Train' from (Row: 5, Col: 2).
+Mar 24, 2023 : 13:27 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 24, 2023 : 13:27 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 24, 2023 : 13:30 - Ryan signs in.
+Mar 24, 2023 : 13:30 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 13:31 - Ryan signs out.
+Mar 24, 2023 : 13:31 - John signs in.
+Mar 24, 2023 : 13:36 - Ryan signs in.
+Mar 24, 2023 : 13:36 - test-manifest3.txt is uploaded.

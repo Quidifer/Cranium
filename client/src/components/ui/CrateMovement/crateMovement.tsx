@@ -99,6 +99,8 @@ export default function CrateMovement(props: Props) {
     updateScreenState();
   };
 
+  const isFinished = () => currentStep >= moveSet.moves.length - 1;
+
   return (
     <div className="page">
       <div className="leftcontent">
@@ -114,6 +116,7 @@ export default function CrateMovement(props: Props) {
             }}
             updatePrevScreenState={updatePrevScreenState}
             goToSignIn={goToSignIn}
+            isFinished={isFinished}
           />
         </div>
         <div className="crane">
@@ -286,7 +289,7 @@ export default function CrateMovement(props: Props) {
               )}
             </button>
           ) : (
-            <PopupRemider func={finishFunctions} columnFinish />
+            <PopupRemider func={finishFunctions} isFinished={isFinished ?? (() => true)} columnFinish />
           )}
         </div>
         <div className="gradient" />
