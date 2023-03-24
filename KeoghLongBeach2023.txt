@@ -127,3 +127,17 @@ Mar 23, 2023 : 21:18 - test-manifest3.txt is uploaded.
 Mar 23, 2023 : 21:24 - test-manifest3.txt is uploaded.
 Mar 23, 2023 : 21:29 - manifest.txt is uploaded.
 Mar 23, 2023 : 21:51 - manifest.txt is uploaded.
+Mar 23, 2023 : 21:57 - manifest.txt is uploaded.
+Mar 23, 2023 : 21:58 - SHIP_MOVE: 'Dog' (Row: 1, Col: 3) => (Row: 2, Col: 12)
+Mar 23, 2023 : 21:58 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 21:58 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 22:06 - Ryan Dalmas signs in.
+Mar 23, 2023 : 22:06 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 22:08 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 23, 2023 : 22:09 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 22:10 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 23, 2023 : 22:10 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 23, 2023 : 22:10 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 23, 2023 : 22:11 - SHIP_MOVE: 'Train' (Row: 5, Col: 7) => (Row: 7, Col: 6)
+Mar 23, 2023 : 22:11 - SHIP_MOVE: 'Train' (Row: 4, Col: 7) => (Row: 8, Col: 6)
+Mar 23, 2023 : 22:12 - SHIP_MOVE: 'O' (Row: 3, Col: 7) => (Row: 6, Col: 8)
