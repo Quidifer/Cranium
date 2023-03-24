@@ -1,15 +1,125 @@
-June 1st 2023: 00:02 John Smith signs out
-June 1st 2023: 00:02 Anil Patel signs in
-June 1st 2023: 02:04 Manifest HMMAlgeciras.txt is opened, there are 12 containers on the ship
-June 1st 2023: 04:23 “Walmart Bikes Moreno Valley South” is offloaded.
-June 1st 2023: 04:55 I notice that the “Walmart Toasters Moreno Valley South” container has a large fresh-looking dent on the door. However, door was not breeched, so just sent a photo to head office and I am continuing with the cycle.
-June 1st 2023: 04:56 “Walmart Toasters Moreno Valley South” is offloaded.
-June 1st 2023: 05:34 “Amazon Empty, Let John or Mike in packaging when arrives” is onloaded.
-June 1st 2023: 06:02 Finished a Cycle. Manifest HMMAlgecirasOUTBOUND.txt was written to desktop, and a reminder pop-up to operator to send file was displayed.
-June 1st 2023: 07:11 Manifest HMMAFreiger.txt is opened, there are 34 containers on the ship
-June 1st 2023: 07:43 “Apple Valley Machine parts, call 902-555-2322 if problem” is offloaded.
-June 1st 2023: 07:47 I noticed that “Apple Valley Machine parts” is about 10% over its stated weight, may be due to the rain on top, no further action taken.
-June 1st 2023: 07:59 Anil Patel signs out
-June 1st 2023: 08:00 Sue Smith signs in
-June 1st 2023: 08:12 “Apple Valley Tires, call 902-555-2322 if problem” is offloaded.
-June 2nd 2023: 01:13 Finished a Cycle. Manifest HMMAFreigerOUTBOUND.txt was written to desktop, and a reminder pop-up to operator to send file was displayed.
+Mar 23, 2023 : 14:26 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:32 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:35 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:38 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:43 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:45 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:47 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:50 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:52 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:53 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:54 - manifest.txt is uploaded.
+Mar 23, 2023 : 14:59 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:04 - Ryan signs in.
+Mar 23, 2023 : 15:04 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:06 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:09 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:11 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:12 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:14 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:16 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:18 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:26 - Ryan signs in.
+Mar 23, 2023 : 15:26 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:28 - Ryan signs in.
+Mar 23, 2023 : 15:28 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:29 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 15:38 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:42 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:43 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:43 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 15:44 - Ryan signs in.
+Mar 23, 2023 : 15:45 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:45 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 15:46 - Ryan signs in.
+Mar 23, 2023 : 15:46 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:46 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 15:49 - Ryan signs in.
+Mar 23, 2023 : 15:49 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:49 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 15:50 - Ryan signs in.
+Mar 23, 2023 : 15:50 - manifest.txt is uploaded.
+Mar 23, 2023 : 15:51 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 15:51 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
+Mar 23, 2023 : 15:51 - John signs in.
+Mar 23, 2023 : 15:51 - one-crate-on-top.txt is uploaded.
+Mar 23, 2023 : 15:53 - Ryan signs in.
+Mar 23, 2023 : 15:53 - one-crate-on-top.txt is uploaded.
+Mar 23, 2023 : 15:53 - one-crate-on-top.txt is uploaded.
+Mar 23, 2023 : 16:01 - one-crate-on-top.txt is uploaded.
+Mar 23, 2023 : 16:16 - one-crate-on-top.txt is uploaded.
+Mar 23, 2023 : 16:16 - SHIP_MOVE: 'Bird' (Row: 2, Col: 3) => (Row: 1, Col: 4)
+Mar 23, 2023 : 16:16 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 16:16 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
+Mar 23, 2023 : 16:18 - Ryan signs in.
+Mar 23, 2023 : 16:18 - one-crate-on-top.txt is uploaded.
+Mar 23, 2023 : 16:18 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 16:19 - SHIP_MOVE: 'Bird' (Row: 2, Col: 3) => (Row: 1, Col: 2)
+Mar 23, 2023 : 16:19 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
+Mar 23, 2023 : 16:19 - Karan signs in.
+Mar 23, 2023 : 16:32 - manifest.txt is uploaded.
+Mar 23, 2023 : 17:09 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 17:17 - test-manifest2.txt is uploaded.
+Mar 23, 2023 : 17:20 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 17:21 - OFFLOAD: 'Train' from (Row: 5, Col: 8).
+Mar 23, 2023 : 17:21 - SHIP_MOVE: 'Train' (Row: 5, Col: 7) => (Row: 5, Col: 8)
+Mar 23, 2023 : 17:21 - OFFLOAD: 'Train' from (Row: 4, Col: 7).
+Mar 23, 2023 : 17:21 - OFFLOAD: 'O' from (Row: 3, Col: 7).
+Mar 23, 2023 : 17:22 - ONLOAD: 'John Do' to (Row: 7, Col: 1).
+Mar 23, 2023 : 17:27 - manifest.txt is uploaded.
+Mar 23, 2023 : 17:27 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 17:28 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
+Mar 23, 2023 : 17:28 - ONLOAD: 'John Doe' to (Row: 2, Col: 1).
+Mar 23, 2023 : 17:30 - manifest.txt is uploaded.
+Mar 23, 2023 : 17:30 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 23, 2023 : 17:30 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
+Mar 23, 2023 : 17:30 - ONLOAD: 'Joe Doe' to (Row: 2, Col: 1).
+Mar 23, 2023 : 17:32 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 18:12 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 18:18 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 18:42 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 18:56 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 18:59 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 19:00 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 19:19 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 19:32 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:02 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:05 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:08 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:10 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:12 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:12 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 23, 2023 : 20:26 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:30 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:30 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 23, 2023 : 20:30 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:30 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 23, 2023 : 20:30 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 23, 2023 : 20:31 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:31 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:31 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 23, 2023 : 20:31 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 23, 2023 : 20:32 - SHIP_MOVE: 'Train' (Row: 5, Col: 11) => (Row: 6, Col: 10)
+Mar 23, 2023 : 20:32 - SHIP_MOVE: 'Train' (Row: 4, Col: 11) => (Row: 7, Col: 10)
+Mar 23, 2023 : 20:32 - SHIP_MOVE: 'T' (Row: 3, Col: 11) => (Row: 8, Col: 10)
+Mar 23, 2023 : 20:32 - OFFLOAD: 'I' from (Row: 2, Col: 11).
+Mar 23, 2023 : 20:33 - manifest.txt is uploaded.
+Mar 23, 2023 : 20:34 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:34 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 23, 2023 : 20:35 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 23, 2023 : 20:36 - test-manifest2.txt is uploaded.
+Mar 23, 2023 : 20:41 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:41 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 23, 2023 : 20:44 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:47 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 23, 2023 : 20:47 - OFFLOAD: 'Train' from (Row: 5, Col: 2).
+Mar 23, 2023 : 20:47 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 23, 2023 : 20:47 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 23, 2023 : 20:48 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:49 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:50 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:52 - test-manifest3.txt is uploaded.
+Mar 23, 2023 : 20:52 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 23, 2023 : 20:52 - OFFLOAD: 'Train' from (Row: 5, Col: 2).
+Mar 23, 2023 : 20:52 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 23, 2023 : 20:53 - OFFLOAD: 'Train' from (Row: 5, Col: 1).

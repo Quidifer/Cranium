@@ -8,7 +8,7 @@ interface Props {
 export default function Calculating(props: Props) {
   setTimeout(() => {
     props.updateScreenState();
-  }, 5000);
+  }, 1000);
 
   return (
     <div
