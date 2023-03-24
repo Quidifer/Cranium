@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
+
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
@@ -40,6 +42,7 @@ p {
   border-bottom: 1px solid;
   text-align: center;
   font-size: 1.3rem;
+  font-family: work sans;
 }
 
 .header {
@@ -82,6 +85,7 @@ p {
   width: 250px;
   margin-left: 25px;
   margin-right: 25px;
+  cursor: pointer;
 }
 
 .gradient {
@@ -171,6 +175,7 @@ p {
   border-radius: 0;
   border-style: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .SubmitComment:hover {

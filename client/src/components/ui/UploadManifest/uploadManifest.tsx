@@ -106,6 +106,7 @@ export default function UploadManifest(props: Props) {
 
   const style = useMemo(
     () => ({
+      cursor: "pointer",
       ...baseStyle,
       ...(isFocused ? focusedStyle : {}),
       ...(isDragAccept ? acceptStyle : {}),
