@@ -45,6 +45,8 @@ export default class Engine {
     // Buffer columns will be indexed backwards
     private readonly BUFFER_VIRTUAL: Location = {row: 5, col: 0};
 
+    private readonly BALANCE_SCORE_GOAL = 0.9;
+
     constructor(
         @Inject(type => Logger)
         private logger: Logger
@@ -71,21 +73,22 @@ export default class Engine {
         }).sort((a,b) => a.cost - b.cost);
 
 
-        offloads.forEach((offload, index) => {
+        for (let i = 0; i < offloads.length; i++) {
+            let offload = offloads[i];
             const offloadCost = this.Manhatten_Distance({row: offload.row, col: offload.col}, this.SHIP_VIRTUAL);
-            for (let i = 0; i < CostMap.length; i++) {
-                let costItem = CostMap[i];
+            for (let j = 0; j < CostMap.length; j++) {
+                let costItem = CostMap[j];
                 if (costItem.container.name === offload.name
                     && (costItem.container.row !== offload.row || costItem.container.col !== offload.col)
                     && costItem.cost < offloadCost
                     && offloads.filter(o => Object.values(o) !== Object.values(offload)).every(o => costItem.container.row !== o.row || costItem.container.col !== o.col)
                 ) {
-                    offloads[index] = costItem.container;
+                    offloads[i] = costItem.container;
                     console.log('Viable alternative located.');
-                    i = CostMap.length;
+                    j = CostMap.length;
                 }
             }
-        })
+        }
 
         this.engineLog('=== INITIAL SHIP: ===');
         this.engineLog(convertedShip);
@@ -394,6 +397,8 @@ export default class Engine {
     public async calculateMoveSet_Balance(ship: FrontEndManifest): Promise<Solution> { 
         const convertedShip: Ship = this.convertFromFrontEndShip(ship);
         const initial_buffer: Buffer = this.fillBuffer();
+        
+        const isSolvable = this.checkForBalanceSolution(convertedShip);
 
         this.engineLog(convertedShip);
 
@@ -406,6 +411,15 @@ export default class Engine {
         const initialState = new EngineNode(convertedShip, initial_buffer, [], []);
         initialState.isInitialState = true;
         queuedStates.enqueue(initialState);
+
+        // if (!isSolvable) {
+        //     goalStates.push(this.SIFT(convertedShip));
+        //     return {
+        //         solved: !(goalStates.length === 0),
+        //         moves: (goalStates.length > 0) ? this.convertGoalStateToMoves(goalStates[0]) : undefined,
+        //         final_manifest: (goalStates.length > 0) ? this.convertToManifest(goalStates[0].state) : undefined
+        //     } 
+        // }
 
         do {
             // Grab next Node and remove from queued set
@@ -523,7 +537,7 @@ export default class Engine {
     }
 
     public isBalanced(node: EngineNode) {
-        return this.balanceScore(node) > 0.9;
+        return this.balanceScore(node) > this.BALANCE_SCORE_GOAL;
     }
 
     private heuristic(node: EngineNode) {
@@ -616,6 +630,116 @@ export default class Engine {
             buffer[row] = newArray;
         }
         return buffer;
+    }
+
+    private checkForBalanceSolution(ship: Ship): boolean {
+        // Container weights sorted in DESCENDING order
+        let weightArray = 
+            (ship
+            .flat()
+            .filter(container => container !== null && container !== undefined) as ShipContainer[])
+            .map(container => container.weight)
+            .sort((a,b) => b - a);
+
+
+        let pile1 = 0, pile2 = 0;
+        weightArray.forEach(weight => {
+            if (pile1 < pile2) {
+                pile1 += weight;
+            }
+            else {
+                pile2 += weight;
+            }
+        });
+        return (Math.min(pile1, pile2)/Math.max(pile1, pile2) > this.BALANCE_SCORE_GOAL);
+    }
+
+    private SIFT(node: EngineNode): EngineNode {
+        console.log('PERFORMING SIFT');
+        let newNode: EngineNode = node;
+
+        let newBuffer = this.fillBuffer();
+        let BufferMap = 
+        (newNode.state
+        .flat()
+        .filter(c => c !== null && c !== undefined) as ShipContainer[])
+        .flatMap(c => {
+            return { container: c, weight: c.weight }
+        })
+        .sort((a,b) => a.weight - b.weight);
+
+        let BufferTargets = [];
+        for (let row = 0; row < this.BUFFER_DIMENSIONS.ROW_MAX; row++) {
+            for (let col = 0; col < this.BUFFER_DIMENSIONS.COLUMN_MAX; col++) {
+                if (newBuffer[row][col] === null && BufferMap.length > 0) {
+                    const o = BufferMap[BufferMap.length-1];
+                    BufferMap = BufferMap.slice(1, BufferMap.length);
+                    newBuffer[row][col] = o.container;
+                    BufferTargets.push({
+                        container: o.container,
+                        a: {row: o.container.row-1, col: o.container.col-1},
+                        b: {row, col}
+                    });
+                }
+            }
+        }
+        
+        // Move everything to buffer
+        // while(BufferTargets.length > 0) {
+        //     let possibleMoves = [];
+
+        //     for(let move of BufferTargets) {
+        //         let point1Available = 
+        //             (move.a.row === this.SHIP_DIMENSIONS.ROW_MAX-1) ||
+        //             (newNode.state[move.a.row+1][move.a.col] === null)
+        //         if (
+        //             newNode.state[move.a.row][move.a.col] ==
+        //         )
+        //     }
+
+
+            for(let column = 0; column < this.SHIP_DIMENSIONS.COLUMN_MAX; column++) {
+                for (let row = this.SHIP_DIMENSIONS.ROW_MAX; row >= 0; row--) {
+                    let topCrate = newNode.state[row][column];
+                    if (!topCrate) continue;
+
+                    let new_state_b = cloneDeep(newNode.state);
+                    let new_buffer = cloneDeep(newNode.buffer);
+                    new_state_b[row][column] = null;
+                    let new_row = 0;
+                    let new_col = 0;
+                    for (let col_check = 0; col_check < this.BUFFER_DIMENSIONS.COLUMN_MAX; col_check++) {
+                        new_col = col_check;
+                        for (let row_check = 0; row_check < this.BUFFER_DIMENSIONS.ROW_MAX; row_check++) {
+                            new_row = row_check;
+                            if (new_buffer[row_check][col_check] === null) {
+                                col_check = Infinity;
+                                row_check = Infinity;
+                            }
+                        }
+                    }
+
+                    let new_depth = newNode.depth + 1;
+                    let new_cost = this.Manhatten_Distance({row: row+1, col: column+1}, this.SHIP_VIRTUAL) + this.Manhatten_Distance({row: new_row+1, col:  new_col+1}, this.BUFFER_VIRTUAL) + this.COST.AREA_MOVE;
+                    let new_minutes = new_cost + newNode.minutes;
+                    new_buffer[new_row][new_col] = this.moveContainer(Object.assign({location: ContainerArea.BUFFER}, topCrate), new_row, new_col);
+                    let bmove = {
+                        row_start: row+1, col_start: column+1, 
+                        row_end: new_row+1, col_end: new_col+1,
+                        move_type: CraneMoveType.SHIP_TO_BUFFER, 
+                        container_name: topCrate.name, 
+                        weight: topCrate.weight,
+                        manifest: this.convertToManifest(newNode.state),
+                        buffer: this.convertToManifest(newNode.buffer),
+                        minutesLeft: new_minutes
+                    };
+                    let new_leaf = new EngineNode(new_state_b, new_buffer, cloneDeep(newNode.onloads), cloneDeep(newNode.offloads), bmove, new_minutes);
+                    new_leaf.depth = new_depth;
+                    new_leaf.cost = new_cost + newNode.cost + new_depth + this.heuristic(new_leaf);
+                    new_leaf.previousNode = newNode;
+                }
+            }
+        return newNode;
     }
 
     private engineLog(input: any) {

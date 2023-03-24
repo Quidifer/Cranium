@@ -167,6 +167,7 @@ export default class ServerConfiguration {
                             let session = await this.fetchSession(res);
                             if (session !== null) {
                                 this.logger.appendToLog(`${session.username} signs out.`);
+                                session.username = requestBody.message;
                             }
                             else {
                                 session = new UserSession(requestBody.message);

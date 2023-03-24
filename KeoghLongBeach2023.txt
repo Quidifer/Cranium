@@ -1,0 +1,29 @@
+Mar 24, 2023 : 10:30 - OFFLOAD: 'E' from (Row: 2, Col: 7).
+Mar 24, 2023 : 10:31 - ONLOAD: 'your mom' to (Row: 5, Col: 1).
+Mar 24, 2023 : 10:31 -  is downloaded.
+Mar 24, 2023 : 10:31 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 10:32 - SHIP_MOVE: 'Train' (Row: 6, Col: 6) => (Row: 7, Col: 4)
+Mar 24, 2023 : 10:32 - SHIP_MOVE: 'Train' (Row: 5, Col: 6) => (Row: 8, Col: 4)
+Mar 24, 2023 : 10:32 - OFFLOAD: 'Z' from (Row: 4, Col: 6).
+Mar 24, 2023 : 10:32 - OFFLOAD: 'N' from (Row: 3, Col: 6).
+Mar 24, 2023 : 10:32 - OFFLOAD: 'D' from (Row: 2, Col: 6).
+Mar 24, 2023 : 10:33 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 24, 2023 : 10:33 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 24, 2023 : 10:33 - manifest.txt is uploaded.
+Mar 24, 2023 : 10:34 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 10:38 - SHIP_MOVE: 'Train' (Row: 5, Col: 7) => (Row: 7, Col: 6)
+Mar 24, 2023 : 10:38 - SHIP_MOVE: 'Train' (Row: 4, Col: 7) => (Row: 8, Col: 6)
+Mar 24, 2023 : 10:45 - OFFLOAD: 'O' from (Row: 3, Col: 7).
+Mar 24, 2023 : 10:45 - OFFLOAD: 'E' from (Row: 2, Col: 7).
+Mar 24, 2023 : 10:45 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 24, 2023 : 10:45 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 24, 2023 : 10:46 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 10:46 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 24, 2023 : 10:46 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 24, 2023 : 10:46 - SHIP_MOVE: 'Train' (Row: 5, Col: 7) => (Row: 7, Col: 6)
+Mar 24, 2023 : 10:46 - SHIP_MOVE: 'Train' (Row: 4, Col: 7) => (Row: 6, Col: 8)
+Mar 24, 2023 : 10:46 - OFFLOAD: 'O' from (Row: 3, Col: 7).
+Mar 24, 2023 : 10:47 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 12:28 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 12:28 - Ryan Dalmas signs out.
+Mar 24, 2023 : 12:28 - Ryan signs in.
