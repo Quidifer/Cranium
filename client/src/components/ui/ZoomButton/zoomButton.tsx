@@ -15,7 +15,6 @@ export default function ZoomButton(props: Props) {
   return (
     <div className="ZoomDiv">
       <button
-        className="zoomInOutButtons"
         style={{ backgroundColor: plusBackground }}
         className="zoomButton"
         onClick={() => onPlus()}
@@ -25,7 +24,6 @@ export default function ZoomButton(props: Props) {
         +
       </button>
       <button
-        className="zoomInOutButtons"
         style={{ backgroundColor: minusBackground }}
         className="zoomButton"
         onClick={() => onMinus()}

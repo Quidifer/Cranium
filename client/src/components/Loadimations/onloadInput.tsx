@@ -136,6 +136,7 @@ export default function OnloadInput(props: Props) {
           top: `${108 * scale}px`,
           fontSize: `${13 * scale}px`,
           borderRadius: `${200 * scale}px`,
+          cursor: "pointer"
         }}
       >
         Add

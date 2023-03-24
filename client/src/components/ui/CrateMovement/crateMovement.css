@@ -42,7 +42,7 @@ p {
   border-bottom: 1px solid;
   text-align: center;
   font-size: 1.3rem;
-  font-family: gloock;
+  font-family: work sans;
 }
 
 .header {
@@ -175,6 +175,7 @@ p {
   border-radius: 0;
   border-style: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .SubmitComment:hover {

@@ -91,13 +91,6 @@ export default function Password(props: Props) {
       ) : (
         ""
       )}
-      {isCorrectPassword ? (
-        <div style={{ fontSize: "17px", paddingTop: "10px", color: "#7acc64" }}>
-          Correct password!{" "}
-        </div>
-      ) : (
-        ""
-      )}
       </div>
       </div>
       

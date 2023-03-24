@@ -177,8 +177,10 @@ export default function Loadimations(props: Props) {
         >
           <Draggable nodeRef={nodeRef}>
             <div
+              className="LoadingDragScreen"
               ref={nodeRef}
               style={{
+                
                 height: `${contentHeight}px`,
                 width: `${contentWidth}px`,
                 display: "block",
