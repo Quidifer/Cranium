@@ -37,7 +37,7 @@ export default function Calculating(props: Props) {
           fontSize: "30px",
         }}
       >
-        Loading...
+        Calculating...
       </p>
     </div>
   );
