@@ -217,6 +217,8 @@ export default class Engine {
                 if (leaf.state[this.SHIP_DIMENSIONS.ROW_MAX-1][column] === null)
                     allOpenCols.push(column);
 
+            console.log(allOpenCols);
+
             // Generate Possible Moves
             for(let column = 0; column < this.SHIP_DIMENSIONS.COLUMN_MAX; column++) {
                 let topCrate!: ShipContainer;
@@ -412,14 +414,14 @@ export default class Engine {
         initialState.isInitialState = true;
         queuedStates.enqueue(initialState);
 
-        if (!isSolvable) {
-            goalStates.push(this.SIFT(initialState));
-            return {
-                solved: !(goalStates.length === 0),
-                moves: (goalStates.length > 0) ? this.convertGoalStateToMoves(goalStates[0]) : undefined,
-                final_manifest: (goalStates.length > 0) ? this.convertToManifest(goalStates[0].state) : undefined
-            } 
-        }
+        // if (!isSolvable) {
+        //     goalStates.push(this.SIFT(initialState));
+        //     return {
+        //         solved: !(goalStates.length === 0),
+        //         moves: (goalStates.length > 0) ? this.convertGoalStateToMoves(goalStates[0]) : undefined,
+        //         final_manifest: (goalStates.length > 0) ? this.convertToManifest(goalStates[0].state) : undefined
+        //     } 
+        // }
 
         do {
             // Grab next Node and remove from queued set
@@ -433,7 +435,7 @@ export default class Engine {
                 continue;
             }
 
-            // Find columns that can accept a container
+            //Find columns that can accept a container
             let openCols: number[] = [];
             for(let column = 0; column < this.SHIP_DIMENSIONS.COLUMN_MAX; column++)
                 if (leaf.state[this.SHIP_DIMENSIONS.ROW_MAX-1][column] === null)
@@ -462,6 +464,7 @@ export default class Engine {
                 openCols.forEach(new_column => {
                     if (new_column === column) return;
 
+
                     let new_state = cloneDeep(leaf.state);
                     new_state[topCrate_row][column] = null;
                     let new_row = 0;
@@ -472,6 +475,10 @@ export default class Engine {
 
                     new_state[new_row][new_column] = this.moveContainer(Object.assign({}, topCrate), new_row, new_column);
 
+
+                    let new_depth = leaf.depth + 1;
+                    let new_cost = this.Manhatten_Distance({row: topCrate_row+1, col: column+1}, {row: new_row+1, col: new_column+1});
+                    let new_minutes = new_cost + leaf.minutes;
                     let move = {
                         row_start: topCrate_row+1, col_start: column+1,
                         row_end: new_row+1, col_end: new_column+1, 
@@ -480,20 +487,30 @@ export default class Engine {
                         weight: topCrate.weight,
                         manifest: this.convertToManifest(new_state),
                         buffer: this.convertToManifest(leaf.buffer),
-                        minutesLeft: leaf.cost
+                        minutesLeft: new_minutes
                     };
-                    let new_leaf = new EngineNode(new_state, leaf.buffer, leaf.onloads, leaf.offloads, move);
+                    let new_leaf = new EngineNode(new_state, leaf.buffer, leaf.onloads, leaf.offloads, move, new_minutes);
                     new_leaf.depth = leaf.depth + 1;
-                    new_leaf.cost = leaf.cost + this.Manhatten_Distance_Move(move) + new_leaf.depth + (this.balanceScore(new_leaf) - this.balanceScore(leaf));
+                    new_leaf.cost = new_cost + leaf.cost + new_depth; //+ (this.balanceScore(new_leaf) - this.balanceScore(leaf));
                     new_leaf.previousNode = leaf;
 
-                    
-                    if (!exploredStates.has(md5(new_leaf.state))) {
+                    console.log(`Trying to move a container from ${{row: topCrate_row+1, col: column+1}} to ${{row: new_row+1, col: new_column+1}} with cost ${new_cost}`)
+
+
+                    if (!exploredStates.has(md5(new_state))) {
                         queuedStates.enqueue(new_leaf);
                     }
                 });
             }
+            let lowestCost = Infinity;
+            goalStates.forEach(goalState => lowestCost = (goalState.cost < lowestCost) ? goalState.cost : lowestCost);
+            if (queuedStates.toArray().every(state => state.cost > lowestCost)) break;
         } while(!queuedStates.isEmpty());
+
+        
+        goalStates.sort((a: EngineNode, b: EngineNode) => a.cost - b.cost);
+        console.log(goalStates.length)
+        console.log(goalStates[0].cost);
 
         // do SIFT if cant solve it
         // maybe consider a timeout on the balance algorithm
@@ -518,14 +535,14 @@ export default class Engine {
     }
 
     public balanceScore(node: EngineNode) {
-        const midline = (this.SHIP_DIMENSIONS.COLUMN_MAX - 1)/2;
+        const midline = (this.SHIP_DIMENSIONS.COLUMN_MAX)/2;
         let leftSide = 0;
         let rightSide = 0;
 
         node.state.forEach(row => {
             row.forEach(cell => {
                if (cell !== undefined && cell !== null) {
-                if ((cell.col - 1) < midline)
+                if ((cell.col-1) < midline)
                     leftSide += cell.weight;
                 else {
                     rightSide += cell.weight;
