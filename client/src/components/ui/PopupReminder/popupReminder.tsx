@@ -7,6 +7,7 @@ import API from "../../../utils/API";
 interface Props {
   func: () => void;
   columnFinish?: boolean;
+  isFinished: () => boolean;
 }
 
 export default function PopupRemider(props: Props) {
@@ -17,7 +18,7 @@ export default function PopupRemider(props: Props) {
     <>
       <button
         className={columnFinish ? "finishColumnButton" : "finishButton"}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => {if (props.isFinished()) setOpen((o) => !o)}}
       >
         Finish
       </button>

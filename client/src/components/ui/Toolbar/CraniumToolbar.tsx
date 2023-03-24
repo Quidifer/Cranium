@@ -17,6 +17,7 @@ interface Props {
   fromLoadScreen?: boolean;
   onloads?: FrontEndContainer[];
   offloads?: FrontEndContainer[];
+  isFinished?: () => boolean
 }
 
 export default function CraniumToolbar(props: Props) {
@@ -29,6 +30,7 @@ export default function CraniumToolbar(props: Props) {
     fromLoadScreen,
     onloads,
     offloads,
+    isFinished,
   } = props;
 
   updatePrevScreenState();
@@ -57,7 +59,7 @@ export default function CraniumToolbar(props: Props) {
             Finish
           </button>
         ) : (
-          <PopupRemider func={updateScreenState} />
+          <PopupRemider func={updateScreenState} isFinished={isFinished ?? (() => true)} />
         )}
         <button
           className="returnToSignInButton"
