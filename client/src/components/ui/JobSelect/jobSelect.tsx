@@ -53,8 +53,15 @@ export default function JobSelect(props: Props) {
           <button
             className="Load"
             onClick={() => {
-              setJob("Load");
+              setTimeout(() => {
+                setJob("Load");
+              }, 400);
             }}
+            onBlur={() =>
+              setTimeout(() => {
+                setJob("");
+              }, 200)
+            }
           >
             <img
               height="80px"
@@ -70,9 +77,16 @@ export default function JobSelect(props: Props) {
           </button>
           <button
             className="Balance"
-            onClick={() => {
-              setJob("Balance");
-            }}
+            onClick={() =>
+              setTimeout(() => {
+                setJob("Balance");
+              }, 400)
+            }
+            onBlur={() =>
+              setTimeout(() => {
+                setJob("");
+              }, 200)
+            }
           >
             <img
               height="150px"

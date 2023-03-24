@@ -6,8 +6,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  border: 1px solid;
-  border-color: black;
   border-radius: 10px;
   background-color: white;
   display: flex;
@@ -22,7 +20,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  border: 1px;
   border-radius: 10px;
   background-color: transparent;
   display: flex;
@@ -37,8 +34,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  border: 1px solid;
-  border-color: black;
   border-radius: 10px;
   background-color: white;
   display: flex;
@@ -53,8 +48,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  border: 1px solid;
-  border-color: black;
   border-radius: 10px;
   background-color: white;
   display: flex;
@@ -69,7 +62,7 @@
   transition: transform 2000ms;
 }
 .move-enter-active {
-  transform: translateX(0px) translateY(-172px);
+  transform: translateX(0px) translateY(-170px);
   transition: transform 2000ms;
 }
 .destroy-enter-active {
@@ -101,6 +94,7 @@
 
 .infoContent {
   font-family: work sans;
+  margin-top: 5px;
   margin-left: 5%;
   width: 100%;
 }
@@ -148,7 +142,7 @@
 }
 
 .fastmove-enter-active {
-  transform: translateX(0px) translateY(-130px);
+  transform: translateX(0px) translateY(-120px);
   transition: transform 500ms;
 }
 .fastdestroy-enter-active {
