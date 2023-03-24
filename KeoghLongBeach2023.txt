@@ -54,3 +54,9 @@ Mar 24, 2023 : 13:27 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
 Mar 24, 2023 : 13:27 - OFFLOAD: 'Train' from (Row: 5, Col: 2).
 Mar 24, 2023 : 13:27 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
 Mar 24, 2023 : 13:27 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 24, 2023 : 13:30 - Ryan signs in.
+Mar 24, 2023 : 13:30 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 13:31 - Ryan signs out.
+Mar 24, 2023 : 13:31 - John signs in.
+Mar 24, 2023 : 13:36 - Ryan signs in.
+Mar 24, 2023 : 13:36 - test-manifest3.txt is uploaded.
