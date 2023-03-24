@@ -6,7 +6,10 @@ interface Props {
 }
 
 export default function Calculating(props: Props) {
+  
+
   setTimeout(() => {
+    console.log("calculating....");
     props.updateScreenState();
   }, 1000);
 

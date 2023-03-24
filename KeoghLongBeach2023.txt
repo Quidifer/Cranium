@@ -60,3 +60,25 @@ Mar 24, 2023 : 13:31 - Ryan signs out.
 Mar 24, 2023 : 13:31 - John signs in.
 Mar 24, 2023 : 13:36 - Ryan signs in.
 Mar 24, 2023 : 13:36 - test-manifest3.txt is uploaded.
+Mar 24, 2023 : 13:58 - Karan signs in.
+Mar 24, 2023 : 13:58 - manifest.txt is uploaded.
+Mar 24, 2023 : 13:58 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
+Mar 24, 2023 : 13:59 - Looks great, I will let Cruz do the rest
+Mar 24, 2023 : 13:59 - Karan signs out.
+Mar 24, 2023 : 13:59 - Cruz signs in.
+Mar 24, 2023 : 13:59 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 24, 2023 : 13:59 - manifest.txt is downloaded.
+Mar 24, 2023 : 13:59 - KeoghLongBeach2023.txt is downloaded.
+Mar 24, 2023 : 14:03 - ShipCase1.txt is uploaded.
+Mar 24, 2023 : 14:13 - Karan signs in.
+Mar 24, 2023 : 14:13 - manifest.txt is uploaded.
+Mar 24, 2023 : 14:14 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
+Mar 24, 2023 : 14:14 - Looks Lovely
+Mar 24, 2023 : 14:14 - Power went out
+Mar 24, 2023 : 14:15 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 24, 2023 : 14:15 - manifest.txt is uploaded.
+Mar 24, 2023 : 14:15 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
+Mar 24, 2023 : 14:16 - OFFLOAD: 'Cat' from (Row: 1, Col: 2).
+Mar 24, 2023 : 14:16 - manifest.txt is uploaded.
+Mar 24, 2023 : 14:19 - Karan signs in.
+Mar 24, 2023 : 14:19 - manifest.txt is uploaded.

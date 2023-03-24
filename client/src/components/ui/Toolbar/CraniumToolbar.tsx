@@ -17,7 +17,11 @@ interface Props {
   fromLoadScreen?: boolean;
   onloads?: FrontEndContainer[];
   offloads?: FrontEndContainer[];
-  isFinished?: () => boolean
+  isFinished?: () => boolean;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+  setManifestName: React.Dispatch<React.SetStateAction<string>>;
+  setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
+  setBuffer: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
 }
 
 export default function CraniumToolbar(props: Props) {
@@ -31,11 +35,23 @@ export default function CraniumToolbar(props: Props) {
     onloads,
     offloads,
     isFinished,
+    setCurrentStep,
+    setManifestName,
+    setManifest,
+    setBuffer,
   } = props;
 
   updatePrevScreenState();
   const height = "50px";
   const width = "100px";
+
+  const finishFunctions = () => {
+    setCurrentStep(0);
+    setManifestName("");
+    setManifest([]);
+    setBuffer([]);
+    updateScreenState();
+  };
 
   return (
     <div className="toolbar">
@@ -59,7 +75,10 @@ export default function CraniumToolbar(props: Props) {
             Finish
           </button>
         ) : (
-          <PopupRemider func={updateScreenState} isFinished={isFinished ?? (() => true)} />
+          <PopupRemider
+            func={finishFunctions}
+            isFinished={isFinished ?? (() => true)}
+          />
         )}
         <button
           className="returnToSignInButton"

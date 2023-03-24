@@ -89,7 +89,10 @@ function App() {
       goToSignIn={() => setScreenState("signIn")}
       manifest={manifest}
       manifestName={manifestName}
+      setCurrentStep={setCurrentStep}
+      setManifestName={setManifestName}
       setManifest={setManifest}
+      setBuffer={setBuffer}
     />
   ) : screenState === "calculating" ? (
     <Calculating

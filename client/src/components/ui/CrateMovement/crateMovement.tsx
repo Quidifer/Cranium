@@ -117,6 +117,10 @@ export default function CrateMovement(props: Props) {
             updatePrevScreenState={updatePrevScreenState}
             goToSignIn={goToSignIn}
             isFinished={isFinished}
+            setCurrentStep={setCurrentStep}
+            setManifestName={setManifestName}
+            setManifest={setManifest}
+            setBuffer={setBuffer}
           />
         </div>
         <div className="crane">
