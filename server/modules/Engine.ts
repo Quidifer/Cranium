@@ -397,31 +397,33 @@ export default class Engine {
 
         this.engineLog(convertedShip);
 
-        let [exploredStates, queuedStates, goalStates]: Array<Array<EngineNode>> = [[],[],[]];
+        let queuedStates = new MinPriorityQueue<EngineNode>((node) => node.cost);
+        let exploredStates = new Map<string, string>();
+
+        let goalStates: Array<EngineNode> = [];
 
         // Queue initial ship state
         const initialState = new EngineNode(convertedShip, initial_buffer, [], []);
         initialState.isInitialState = true;
-        queuedStates.push(initialState);
+        queuedStates.enqueue(initialState);
 
         do {
             // Grab next Node and remove from queued set
-            const leaf = queuedStates[0];
-            queuedStates = queuedStates.slice(1, queuedStates.length);
-            exploredStates.push(leaf);
+            const leaf = queuedStates.dequeue();
+            exploredStates.set(md5(leaf.state), '');
             this.engineLog(`Expanding EngineNode (WeightDiff: ${this.balanceScore(leaf)}): ${leaf.id}`)
 
             // Goal State!
             if(this.isBalanced(leaf)) {
                 goalStates.push(leaf);
-                break;
+                continue;
             }
 
             // Find columns that can accept a container
-            let allOpenCols: number[] = [];
+            let openCols: number[] = [];
             for(let column = 0; column < this.SHIP_DIMENSIONS.COLUMN_MAX; column++)
                 if (leaf.state[this.SHIP_DIMENSIONS.ROW_MAX-1][column] === null)
-                    allOpenCols.push(column);
+                openCols.push(column);
 
             // Generate Possible Moves
             for(let column = 0; column < this.SHIP_DIMENSIONS.COLUMN_MAX; column++) {
@@ -434,16 +436,6 @@ export default class Engine {
                         topCrate_row = row_check;
                     }
                 }
-
-                // let leftCol = 0;
-                // let rightCol = this.SHIP_DIMENSIONS.COLUMN_MAX-1;
-    
-                // allOpenCols.forEach(value => {
-                //     if (value < column && value > leftCol) leftCol = value;
-                //     if (value > column && value < rightCol) leftCol = value;
-                // });
-
-                let openCols = allOpenCols; //[leftCol, rightCol];
 
                 if (!topCrate) {
                     this.engineLog(`Column ${column+1} is empty. Continuing...`);
@@ -467,8 +459,8 @@ export default class Engine {
                     new_state[new_row][new_column] = this.moveContainer(Object.assign({}, topCrate), new_row, new_column);
 
                     let move = {
-                        row_start: topCrate_row, col_start: column,
-                        row_end: new_row, col_end: new_column, 
+                        row_start: topCrate_row+1, col_start: column+1,
+                        row_end: new_row+1, col_end: new_column+1, 
                         move_type: CraneMoveType.SHIP_MOVE, 
                         container_name: topCrate.name, 
                         weight: topCrate.weight,
@@ -481,16 +473,13 @@ export default class Engine {
                     new_leaf.cost = leaf.cost + this.Manhatten_Distance_Move(move) + new_leaf.depth + (this.balanceScore(new_leaf) - this.balanceScore(leaf));
                     new_leaf.previousNode = leaf;
 
-                    queuedStates.push(new_leaf);
+                    
+                    if (!exploredStates.has(md5(new_leaf.state))) {
+                        queuedStates.enqueue(new_leaf);
+                    }
                 });
             }
-            queuedStates.sort((a: EngineNode, b: EngineNode) => a.cost - b.cost);
-            queuedStates = queuedStates.filter((queued: EngineNode) => !exploredStates.some(explored => explored.state === queued.state));
-        } while(queuedStates.length > 0);
-
-        //this.engineLog(`Loop terminated with goal state: ${goalStates[0]?.id}`);
-        //this.engineLog(this.convertToManifest(goalStates[0]?.state ?? []));
-        //this.engineLog(goalStates[0].cost ?? 'No Solution');
+        } while(!queuedStates.isEmpty());
 
         // do SIFT if cant solve it
         // maybe consider a timeout on the balance algorithm
