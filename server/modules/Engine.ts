@@ -412,6 +412,7 @@ export default class Engine {
         // Queue initial ship state
         const initialState = new EngineNode(convertedShip, initial_buffer, [], []);
         initialState.isInitialState = true;
+        initialState.cost = 0;
         queuedStates.enqueue(initialState);
 
         // if (!isSolvable) {
@@ -430,8 +431,23 @@ export default class Engine {
             this.engineLog(`Expanding EngineNode (WeightDiff: ${this.balanceScore(leaf)}): ${leaf.id}`)
 
             // Goal State!
-            if(this.isBalanced(leaf)) {
-                goalStates.push(leaf);
+            if(this.isBalanced(leaf)) {                // Add final dummy move
+                let dummyMove: CraneMove = {
+                    row_start: -1, col_start: -1,  row_end: -1, col_end: -1,
+                    move_type: CraneMoveType.DUMMY,
+                    buffer: [],
+                    manifest: this.convertToManifest(leaf.state),
+                    container_name: 'invis',
+                    minutesLeft: leaf.minutes,
+                    weight: -1,
+                    step: -1
+                }
+                let final_state = new EngineNode(leaf.state, [], [], [], dummyMove, leaf.minutes);
+                final_state.previousNode = leaf;
+                final_state.depth = leaf.depth;
+                final_state.cost = leaf.cost;
+
+                goalStates.push(final_state);
                 continue;
             }
 
