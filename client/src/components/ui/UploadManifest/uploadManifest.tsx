@@ -8,6 +8,8 @@ import React, {
 import { useDropzone, FileWithPath } from "react-dropzone";
 import { FrontEndContainer } from "../../../types/APISolution";
 import API from "../../../utils/API";
+import "./uploadManifest.css";
+import { manifestExamples } from "../../../types/manifestExamples";
 
 interface Props {
   updateScreenState: () => void;
@@ -18,15 +20,11 @@ interface Props {
 }
 
 const baseStyle = {
-  position: "absolute" as const,
-  left: "50%",
-  top: "50%",
   height: "200px",
-  marginTop: "-100px" /* half of you height */,
   width: "400px",
-  marginLeft: "-200px" /* half of you width */,
   border: "gray dashed 1.3px",
   textAlign: "center" as const,
+  justifyContent: "center",
 };
 
 const focusedStyle = {
@@ -63,37 +61,41 @@ export default function UploadManifest(props: Props) {
   useEffect(() => {
     if (prevRef !== manifestName) {
       console.log(`${manifestName} is uploaded.`);
-      API.sendLog(`${manifestName} is uploaded.`, 'NONE');
+      API.sendLog(`${manifestName} is uploaded.`, "NONE");
       updateScreenState();
     }
   }, [manifestName]);
 
+  const readManifest = (data: string, fileName: string) => {
+    let rows = data.split("\n");
+    let cells: FrontEndContainer[] = [];
+    rows.forEach((element) => {
+      let row = element.split(",");
+
+      let name = row[3].trim();
+      let r = Number(row[0].replace("[", ""));
+      let c = Number(row[1].replace("]", ""));
+
+      cells.push({
+        row: r,
+        col: c,
+        weight: Number(row[2].replace("{", "").replace("}", "")),
+        name: name,
+      });
+    });
+    setManifest(cells);
+    setManifestName(fileName);
+  };
+
   const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
+    debugger;
     acceptedFiles.forEach((file: FileWithPath) => {
       const reader = new FileReader();
 
       reader.onabort = () => console.log("file reading was aborted");
       reader.onerror = () => console.log("file reading has failed");
       reader.onload = (e) => {
-        let rows = e.target?.result?.toString().split("\n") ?? [];;
-        if (rows.length === 0) throw new Error("Manifest Ingestion Error");
-        let cells: FrontEndContainer[] = [];
-        rows.filter(row => row.length > 0 && row[0].trim() !== '').forEach((element: string) => {
-          let row = element.split(",");
-
-          let name = row[3].trim();
-          let r = Number(row[0].replace("[", ""));
-          let c = Number(row[1].replace("]", ""));
-
-          cells.push({
-            row: r,
-            col: c,
-            weight: Number(row[2].replace("{", "").replace("}", "")),
-            name: name,
-          });
-        });
-        setManifest(cells);
-        setManifestName(file.path ?? "Undefined Name");
+        readManifest(String(e.target?.result), file.path ?? "Undefined Name");
       };
       reader.readAsText(file);
     });
@@ -117,22 +119,65 @@ export default function UploadManifest(props: Props) {
   );
 
   return (
-    <section className="container">
-      <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/126/126477.png"
-          style={{ width: "110px", height: "100px", paddingTop: "25px" }}
-          alt="Upload Manifest"
-        />
-        <p style={{ fontSize: "15px" }}>
-          Drag or click here to upload Manifest
-        </p>
+    <div style={{ marginTop: "-=15px" }}>
+      <div className="uploadContainer" style={{ margin: "40px" }}>
+        <div {...getRootProps({ style })}>
+          <input {...getInputProps()} />
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/126/126477.png"
+            style={{ width: "110px", height: "100px", paddingTop: "25px" }}
+            alt="Upload Manifest"
+          />
+          <p style={{ fontSize: "15px" }}>
+            Drag or click here to upload Manifest
+          </p>
+        </div>
       </div>
-      {/* <aside>
-        <h4>Files</h4>
-        <ul>{files}</ul>
-      </aside> */}
-    </section>
+      <p style={{ textAlign: "center", marginBottom: "5px", fontSize: "22px" }}>
+        Sample Manifests
+      </p>
+      <aside className="uploadContainer">
+        <button
+          className="exampleButton"
+          onClick={() => readManifest(manifestExamples[0], "Ship Case #1")}
+        >
+          Ship Case #1
+        </button>
+        <button
+          className="exampleButton"
+          onClick={() => {
+            readManifest(manifestExamples[1], "Ship Case #2");
+          }}
+        >
+          Ship Case #2
+        </button>
+        <button
+          className="exampleButton"
+          onClick={() => readManifest(manifestExamples[2], "Ship Case #3")}
+        >
+          Ship Case #3
+        </button>
+      </aside>
+      <aside className="uploadContainer">
+        <button
+          className="exampleButton"
+          onClick={() => readManifest(manifestExamples[3], "Small Manifest")}
+        >
+          Small Manifest
+        </button>
+        <button
+          className="exampleButton"
+          onClick={() => readManifest(manifestExamples[4], "Medium Manifest")}
+        >
+          Medium Manifest
+        </button>
+        <button
+          className="exampleButton"
+          onClick={() => readManifest(manifestExamples[5], "Big Manifest")}
+        >
+          Big Manifest
+        </button>
+      </aside>
+    </div>
   );
 }

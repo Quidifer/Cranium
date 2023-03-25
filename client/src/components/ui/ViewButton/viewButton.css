@@ -24,8 +24,7 @@
   color: #9b9b9b;
   margin: 0 5px;
   padding: 0;
-  border: 3.5px solid white;
-  box-shadow: rgba(0, 0, 0, 0.10) 0 8px 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 8px 15px;
   cursor: pointer;
 }
 
