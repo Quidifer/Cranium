@@ -58,7 +58,7 @@ export function Tile(props: any) {
           justifyContent: "center",
           alignItems: "center",
           border:
-            color === "nan" || color === "unselected"
+            color === "nan" || color === "normal"
               ? `${scale * 0.8}px solid rgba(46, 46, 46, 0.3)`
               : `${scale * 0.8}px solid rgb(46, 46, 46)`,
           borderRadius: name !== "" ? `${scale * 1.6}px` : "",

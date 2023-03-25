@@ -32,9 +32,10 @@ export default function OnloadInput(props: Props) {
     <div
       style={{
         position: "relative",
-        border: "solid",
+        border: `solid ${1.5 * scale}px`,
         backgroundColor: "white",
-        height: `${150 * scale}px`,
+        borderRadius: `${10 * scale}px`,
+        height: `${156 * scale}px`,
         width: `${250 * scale}px`,
       }}
     >
@@ -43,7 +44,7 @@ export default function OnloadInput(props: Props) {
           fontSize: `${13 * scale}px`,
           fontWeight: "bold",
           textAlign: "center",
-          paddingTop: "5px",
+          paddingTop: `${11 * scale}px`,
         }}
       >
         Enter information of
@@ -62,7 +63,7 @@ export default function OnloadInput(props: Props) {
           position: "absolute",
           fontSize: `${13 * scale}px`,
           left: `${15 * scale}px`,
-          top: `${48 * scale}px`,
+          top: `${51 * scale}px`,
         }}
       >
         <form id="onload" action="" method="get" className="form-example">
@@ -72,7 +73,7 @@ export default function OnloadInput(props: Props) {
               style={{
                 position: "absolute",
                 left: `${0 * scale}`,
-                top: `${3 * scale}px`,
+                top: `${6 * scale}px`,
               }}
             >
               Name:{" "}
@@ -85,11 +86,13 @@ export default function OnloadInput(props: Props) {
               style={{
                 position: "absolute",
                 left: `${58 * scale}px`,
-                top: `${0 * scale}px`,
+                top: `${3 * scale}px`,
                 padding: `${3 * scale}px`,
                 margin: `${3 * scale}px`,
                 height: `${10 * scale}px`,
                 width: `${145 * scale}px`,
+                fontSize: `${14 * scale}px`,
+                fontFamily: "work sans",
               }}
             />
           </div>
@@ -99,7 +102,7 @@ export default function OnloadInput(props: Props) {
               style={{
                 position: "absolute",
                 left: `${0 * scale}px`,
-                top: `${27 * scale}px`,
+                top: `${30 * scale}px`,
               }}
             >
               Weight:{" "}
@@ -112,11 +115,13 @@ export default function OnloadInput(props: Props) {
               style={{
                 position: "absolute",
                 left: `${58 * scale}px`,
-                top: `${23 * scale}px`,
+                top: `${26 * scale}px`,
                 padding: `${3 * scale}px`,
                 margin: `${3 * scale}px`,
                 height: `${10 * scale}px`,
                 width: `${145 * scale}px`,
+                fontSize: `${14 * scale}px`,
+                fontFamily: "work sans",
               }}
             />
           </div>
@@ -133,9 +138,10 @@ export default function OnloadInput(props: Props) {
           width: `${100 * scale}px`,
           height: `${30 * scale}px`,
           left: `${75 * scale}px`,
-          top: `${108 * scale}px`,
+          top: `${111 * scale}px`,
           fontSize: `${13 * scale}px`,
           borderRadius: `${200 * scale}px`,
+          cursor: "pointer"
         }}
       >
         Add

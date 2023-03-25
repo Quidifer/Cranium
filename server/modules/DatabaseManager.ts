@@ -1,4 +1,4 @@
-import { EntityManager, MikroORM, PostgreSqlDriver } from '@mikro-orm/postgresql';
+import { EntityManager, MikroORM, Options, PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { Service } from "typedi";
 import { Constructor } from '@mikro-orm/core';
 import { Migration } from '@mikro-orm/migrations';
@@ -15,11 +15,15 @@ export default class DatabaseManager {
 
     private orm!: MikroORM;
 
-    private readonly MigrationsPath: string = path.resolve(process.cwd(), './dist/migrations');
+    private static readonly MigrationsPath: string = path.resolve(process.cwd(), DatabaseManager.isTsNode() ? './server/migrations' : './dist/migrations');
 
     constructor() {
         process.on('SIGINT', this.onSignalTerminationHandler.bind(this));
         process.on('SIGTERM', this.onSignalTerminationHandler.bind(this));
+    }
+
+    public static isTsNode(): boolean {
+        return (Symbol.for('ts-node.register.instance') in process);
     }
 
     public async getEntityManager(): Promise<EntityManager> {
@@ -27,9 +31,27 @@ export default class DatabaseManager {
         return this.orm.em.fork();
     }
 
+    public async resetDatabase() {
+        console.log('Resetting database...');
+        const orm = await this.getMikroOrm();
+
+        try {
+            await orm.getSchemaGenerator().dropSchema({wrap: true, dropMigrationsTable: true, dropDb: true});
+            await this.setMigration();
+        }
+        catch(e) {
+            console.log(`DatabaseManager: ${e}`);
+        }
+    }
+
     private async getMikroOrm(): Promise<MikroORM> {
-        this.orm = await MikroORM.init<PostgreSqlDriver>({
-            entities: ['./dist/entities'],
+        this.orm = await MikroORM.init<PostgreSqlDriver>(DatabaseManager.getConfiguration(), true);
+        return this.orm;
+    }
+
+    public static getConfiguration(): Options {
+        return {
+            entities: this.isTsNode() ? ['./server/entities'] : ['./dist/entities'],
             dbName: 'application',
             type: 'postgresql',
             user: 'root',
@@ -40,8 +62,8 @@ export default class DatabaseManager {
             debug: false,
             migrations: {
                 tableName: 'mikro_orm_migrations',
-                migrationsList: this.getMigrations(),
-                path: this.MigrationsPath,
+                migrationsList: DatabaseManager.getMigrations(),
+                path: DatabaseManager.MigrationsPath,
                 transactional: true,
                 disableForeignKeys: true,
                 allOrNothing: true,
@@ -49,16 +71,14 @@ export default class DatabaseManager {
                 safe: false,
                 emit: 'ts'
             }
-          }, true);
-
-        return this.orm;
+          }
     }
 
-    private getMigrations(): MigrationObject[] {
+    private static getMigrations(): MigrationObject[] {
         const Migrations: MigrationObject[] = [];
         const files = fs.readdirSync(this.MigrationsPath);
         files.forEach((file) => {
-            if((file.match(/\.ts$/) || file.match(/\.js$/)) && !file.match(/\.d\.ts$/)) {
+            if(this.isTsNode() ? (file.match(/\.ts$/)) : file.match(/\.js$/) && !file.match(/\.d\.ts$/)) {
                 //eslint-disable-next-line @typescript-eslint/no-var-requires
                 const module = require(path.resolve(this.MigrationsPath, file));
                 for (const key in module) {
@@ -78,7 +98,7 @@ export default class DatabaseManager {
     private async setMigration(): Promise<void> {
         const migrator = this.orm.getMigrator();
         const entities = this.orm.config.get('entities');
-        const migrationsList = this.getMigrations();
+        const migrationsList = DatabaseManager.getMigrations();
 
         if ((!migrationsList || migrationsList.length === 0) && entities.length > 0) {
             await migrator.createInitialMigration();
@@ -107,4 +127,4 @@ export default class DatabaseManager {
     private async onSignalTerminationHandler(): Promise<void> {
         await this.down();
     }
-}   
+}

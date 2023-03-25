@@ -19,11 +19,13 @@
 .selected {
   background: #addd8b;
   color: #000000;
+  cursor: pointer;
 }
 .unselected {
   background: #ffffff;
   border: black;
   color: #000000;
+  cursor: pointer;
 }
 .duplicate {
   background: #f6ce56;

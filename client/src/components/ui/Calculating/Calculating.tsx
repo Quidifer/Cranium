@@ -6,7 +6,10 @@ interface Props {
 }
 
 export default function Calculating(props: Props) {
+
+
   setTimeout(() => {
+    console.log("calculating....");
     props.updateScreenState();
   }, 5000);
 
@@ -37,7 +40,7 @@ export default function Calculating(props: Props) {
           fontSize: "30px",
         }}
       >
-        Loading...
+        Calculating...
       </p>
     </div>
   );

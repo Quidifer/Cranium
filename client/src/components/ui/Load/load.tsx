@@ -19,7 +19,10 @@ interface Props {
   goToSignIn: () => void;
   manifestName: string;
   manifest: FrontEndContainer[];
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+  setManifestName: React.Dispatch<React.SetStateAction<string>>;
   setManifest: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
+  setBuffer: React.Dispatch<React.SetStateAction<FrontEndContainer[]>>;
 }
 
 export default function Load(props: Props) {
@@ -29,6 +32,10 @@ export default function Load(props: Props) {
     goToSignIn,
     manifest,
     manifestName,
+    setCurrentStep,
+    setManifestName,
+    setManifest,
+    setBuffer,
   } = props;
 
   const [destroyedIndex, setDestroyedIndex] = useState(1e9);
@@ -100,6 +107,10 @@ export default function Load(props: Props) {
           updateScreenState={updateScreenState}
           updatePrevScreenState={updatePrevScreenState}
           goToSignIn={goToSignIn}
+          setCurrentStep={setCurrentStep}
+          setManifestName={setManifestName}
+          setManifest={setManifest}
+          setBuffer={setBuffer}
         />
         <div className="loadScreen">
           <Loadimations
@@ -119,9 +130,6 @@ export default function Load(props: Props) {
         <div className="loadBoxContent scrollbar-hidden">
           {displayOffload &&
             counts.map((item, index) => {
-              // let info = `OFFLOAD '${item.name}' ${
-              //   manifest.find((u) => u.name === item.name)?.weight ?? -1
-              // } kg Count: ${item.count}`;
               let info = {
                 name: item.name,
                 weight:
@@ -145,8 +153,7 @@ export default function Load(props: Props) {
             onloadContainers.map((item, index) => {
               let info = {
                 name: item.name,
-                weight:
-                  manifest.find((u) => u.name === item.name)?.weight ?? -1,
+                weight: item.weight,
                 count: -1,
                 type: "ONLOAD",
               };

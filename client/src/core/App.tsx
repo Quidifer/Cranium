@@ -16,12 +16,11 @@ import { CraniumContainer } from "../types/CraniumContainer";
 let data: APISolution | null = null;
 
 API.getSolution().then((_data) => {
-  console.log("There's so much data, holy wow you're so fantastic");
   data = _data;
 });
 
 function App() {
-  const [screenState, setScreenState] = useState("uploadManifest");
+  const [screenState, setScreenState] = useState("password");
   const [manifest, setManifest] = useState<CraniumContainer[]>([]);
   const [manifestName, setManifestName] = useState("");
   const [buffer, setBuffer] = useState<FrontEndContainer[]>(() => {
@@ -56,7 +55,7 @@ function App() {
   return screenState === "password" ? (
     <Password
       updateScreenState={() => setScreenState("signIn")}
-      restoreSession={() => setScreenState(prevScreenState)}
+      restoreSession={() => setScreenState("calculating")}
     />
   ) : screenState === "signIn" ? (
     <SignIn updateScreenState={() => setScreenState(prevScreenState)} />
@@ -90,12 +89,16 @@ function App() {
       goToSignIn={() => setScreenState("signIn")}
       manifest={manifest}
       manifestName={manifestName}
+      setCurrentStep={setCurrentStep}
+      setManifestName={setManifestName}
       setManifest={setManifest}
+      setBuffer={setBuffer}
     />
   ) : screenState === "calculating" ? (
     <Calculating
       updateScreenState={() => {
         API.getSolution().then((data) => {
+          console.log(data);
           if (data) {
             setMoveSet(data);
             setCurrentStep(data.index);
@@ -113,6 +116,7 @@ function App() {
       goToSignIn={() => setScreenState("signIn")}
       setManifest={setManifest}
       manifest={manifest}
+      setManifestName={setManifestName}
       manifestName={manifestName}
       buffer={buffer}
       setBuffer={setBuffer}

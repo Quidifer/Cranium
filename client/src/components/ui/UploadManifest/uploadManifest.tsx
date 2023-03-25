@@ -61,7 +61,7 @@ export default function UploadManifest(props: Props) {
   useEffect(() => {
     if (prevRef !== manifestName) {
       console.log(`${manifestName} is uploaded.`);
-      API.sendLog(`${manifestName} is uploaded.`);
+      API.sendLog(`${manifestName} is uploaded.`, "NONE");
       updateScreenState();
     }
   }, [manifestName]);
@@ -109,6 +109,7 @@ export default function UploadManifest(props: Props) {
 
   const style = useMemo(
     () => ({
+      cursor: "pointer",
       ...baseStyle,
       ...(isFocused ? focusedStyle : {}),
       ...(isDragAccept ? acceptStyle : {}),
@@ -138,53 +139,43 @@ export default function UploadManifest(props: Props) {
       <aside className="uploadContainer">
         <button
           className="exampleButton"
-          onClick={() =>
-            readManifest(manifestExamples[0], "Manifest Sample #1")
-          }
+          onClick={() => readManifest(manifestExamples[0], "Ship Case #1")}
         >
-          Manifest #1
+          Ship Case #1
         </button>
         <button
           className="exampleButton"
           onClick={() => {
-            readManifest(manifestExamples[1], "Manifest Sample #2");
+            readManifest(manifestExamples[1], "Ship Case #2");
           }}
         >
-          Manifest #2
+          Ship Case #2
         </button>
         <button
           className="exampleButton"
-          onClick={() =>
-            readManifest(manifestExamples[2], "Manifest Sample #3")
-          }
+          onClick={() => readManifest(manifestExamples[2], "Ship Case #3")}
         >
-          Manifest #3
+          Ship Case #3
         </button>
       </aside>
       <aside className="uploadContainer">
         <button
           className="exampleButton"
-          onClick={() =>
-            readManifest(manifestExamples[3], "Manifest Sample #4")
-          }
+          onClick={() => readManifest(manifestExamples[3], "Small Manifest")}
         >
-          Manifest #4
+          Small Manifest
         </button>
         <button
           className="exampleButton"
-          onClick={() =>
-            readManifest(manifestExamples[4], "Manifest Sample #5")
-          }
+          onClick={() => readManifest(manifestExamples[4], "Medium Manifest")}
         >
-          Manifest #5
+          Medium Manifest
         </button>
         <button
           className="exampleButton"
-          onClick={() =>
-            readManifest(manifestExamples[5], "Manifest Sample #6")
-          }
+          onClick={() => readManifest(manifestExamples[5], "Big Manifest")}
         >
-          Manifest #6
+          Big Manifest
         </button>
       </aside>
     </div>

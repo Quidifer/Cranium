@@ -43,6 +43,25 @@
           "primary": false,
           "nullable": false,
           "mappedType": "string"
+        },
+        "solution": {
+          "name": "solution",
+          "type": "jsonb",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "json"
+        },
+        "current_move": {
+          "name": "current_move",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "-1",
+          "mappedType": "integer"
         }
       },
       "name": "user_session",

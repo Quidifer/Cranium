@@ -16,12 +16,6 @@ export default function ViewLog(props: Props) {
     });
   };
 
-  const logButton = (
-    <button className={"viewButton"} onClick={handleGetLog}>
-      Log
-    </button>
-  );
-
   const downloadLog = () => {
     // const fileData = JSON.stringify(manifest);
     const blob = new Blob([log], { type: "text/plain" });
@@ -33,7 +27,11 @@ export default function ViewLog(props: Props) {
   };
 
   return (
-    <Popup trigger={logButton} onOpen={handleGetLog} modal>
+    <Popup
+      trigger={<button className="viewButton">Log</button>}
+      onOpen={handleGetLog}
+      modal
+    >
       <div className="modal">
         <div className="modalHeader"> {currentYear} Log </div>
         <div className="modalContent">{log}</div>
@@ -48,8 +46,8 @@ export default function ViewLog(props: Props) {
           }}
           onClick={() => {
             downloadLog();
-            console.log(`${logName} is downloaded.`);
-            API.sendLog(`${logName} is downloaded.`);
+            console.log(`${logName} is downloaded.`, 'NONE');
+            API.sendLog(`${logName} is downloaded.`, 'NONE');
           }}
         >
           Download Log

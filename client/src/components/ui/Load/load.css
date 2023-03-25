@@ -40,7 +40,7 @@
   background-color: #4c4c4c;
   border-radius: 30px !important;
   justify-content: center;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 25px 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px 15px;
   border: 3px;
 }
 
@@ -49,6 +49,7 @@
   border-bottom-left-radius: 30px !important;
   font-family: work sans !important;
 }
+
 
 .columnButtonLast {
   border-top-right-radius: 30px !important;

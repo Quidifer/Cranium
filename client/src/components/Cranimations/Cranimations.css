@@ -35,3 +35,19 @@
 .cloudlong {
   animation: Jiggle 80s forwards linear infinite;
 }
+
+.cloudshort {
+  animation: Jiggle 30s forwards linear infinite;
+}
+
+.cloudlong {
+  animation: Jiggle 80s forwards linear infinite;
+}
+
+.DraggingClassCrate:active{
+  cursor: grabbing;
+}
+
+.zoomInOutButtons{
+  cursor: pointer;
+}
