@@ -1,18 +1,22 @@
 import Video from "../../../resources/loadingbox.gif";
 import "../JobSelect/jobSelect.css";
+import { useEffect } from "react";
+import API from "../../../utils/API";
 
 interface Props {
   updateScreenState: () => void;
 }
 
 export default function Calculating(props: Props) {
-
-
-  setTimeout(() => {
-    console.log("calculating....");
-    props.updateScreenState();
-  }, 5000);
-
+  const interval = setInterval(() => {
+    console.log("polling backend......");
+    API.getSolution().then((_data) => {
+      if (_data) {
+        props.updateScreenState();
+        clearInterval(interval);
+      }
+    });
+  }, 300);
   return (
     <div
       style={{
