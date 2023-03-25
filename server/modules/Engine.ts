@@ -217,7 +217,7 @@ export default class Engine {
                 if (leaf.state[this.SHIP_DIMENSIONS.ROW_MAX-1][column] === null)
                     allOpenCols.push(column);
 
-            console.log(allOpenCols);
+            //console.log(allOpenCols);
 
             // Generate Possible Moves
             for(let column = 0; column < this.SHIP_DIMENSIONS.COLUMN_MAX; column++) {

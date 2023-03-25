@@ -74,3 +74,24 @@ Mar 24, 2023 : 14:07 - Ryan signs in.
 Mar 24, 2023 : 14:07 - shipCase1.txt is uploaded.
 Mar 24, 2023 : 14:19 - Ryan signs in.
 Mar 24, 2023 : 14:20 - shipCase1.txt is uploaded.
+Mar 24, 2023 : 14:21 - Ryan signs in.
+Mar 24, 2023 : 14:21 - shipCase1.txt is uploaded.
+Mar 24, 2023 : 14:21 - SHIP_MOVE: 'Dog' (Row: 1, Col: 3) => (Row: 1, Col: 7)
+Mar 24, 2023 : 14:22 - shipCase2.txt is uploaded.
+Mar 24, 2023 : 14:23 - shipCase3.txt is uploaded.
+Mar 24, 2023 : 14:23 - SHIP_MOVE: 'Cat' (Row: 2, Col: 1) => (Row: 3, Col: 2)
+Mar 24, 2023 : 14:23 - SHIP_MOVE: 'Ewe' (Row: 1, Col: 1) => (Row: 1, Col: 7)
+Mar 24, 2023 : 14:41 - Ryan signs in.
+Mar 24, 2023 : 14:41 - BigManifest.txt is uploaded.
+Mar 24, 2023 : 14:44 - Ryan signs in.
+Mar 24, 2023 : 14:44 - BigManifest.txt is uploaded.
+Mar 24, 2023 : 14:47 - pw signs in.
+Mar 24, 2023 : 14:47 - BigManifest.txt is uploaded.
+Mar 24, 2023 : 14:47 - OFFLOAD: 'Train' from (Row: 6, Col: 2).
+Mar 24, 2023 : 14:47 - OFFLOAD: 'Train' from (Row: 5, Col: 2).
+Mar 24, 2023 : 14:48 - SHIP_MOVE: 'Train' (Row: 5, Col: 7) => (Row: 7, Col: 6)
+Mar 24, 2023 : 14:48 - SHIP_MOVE: 'Train' (Row: 4, Col: 7) => (Row: 6, Col: 8)
+Mar 24, 2023 : 14:48 - OFFLOAD: 'O' from (Row: 3, Col: 7).
+Mar 24, 2023 : 14:48 - OFFLOAD: 'Train' from (Row: 6, Col: 1).
+Mar 24, 2023 : 14:48 - OFFLOAD: 'Train' from (Row: 5, Col: 1).
+Mar 24, 2023 : 14:48 - ONLOAD: 'John Deere' to (Row: 5, Col: 1).
