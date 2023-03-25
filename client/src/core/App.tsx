@@ -98,7 +98,6 @@ function App() {
     <Calculating
       updateScreenState={() => {
         API.getSolution().then((data) => {
-          console.log(data);
           if (data) {
             setMoveSet(data);
             setCurrentStep(data.index);

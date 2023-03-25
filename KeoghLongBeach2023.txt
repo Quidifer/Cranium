@@ -96,13 +96,3 @@ Mar 24, 2023 : 14:07 - Ryan signs in.
 Mar 24, 2023 : 14:07 - shipCase1.txt is uploaded.
 Mar 24, 2023 : 14:19 - Ryan signs in.
 Mar 24, 2023 : 14:20 - shipCase1.txt is uploaded.
-Mar 24, 2023 : 18:45 - tran signs in.
-Mar 24, 2023 : 18:45 - Big Manifest is uploaded.
-Mar 24, 2023 : 18:45 - logging
-Mar 24, 2023 : 18:47 - OFFLOAD: 'Pig' from (Row: 8, Col: 5).
-Mar 24, 2023 : 18:47 - Ship Case #1 is uploaded.
-Mar 24, 2023 : 18:48 - OFFLOAD: 'Dog' from (Row: 1, Col: 3).
-Mar 24, 2023 : 18:48 - ONLOAD: 'nkfd' to (Row: 2, Col: 1).
-Mar 24, 2023 : 18:49 - Big Manifest is uploaded.
-Mar 24, 2023 : 18:59 - tran signs in.
-Mar 24, 2023 : 18:59 - Ship Case #2 is uploaded.
